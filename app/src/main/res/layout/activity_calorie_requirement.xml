@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e1d1d"
+    tools:context=".CalorieRequirement">
+
+    <ImageView
+        android:id="@+id/imageViewCalorieRequirement"
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/calorie_requirement_page"
+        android:layout_above="@id/contentLayout"
+        android:layout_marginBottom="80dp"
+        android:padding="5dp"
+        android:src="@drawable/calorie" />
+
+    <RelativeLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/startBtnLayout"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="250dp"
+        android:background="@drawable/card_background"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvCalorieRequirement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/daily_requirement"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/startBtnLayout"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp">
+
+        <android.widget.Button
+            android:id="@+id/startBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_background"
+            android:text="@string/start"
+            android:textColor="#FFF8E1"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

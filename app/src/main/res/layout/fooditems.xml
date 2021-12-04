@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#1e1d1d"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    app:contentPadding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etFoodName"
+            android:layout_alignParentStart="true"
+            android:hint="@string/food_name"
+            android:textColorHint="@color/grey"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:autofillHints="Your hint here"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/etCaloriePer100Gram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etFoodName"
+            android:hint="@string/calorie_per_100_gram"
+            android:inputType="numberDecimal"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            android:textSize="20sp"
+            android:autofillHints="Your hint here" />
+
+        <EditText
+            android:id="@+id/etPortion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etCaloriePer100Gram"
+            android:hint="@string/portion"
+            android:minHeight="48dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            android:autofillHints="Your hint here"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/tvTotalCalorieText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/etCaloriePer100Gram"
+            android:layout_above="@+id/tvTotalCalorieNum"
+            android:text="@string/total_calories"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTotalCalorieNum"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/etPortion"
+            android:text="@string/total_calorie_num"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="40dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="9dp" />
+
+
+        <android.widget.Button
+            android:id="@+id/foodDeleteBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/etCaloriePer100Gram"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/ic_delete"
+            android:contentDescription="@string/delete_food" />
+
+        <android.widget.Button
+            android:id="@+id/addToDayBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/etCaloriePer100Gram"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@id/foodDeleteBtn"
+            android:background="@drawable/ic_add"
+            android:contentDescription="@string/confirm_to_add_food_to_diary" />
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

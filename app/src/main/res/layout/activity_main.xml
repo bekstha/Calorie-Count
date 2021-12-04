@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e1d1d"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width= "match_parent"
+        android:layout_height="150dp"
+        app:cardBackgroundColor="#2C2C2C"
+        android:layout_margin="20dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:textSize="20sp"
+            android:textColor="#FFE5CC"
+            android:textAlignment="center"
+            android:layout_marginTop="50dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/etPassword"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:autofillHints="your hint here"
+        android:hint="@string/username"
+        android:inputType="text"
+        android:minHeight="50dp"
+        android:textColorHint="@color/grey" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:inputType="textPassword"
+        android:hint="@string/et_password"
+        android:textColorHint="@color/grey"
+        android:layout_above="@+id/loginBtn"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="40dp"
+        android:autofillHints="your hint here" />
+
+    <android.widget.Button
+        android:id="@+id/loginBtn"
+        android:layout_width="154dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_background"
+        android:text="@string/login"
+        android:textColor="#FFF8E1"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/createBtn"
+        android:layout_width="154dp"
+        android:layout_height="73dp"
+        android:layout_below="@+id/loginBtn"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_background"
+        android:text="@string/create_button"
+        android:textColor="#FFE8E1" />
+
+
+</RelativeLayout>

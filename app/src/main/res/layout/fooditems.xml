@@ -16,40 +16,43 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/etFoodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/etFoodName"
             android:layout_alignParentStart="true"
-            android:hint="@string/food_name"
-            android:textColorHint="@color/grey"
-            android:textColor="@color/white"
-            android:textSize="20sp"
             android:autofillHints="Your hint here"
-            android:inputType="text" />
+            android:hint="@string/food_name"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/etCaloriePer100Gram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/etFoodName"
+            android:autofillHints="Your hint here"
             android:hint="@string/calorie_per_100_gram"
             android:inputType="numberDecimal"
+            android:minHeight="48dp"
             android:textColor="@color/grey"
             android:textColorHint="@color/grey"
-            android:textSize="20sp"
-            android:autofillHints="Your hint here" />
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/etPortion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/etCaloriePer100Gram"
+            android:autofillHints="Your hint here"
             android:hint="@string/portion"
+            android:inputType="numberDecimal"
+            android:minWidth="48dp"
             android:minHeight="48dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/grey"
-            android:autofillHints="Your hint here"
-            android:inputType="numberDecimal" />
+            android:textColorHint="@color/grey" />
 
         <TextView
             android:id="@+id/tvTotalCalorieText"

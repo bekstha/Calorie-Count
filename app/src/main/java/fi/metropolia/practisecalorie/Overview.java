@@ -44,6 +44,15 @@ public class Overview extends AppCompatActivity {
 
     });
 
+    ActivityResultLauncher<Intent> startForEditResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if(result != null && result.getResultCode() == RESULT_OK){
+            if(result.getData() != null && result.getData().getStringExtra(FoodItems.KEY_FOOD_NAME) != null){
+                Toast.makeText(getApplicationContext(),"DONE!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +97,7 @@ public class Overview extends AppCompatActivity {
                 editIntent.putExtra(KEY_EDIT_FOOD_KCAL, food.getKcalPerPortion());
                 editIntent.putExtra(KEY_EDIT_PORTIONS, food.getPortion());
                 editIntent.putExtra(KEY_EDIT_ENTRY_KCAL, food.getTotalKcalPerEntry());
-                //startForEditResult.launch(editIntent);
+                startForEditResult.launch(editIntent);
             }
         });
 

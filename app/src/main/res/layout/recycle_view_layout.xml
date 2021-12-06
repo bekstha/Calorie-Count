@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     app:cardBackgroundColor="#1e1d1d"
@@ -10,8 +10,8 @@
     app:contentPadding="10dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/card_background"
         android:orientation="horizontal">
 
@@ -83,12 +83,11 @@
         <TextView
             android:id="@+id/tvTotalCalorieText"
             android:layout_width="110dp"
-            android:layout_height="100dp"
-            android:layout_above="@+id/tvTotalCalorieNum"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="20dp"
             android:text="@string/total_calories"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -99,41 +98,13 @@
             android:id="@+id/tvTotalCalorieNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/tvPortion"
+            android:layout_below="@id/tvTotalCalorieText"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="40dp"
             android:text="@string/total_calorie_num"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-
-        <android.widget.Button
-            android:id="@+id/foodDeleteBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_below="@id/tvCaloriePer100Gram"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/ic_delete"
-            android:contentDescription="@string/delete_food" />
-
-        <android.widget.Button
-            android:id="@+id/editFoodBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_below="@id/tvCaloriePer100Gram"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toStartOf="@id/foodDeleteBtn"
-            android:background="@drawable/ic_edit"
-            android:contentDescription="edit food" />
-
-
 
 
     </RelativeLayout>

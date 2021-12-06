@@ -44,69 +44,41 @@ public class FoodItems extends AppCompatActivity {
         addToDayBtn = findViewById(R.id.addToDay);
         tvNumTotalCalorie = findViewById(R.id.tvNumTotalCalorie);
 
-
-
         addToDayBtn.setOnClickListener(v -> {
 
-            if (foodInput.getText().toString().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Enter the food name", Toast.LENGTH_SHORT).show();
+            if (foodInput.getText().toString().isEmpty() || kcalInput.getText().toString().isEmpty() || portionsInput.getText().toString().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                return;
+            }else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0){
+                Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
                 return;
             }else{
                 foodName = foodInput.getText().toString().trim();
-            }
-
-            if(kcalInput.getText().toString().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Enter the number of calories per 100gm", Toast.LENGTH_SHORT).show();
-                return;
-            }else if (Double.parseDouble(kcalInput.getText().toString()) <= 0) {
-                Toast.makeText(getApplicationContext(), "Kcal cannot be less or equal to o!", Toast.LENGTH_SHORT).show();
-                return;
-            }else{
                 intKcalInput = Double.parseDouble(kcalInput.getText().toString());
-            }
-
-            if(portionsInput.getText().toString().isEmpty()){
-                Toast.makeText(getApplicationContext(),"Enter the portion",Toast.LENGTH_SHORT).show();
-                return;
-            }else if (Double.parseDouble(portionsInput.getText().toString()) <= 0) {
-                Toast.makeText(getApplicationContext(), "portions cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
-                return;
-            }else{
                 intPortions = Double.parseDouble(portionsInput.getText().toString());
             }
 
-            if(intKcalInput > 0 && intPortions > 0){
-                intTotalCalorieForEntry = intKcalInput * intPortions;
-                tvNumTotalCalorie.setText("" + intTotalCalorieForEntry);
-            }else{
-                tvNumTotalCalorie.setText(""+ 0);
-            }
+            intTotalCalorieForEntry = intKcalInput * intPortions;
+            tvNumTotalCalorie.setText("" + intTotalCalorieForEntry);
 
+            Toast.makeText(getApplicationContext(),"Added successfully!",Toast.LENGTH_SHORT).show();
 
+            FoodDB foodDB = FoodDB.get(this);
 
-            if(intTotalCalorieForEntry <= 0){
-                Toast.makeText(getApplicationContext(),"Not added",Toast.LENGTH_SHORT).show();
-            } else{
-                Toast.makeText(getApplicationContext(),"Added successfully!",Toast.LENGTH_SHORT).show();
+            Food test = new Food(0,LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry);
+            Long newId = foodDB.foodDAO().create(test);
+            Log.d(TAG,"new food added to database with new id " + newId);
 
-                FoodDB foodDB = FoodDB.get(this);
-
-                Food test = new Food(0,LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry);
-                Long newId = foodDB.foodDAO().create(test);
-                Log.d(TAG,"new food added to database with new id " + newId);
-
-
-                Intent intent = new Intent();
-                intent.putExtra(KEY_FOOD_NAME, foodName);
-                intent.putExtra(KEY_FOOD_KCAL, intKcalInput);
-                intent.putExtra(KEY_PORTIONS, intPortions);
-                intent.putExtra(KEY_ENTRY_KCAL, intTotalCalorieForEntry);
-                setResult(RESULT_OK, intent);
-                finish();
-            }
+            Intent intent = new Intent();
+            intent.putExtra(KEY_FOOD_NAME, foodName);
+            intent.putExtra(KEY_FOOD_KCAL, intKcalInput);
+            intent.putExtra(KEY_PORTIONS, intPortions);
+            intent.putExtra(KEY_ENTRY_KCAL, intTotalCalorieForEntry);
+            setResult(RESULT_OK, intent);
+            finish();
 
         });
 
-
     }
+
 }

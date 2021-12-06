@@ -8,24 +8,29 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width= "match_parent"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
-        app:cardBackgroundColor="#2C2C2C"
-        android:layout_margin="20dp">
+        android:layout_above="@+id/etUserName"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="#2C2C2C">
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:text="@string/welcome"
-            android:textSize="20sp"
-            android:textColor="#FFE5CC"
             android:textAlignment="center"
-            android:layout_marginTop="50dp" />
+            android:textColor="#FFE5CC"
+            android:textSize="20sp" />
 
     </com.google.android.material.card.MaterialCardView>
 
     <EditText
+        android:id="@+id/etUserName"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/etPassword"

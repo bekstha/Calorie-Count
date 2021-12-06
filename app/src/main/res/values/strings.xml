@@ -30,16 +30,20 @@
     <string name="login">Login</string>
     <string name="get_started">Let\'s get started</string>
     <string name="food_name">Food name</string>
-    <string name="calorie_per_100_gram">kcal per 100 gram</string>
+    <string name="calorie_per_100_gram">kcal per 100 grams</string>
     <string name="portion">portion</string>
-    <string name="total_calories">Total Calories</string>
-    <string name="total_calorie_num">200 Kcal</string>
+    <string name="total_calories">Total Calories (in Kcal)</string>
+    <string name="total_calorie_num">200</string>
     <string name="confirm_to_add_food_to_diary">confirm to add food to diary</string>
     <string name="delete_food">delete food</string>
     <string name="calories">Calories</string>
     <string name="add_food">Add food</string>
     <string name="autofill_hint">Your hint here</string>
     <string name="completed_day">Congratulations! Your calorie intake for the day was 1200 Kcal which is 300 Kcal lower than recommended. If you continue like this, you will be loosing weight.</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="total_calorie_for_entry">The total calorie for this entry is</string>
+    <string name="portion_size">(portion size = 100 grams)</string>
+    <string name="add_to_your_day">Add to your day</string>
 
 
 </resources>

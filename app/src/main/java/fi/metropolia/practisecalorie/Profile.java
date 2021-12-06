@@ -149,7 +149,6 @@ public class Profile extends AppCompatActivity {
                     Period period = new Period(startDate,endDate, PeriodType.yearMonthDay());
                     age = period.getYears();
 
-
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -157,7 +156,10 @@ public class Profile extends AppCompatActivity {
 
             // if-statements to check that all the parameters are entered by the user and only then
             // go on to the next activity
-            if(typeOfUser.equals("0")){
+            if(birthDate == null) {
+                Toast.makeText(getApplicationContext(), "Enter your birth date", Toast.LENGTH_SHORT).show();
+
+            }else if(typeOfUser.equals("0")){
 
                 Toast.makeText(getApplicationContext(),"Select a gender",Toast.LENGTH_SHORT).show();
 

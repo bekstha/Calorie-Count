@@ -7,8 +7,17 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.UUID;
 
 public class Overview extends AppCompatActivity {
+
+    private final String TAG = this.getClass().getSimpleName();
+
+    private RecyclerView recyclerView;
 
     ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if(result != null && result.getResultCode() == RESULT_OK){
@@ -18,6 +27,7 @@ public class Overview extends AppCompatActivity {
         }
 
     });
+
 
 
     @Override
@@ -30,6 +40,10 @@ public class Overview extends AppCompatActivity {
             Intent intent = new Intent(Overview.this, FoodItems.class);
             startForResult.launch(intent);
         });
+
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //complete day button
         findViewById(R.id.completeBtn).setOnClickListener(v -> {

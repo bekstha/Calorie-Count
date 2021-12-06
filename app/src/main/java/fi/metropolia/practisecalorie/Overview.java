@@ -35,19 +35,23 @@ public class Overview extends AppCompatActivity {
 
     });
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
         getSupportActionBar().hide();
 
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FoodAdapter adapter = new FoodAdapter();
+        recyclerView.setAdapter(adapter);
+
         foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         foodViewModel.getAllFoods().observe(this, new Observer<List<Food>>() {
             @Override
             public void onChanged(List<Food> foods) {
-                //Update RecyclerView
+                adapter.setFoods(foods);
             }
         });
 
@@ -57,15 +61,11 @@ public class Overview extends AppCompatActivity {
         });
 
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         //complete day button
         findViewById(R.id.completeBtn).setOnClickListener(v -> {
             Intent completedDayIntent = new Intent(Overview.this, CompletedDay.class);
             startActivity(completedDayIntent);
         });
-
 
 
 

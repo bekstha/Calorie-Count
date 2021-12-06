@@ -43,13 +43,13 @@
             android:id="@+id/tvCaloriePer100GramText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/tvCaloriePer100Gram"
             android:layout_below="@+id/tvFoodName"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/tvCaloriePer100Gram"
             android:text="@string/calorie_per_100_gram"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
 
@@ -71,13 +71,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvCaloriePer100Gram"
-            android:layout_toEndOf="@id/tvPortion"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@id/tvPortion"
             android:minHeight="48dp"
             android:text="@string/portion"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
@@ -102,8 +102,8 @@
             android:layout_above="@id/tvPortion"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="9dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/total_calorie_num"
             android:textColor="@color/white"
             android:textSize="20sp"

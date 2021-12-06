@@ -14,7 +14,7 @@ public abstract class FoodDB extends RoomDatabase {
 
     private static FoodDB foodDB;
 
-    public static FoodDB get(Context context){
+    public static synchronized FoodDB get(Context context){
         if (null == foodDB){
             foodDB = Room.databaseBuilder(context.getApplicationContext(),FoodDB.class, "food.db").allowMainThreadQueries().build();
         }

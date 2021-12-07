@@ -49,12 +49,12 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                 double totalCaloriePerEntry = currentFood.getTotalKcalPerEntry();
                 Toast.makeText(v.getContext(), foodName + kcalPerPortion + portion + totalCaloriePerEntry, Toast.LENGTH_SHORT).show();
 
-//                Intent editIntent = new Intent(v.getContext(), EditFood.class);
+                Intent editIntent = new Intent(v.getContext(), EditFood.class);
 //                editIntent.putExtra("foodName", foodName);
 //                editIntent.putExtra("kcalPerPortion", kcalPerPortion);
 //                editIntent.putExtra("portion", portion);
 //                editIntent.putExtra("totalCaloriePerEntry", totalCaloriePerEntry);
-//                v.getContext().startActivity(editIntent);
+                v.getContext().startActivity(editIntent);
 
 
             }

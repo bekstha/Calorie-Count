@@ -25,7 +25,10 @@ public class EditFood extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    
+        setContentView(R.layout.activity_edit_food);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("Edit entry");
+
         updateFoodInput = findViewById(R.id.etFoodName);
         updateKcalInput = findViewById(R.id.etCaloriePer100Gram);
         updatePortionsInput = findViewById(R.id.etPortion);

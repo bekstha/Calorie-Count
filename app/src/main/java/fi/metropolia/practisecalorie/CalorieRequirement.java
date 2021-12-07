@@ -26,7 +26,6 @@ public class CalorieRequirement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calorie_requirement);
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         Intent intent = getIntent();
         height = intent.getIntExtra("height", 0);

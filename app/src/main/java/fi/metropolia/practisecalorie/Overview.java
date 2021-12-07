@@ -15,9 +15,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import fi.metropolia.practisecalorie.data.Food;
 import fi.metropolia.practisecalorie.data.FoodViewModel;
 
 public class Overview extends AppCompatActivity {
+    public static final String KEY_FOOD_ID = "Food ID";
+    public static final String KEY_FOOD_NAME = "Food Name";
+    public static final String KEY_FOOD_KCAL = "Kcal per 100 gram";
+    public static final String KEY_PORTIONS = "portions";
+    public static final String KEY_ENTRY_KCAL = "total calories for entry";
 
     //trying to update progress bar
     TextView tvCalorieConsumedNum, tvTotalCalorieRequirement;
@@ -27,12 +33,18 @@ public class Overview extends AppCompatActivity {
     double kcalPerPortion, portion, kcalPerEntry;
 
     private FoodViewModel foodViewModel;
+    FoodAdapter adapter;
 
     private final String TAG = this.getClass().getSimpleName();
 
     double sumConsumedCalorie;
 
+    String today;
+
     ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+
+        foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+        foodViewModel.getAllFoods().observe(this, adapter::setFoods);
 //        if (result != null && result.getResultCode() == RESULT_OK) {
 //            if (result.getData() != null
 //                    && result.getData().getStringExtra(EditFoodItems.KEY_FOOD_NAME) != null
@@ -50,13 +62,16 @@ public class Overview extends AppCompatActivity {
 //            }
 //        }
 //        sumConsumedCalorie = sumConsumedCalorie + kcalPerEntry;
-        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
+//        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
     });
 
 
 
 
 //    ActivityResultLauncher<Intent> startForEditResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+//                foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+//                foodViewModel.getAllFoods().observe(this, adapter::setFoods);
+
 //        if(result != null && result.getResultCode() == EDIT_FOOD_REQUEST){
 //            if(result.getData() != null && result.getData().getStringExtra(EditFoodItems.KEY_FOOD_ID) != null){
 //                int id = result.getData().getIntExtra(EditFoodItems.KEY_FOOD_ID, -1);
@@ -81,6 +96,8 @@ public class Overview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
+
+
         Log.d("Overview", "On create");
 
         tvTotalCalorieRequirement = findViewById(R.id.tvCalorieRequirement);
@@ -90,7 +107,7 @@ public class Overview extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FoodAdapter adapter = new FoodAdapter();
+        adapter = new FoodAdapter();
         recyclerView.setAdapter(adapter);
 
         foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
@@ -111,24 +128,21 @@ public class Overview extends AppCompatActivity {
         }).attachToRecyclerView(recyclerView);
 
         //editFood
-//        adapter.setOnItemClickListener(new FoodAdapter.onItemClickListener() {
-//            @Override
-//            public void onItemClick(Food food) {
-//                Intent editIntent = new Intent(Overview.this, EditFoodItems.class);
-//                editIntent.putExtra(EditFoodItems.KEY_FOOD_ID, food.getId());
-//                editIntent.putExtra(EditFoodItems.KEY_FOOD_NAME, food.getFoodName());
-//                editIntent.putExtra(EditFoodItems.KEY_FOOD_KCAL, food.getKcalPerPortion());
-//                editIntent.putExtra(EditFoodItems.KEY_PORTIONS, food.getPortion());
-//                editIntent.putExtra(EditFoodItems.KEY_ENTRY_KCAL, food.getTotalKcalPerEntry());
-//                setResult(EDIT_FOOD_REQUEST,editIntent);
-//                startForEditResult.launch(editIntent);
-//            }
+//        adapter.setOnItemClickListener(food -> {
+//            Intent editIntent = new Intent(Overview.this, EditFood.class);
+////                editIntent.putExtra(KEY_FOOD_ID, food.getId());
+////                editIntent.putExtra(KEY_FOOD_NAME, food.getFoodName());
+////                editIntent.putExtra(KEY_FOOD_KCAL, food.getKcalPerPortion());
+////                editIntent.putExtra(KEY_PORTIONS, food.getPortion());
+////                editIntent.putExtra(KEY_ENTRY_KCAL, food.getTotalKcalPerEntry());
+////                setResult(EDIT_FOOD_REQUEST,editIntent);
+//            startActivity(editIntent);
 //        });
 
 
         //addFood
         findViewById(R.id.addFoodBtn).setOnClickListener(v -> {
-            Intent addIntent = new Intent(Overview.this, EditFoodItems.class);
+            Intent addIntent = new Intent(Overview.this, AddFoodItems.class);
             startForResult.launch(addIntent);
         });
 
@@ -140,4 +154,5 @@ public class Overview extends AppCompatActivity {
 
 
     }
+
 }

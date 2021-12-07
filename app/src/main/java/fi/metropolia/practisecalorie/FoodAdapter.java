@@ -1,12 +1,16 @@
 package fi.metropolia.practisecalorie;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -17,7 +21,7 @@ import fi.metropolia.practisecalorie.data.Food;
 public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     private List<Food> foods = new ArrayList<>();
-    private onItemClickListener listener;
+//    private  OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -33,7 +37,30 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         Food currentFood = foods.get(position);
         holder.tvFoodName.setText(currentFood.getFoodName());
         holder.tvCaloriePer100Gram.setText(String.valueOf(currentFood.getKcalPerPortion()));
+        holder.tvPortion.setText(String.valueOf(currentFood.getPortion()));
         holder.tvTotalCalorieNum.setText(String.valueOf(currentFood.getTotalKcalPerEntry()));
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String foodName = currentFood.getFoodName();
+                double kcalPerPortion = currentFood.getKcalPerPortion();
+                double portion = currentFood.getPortion();
+                double totalCaloriePerEntry = currentFood.getTotalKcalPerEntry();
+                Toast.makeText(v.getContext(), foodName + kcalPerPortion + portion + totalCaloriePerEntry, Toast.LENGTH_SHORT).show();
+
+//                Intent editIntent = new Intent(v.getContext(), EditFood.class);
+//                editIntent.putExtra("foodName", foodName);
+//                editIntent.putExtra("kcalPerPortion", kcalPerPortion);
+//                editIntent.putExtra("portion", portion);
+//                editIntent.putExtra("totalCaloriePerEntry", totalCaloriePerEntry);
+//                v.getContext().startActivity(editIntent);
+
+
+            }
+        });
+
+
 
     }
 
@@ -53,6 +80,8 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     class FoodHolder extends RecyclerView.ViewHolder{
         private TextView tvFoodName,tvCaloriePer100Gram,tvPortion,tvTotalCalorieNum;
+        CardView cardView;
+
 
         public FoodHolder(View itemView){
             super(itemView);
@@ -61,23 +90,26 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
             tvPortion = itemView.findViewById(R.id.tvPortion);
             tvTotalCalorieNum = itemView.findViewById(R.id.tvTotalCalorieNum);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAbsoluteAdapterPosition();
-                    if (listener != null && position != RecyclerView.NO_POSITION){
-                    listener.onItemClick(foods.get(position));
-                    }
-                }
-            });
+            cardView = itemView.findViewById(R.id.cardView);
+
+
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int position = getAbsoluteAdapterPosition();
+//                    listener.onItemClick(foods.get(position));
+//                }
+//            });
         }
     }
 
-    public interface onItemClickListener{
-        void onItemClick(Food food);
-    }
+//    public interface OnItemClickListener {
+//        void onItemClick(Food food);
+//    }
+//
+//    public void setOnItemClickListener(OnItemClickListener listener){
+//        this.listener =listener;
+//    }
 
-    public void setOnItemClickListener(onItemClickListener listener){
-        this.listener = listener;
-    }
+
 }

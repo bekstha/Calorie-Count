@@ -31,11 +31,6 @@ public class FoodViewModel extends AndroidViewModel {
         foodRepository.delete(food);
     }
 
-    public double total (){
-
-    }
-
-
 
     public LiveData<List<Food>> getAllFoods(){
         return allFoods;

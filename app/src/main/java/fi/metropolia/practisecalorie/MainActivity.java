@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button createBtn;
+    Button createBtn, loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,17 @@ public class MainActivity extends AppCompatActivity {
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Credentials.class);
-                startActivity(intent);
+                Intent createIntent = new Intent(MainActivity.this, Credentials.class);
+                startActivity(createIntent);
+            }
+        });
+
+        loginBtn = findViewById(R.id.loginBtn);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(MainActivity.this, Overview.class);
+                startActivity(loginIntent);
             }
         });
     }

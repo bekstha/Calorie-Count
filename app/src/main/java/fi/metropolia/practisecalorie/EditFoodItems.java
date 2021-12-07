@@ -3,11 +3,15 @@ package fi.metropolia.practisecalorie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -17,7 +21,7 @@ import java.time.LocalDate;
 import fi.metropolia.practisecalorie.data.Food;
 import fi.metropolia.practisecalorie.data.FoodDB;
 
-public class FoodItems extends AppCompatActivity {
+public class EditFoodItems extends AppCompatActivity {
 
     EditText foodInput, kcalInput, portionsInput;
     Button addToDayBtn;
@@ -26,8 +30,9 @@ public class FoodItems extends AppCompatActivity {
     String foodName;
 
     public static final String TAG = "ROOM";
+    public static final String KEY_FOOD_ID = "Food ID";
     public static final String KEY_FOOD_NAME = "Food Name";
-    public static final String KEY_FOOD_KCAL= "Kcal per 100 gram";
+    public static final String KEY_FOOD_KCAL = "Kcal per 100 gram";
     public static final String KEY_PORTIONS = "portions";
     public static final String KEY_ENTRY_KCAL = "total calories for entry";
 
@@ -36,7 +41,9 @@ public class FoodItems extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_items);
-        getSupportActionBar().hide();
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("New entry");
 
         foodInput = findViewById(R.id.etFoodName);
         kcalInput = findViewById(R.id.etCaloriePer100Gram);
@@ -44,15 +51,16 @@ public class FoodItems extends AppCompatActivity {
         addToDayBtn = findViewById(R.id.addToDay);
         tvNumTotalCalorie = findViewById(R.id.tvNumTotalCalorie);
 
+
         addToDayBtn.setOnClickListener(v -> {
 
             if (foodInput.getText().toString().isEmpty() || kcalInput.getText().toString().isEmpty() || portionsInput.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
                 return;
-            }else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0){
+            } else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0) {
                 Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
                 return;
-            }else{
+            } else {
                 foodName = foodInput.getText().toString().trim();
                 intKcalInput = Double.parseDouble(kcalInput.getText().toString());
                 intPortions = Double.parseDouble(portionsInput.getText().toString());
@@ -61,19 +69,18 @@ public class FoodItems extends AppCompatActivity {
             intTotalCalorieForEntry = intKcalInput * intPortions;
             tvNumTotalCalorie.setText("" + intTotalCalorieForEntry);
 
-            Toast.makeText(getApplicationContext(),"Added successfully!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Added successfully!", Toast.LENGTH_SHORT).show();
 
             FoodDB foodDB = FoodDB.get(this);
 
-            Food test = new Food(0,LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry);
+            Food test = new Food(LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry);
             Long newId = foodDB.foodDAO().create(test);
-            Log.d(TAG,"new food added to database with new id " + newId);
 
             Intent intent = new Intent();
             intent.putExtra(KEY_FOOD_NAME, foodName);
-            intent.putExtra(KEY_FOOD_KCAL, intKcalInput);
-            intent.putExtra(KEY_PORTIONS, intPortions);
-            intent.putExtra(KEY_ENTRY_KCAL, intTotalCalorieForEntry);
+            intent.putExtra(KEY_FOOD_KCAL, String.valueOf(intKcalInput));
+            intent.putExtra(KEY_PORTIONS, String.valueOf(intPortions));
+            intent.putExtra(KEY_ENTRY_KCAL, String.valueOf(intTotalCalorieForEntry));
             setResult(RESULT_OK, intent);
             finish();
 
@@ -81,4 +88,23 @@ public class FoodItems extends AppCompatActivity {
 
     }
 
+  //  private void saveFood
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.add_food_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.save_food:
+//                saveFood();
+//                return true;
+//                default: return super.onOptionsItemSelected(item);
+//
+//        }
+//    }
 }

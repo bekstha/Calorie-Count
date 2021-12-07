@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PractiseCalorie">
         <activity
-            android:name=".EditFood"
-            android:exported="false" />
-        <activity
-            android:name=".FoodItems"
+            android:name=".EditFoodItems"
             android:exported="false" />
         <activity
             android:name=".CompletedDay"

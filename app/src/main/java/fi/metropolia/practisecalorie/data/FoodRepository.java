@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -11,11 +12,13 @@ import java.util.concurrent.Executors;
 public class FoodRepository {
     private FoodDAO foodDAO;
     private LiveData<List<Food>> allFoods;
+    private Double total;
 
     public FoodRepository(Application application){
         FoodDB foodDB = FoodDB.get(application);
         foodDAO = foodDB.foodDAO();
-        allFoods = foodDAO.getAll();
+        allFoods = foodDAO.getByDay(LocalDate.now());
+        total = foodDAO.getTotal(LocalDate.now());
     }
 
     public void create (Food food) {
@@ -47,6 +50,10 @@ public class FoodRepository {
             }
         });
 
+    }
+
+    public double total(){
+      return total;
     }
 
     public LiveData<List<Food>> getAllFoods(){

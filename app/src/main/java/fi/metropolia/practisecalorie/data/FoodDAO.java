@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Dao
@@ -32,4 +33,10 @@ public interface FoodDAO {
 
     @Query("Select * FROM food WHERE id = :foodId")
     Food getById(long foodId);
+
+    @Query("SELECT * FROM food WHERE day = :day")
+    LiveData<List<Food>> getByDay(LocalDate day);
+
+    @Query("SELECT SUM(totalKcalPerEntry) FROM food WHERE day = :day")
+    double getTotal(LocalDate day);
 }

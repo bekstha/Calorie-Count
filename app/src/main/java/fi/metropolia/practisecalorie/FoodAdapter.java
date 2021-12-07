@@ -58,6 +58,7 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
             super(itemView);
             tvFoodName = itemView.findViewById(R.id.tvFoodName);
             tvCaloriePer100Gram = itemView.findViewById(R.id.tvCaloriePer100Gram);
+            tvPortion = itemView.findViewById(R.id.tvPortion);
             tvTotalCalorieNum = itemView.findViewById(R.id.tvTotalCalorieNum);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +66,8 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                 public void onClick(View v) {
                     int position = getAbsoluteAdapterPosition();
                     if (listener != null && position != RecyclerView.NO_POSITION){
-                    listener.onItemClick(foods.get(position));}
+                    listener.onItemClick(foods.get(position));
+                    }
                 }
             });
         }

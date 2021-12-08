@@ -38,9 +38,6 @@ public class AddFoodItems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_items);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("New entry");
-
         foodInput = findViewById(R.id.etFoodName);
         kcalInput = findViewById(R.id.etCaloriePer100Gram);
         portionsInput = findViewById(R.id.etPortion);
@@ -61,7 +58,7 @@ public class AddFoodItems extends AppCompatActivity {
     }
 
     private void saveFood() {
-        if (foodInput.getText().toString().isEmpty() || kcalInput.getText().toString().isEmpty() || portionsInput.getText().toString().isEmpty()) {
+        if (foodInput.getText().toString().trim().isEmpty() || kcalInput.getText().toString().trim().isEmpty() || portionsInput.getText().toString().trim().isEmpty()) {
             Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
             return;
         } else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0) {

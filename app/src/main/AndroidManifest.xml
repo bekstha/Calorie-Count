@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PractiseCalorie">
         <activity
-            android:name=".AddFoodItems"
-            android:parentActivityName=".Overview"
+            android:name=".History"
             android:exported="false" />
+        <activity
+            android:name=".AddFoodItems"
+            android:exported="false"
+            android:parentActivityName=".Overview" />
         <activity
             android:name=".CompletedDay"
             android:exported="false" />

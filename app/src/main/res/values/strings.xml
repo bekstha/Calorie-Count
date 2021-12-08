@@ -18,7 +18,7 @@
     <string name="daily_requirement"> Your daily calorie requirement is 1500 Kcal</string>
     <string name="start">Start</string>
     <string name="tv_consumed">0</string>
-    <string name="food">Day Overview</string>
+    <string name="day_Overview">Day Overview</string>
     <string name="remaining_calorie">of total kcal</string>
     <string name="add">Add</string>
     <string name="complete_your_day">Complete your day</string>
@@ -43,6 +43,7 @@
     <string name="total_calorie_for_entry">The total calorie for this entry is</string>
     <string name="portion_size">(portion size = 100 grams)</string>
     <string name="add_to_your_day">Add to your day</string>
+    <string name="filter_by_day">Filter by day</string>
 
 
 </resources>

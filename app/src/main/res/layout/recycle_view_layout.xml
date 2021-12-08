@@ -107,16 +107,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_centerInParent="true"
-            android:layout_toEndOf="@id/tvPortionText"
-            android:layout_below="@id/tvTotalCalorieText"
-            android:layout_marginStart="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_edit" />
-
 
     </RelativeLayout>
 

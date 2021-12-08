@@ -154,7 +154,7 @@ public class Overview extends AppCompatActivity {
 
         //complete day button
         findViewById(R.id.completeBtn).setOnClickListener(v -> {
-            Intent completedDayIntent = new Intent(Overview.this, CompletedDay.class);
+            Intent completedDayIntent = new Intent(Overview.this, History.class);
             startActivity(completedDayIntent);
         });
 

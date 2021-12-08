@@ -1,6 +1,7 @@
 package fi.metropolia.practisecalorie;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -112,7 +114,7 @@ public class Overview extends AppCompatActivity {
         foodViewModel.getAllFoods().observe(this, adapter::setFoods);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+                ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -120,9 +122,15 @@ public class Overview extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                foodViewModel.delete(adapter.getFoodAt(viewHolder.getAbsoluteAdapterPosition()));
-                Toast.makeText(Overview.this, "Entry deleted", Toast.LENGTH_SHORT).show();
+                final int viewPosition = viewHolder.getAbsoluteAdapterPosition();
+
+                switch(direction){
+                    case ItemTouchHelper.LEFT:
+                        foodViewModel.delete(adapter.getFoodAt(viewHolder.getAbsoluteAdapterPosition()));
+                        Toast.makeText(Overview.this, "Entry deleted", Toast.LENGTH_SHORT).show();
+                }
             }
+
         }).attachToRecyclerView(recyclerView);
 
         //editFood

@@ -9,7 +9,7 @@
     tools:context=".Overview">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:id="@+id/progressBarCardView"
@@ -79,7 +79,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="2dp"
         tools:listitem="@layout/recycle_view_layout"
         android:layout_weight="1" />
 

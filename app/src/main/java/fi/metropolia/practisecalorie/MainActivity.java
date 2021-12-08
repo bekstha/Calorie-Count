@@ -43,33 +43,33 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userName = etUserName.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
-//
-//                if (userName.isEmpty() || password.isEmpty()){
-//                    Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
-//                    final UserDao userDao = userDatabase.userDao();
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            User user = userDao.login(userName,password);
-//                            if (null == user){
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                            } else {
+
+                if (userName.isEmpty() || password.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                }else{
+                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+                    final UserDao userDao = userDatabase.userDao();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            User user = userDao.login(userName,password);
+                            if (null == user){
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
                                 Intent loginIntent = new Intent(MainActivity.this, Overview.class);
                                 startActivity(loginIntent);
-//                            }
-//
-//                        }
-//                    }).start();
-//
-//                }
-//
+                            }
+
+                        }
+                    }).start();
+
+                }
+
             }
         });
     }

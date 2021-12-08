@@ -146,7 +146,7 @@ public class Profile extends AppCompatActivity {
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     Date date1 = simpleDateFormat1.parse(birthDate);
-                    Date date2 = simpleDateFormat.parse(todayDate);
+                    Date date2 = simpleDateFormat1.parse(todayDate);
 
                     assert date1 != null;
                     long startDate = date1.getTime();

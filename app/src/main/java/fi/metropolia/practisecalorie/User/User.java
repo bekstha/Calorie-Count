@@ -12,7 +12,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String userName;
-    private String passWord;
+    private String password;
     private String gender;
     private int age;
     private int weight;
@@ -20,12 +20,12 @@ public class User {
     private int calorieRequirement;
 
 
-    public User(int id, String firstName, String lastName, String userName, String passWord, String gender,int age, int weight, int height, int calorieRequirement) {
+    public User(int id, String firstName, String lastName, String userName, String password, String gender,int age, int weight, int height, int calorieRequirement) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.passWord = passWord;
+        this.password = password;
         this.gender = gender;
         this.weight = weight;
         this.height = height;
@@ -49,8 +49,8 @@ public class User {
         return userName;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
     public String getGender() {
@@ -80,7 +80,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
+                ", passWord='" + password + '\'' +
                 ", gender='" + gender + '\'' +
                 ", age='" + age + '\'' +
                 ", weight=" + weight +

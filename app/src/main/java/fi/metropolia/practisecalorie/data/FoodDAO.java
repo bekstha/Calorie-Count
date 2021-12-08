@@ -39,4 +39,5 @@ public interface FoodDAO {
 
     @Query("SELECT SUM(totalKcalPerEntry) FROM food WHERE day = :day")
     double getTotal(LocalDate day);
+
 }

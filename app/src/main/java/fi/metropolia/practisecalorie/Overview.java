@@ -17,7 +17,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
+
 import fi.metropolia.practisecalorie.data.Food;
+import fi.metropolia.practisecalorie.data.FoodDAO;
+import fi.metropolia.practisecalorie.data.FoodDB;
 import fi.metropolia.practisecalorie.data.FoodViewModel;
 
 public class Overview extends AppCompatActivity {
@@ -34,7 +38,7 @@ public class Overview extends AppCompatActivity {
     String foodName;
     double kcalPerPortion, portion, kcalPerEntry;
 
-    private FoodViewModel foodViewModel;
+    private FoodViewModel foodViewModel, totalViewModel;
     FoodAdapter adapter;
 
     private final String TAG = this.getClass().getSimpleName();
@@ -102,7 +106,13 @@ public class Overview extends AppCompatActivity {
 
         tvTotalCalorieRequirement = findViewById(R.id.tvCalorieRequirement);
         tvCalorieConsumedNum = findViewById(R.id.tvTotalCalorieNum);
-        sumConsumedCalorie = 0;
+
+//        FoodDB foodDB = FoodDB.get(getApplicationContext());
+//        final FoodDAO foodDAO = foodDB.foodDAO();
+//        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now());
+//        Toast.makeText(getApplicationContext(), " sum: " + sumConsumedCalorie, Toast.LENGTH_SHORT).show();
+
+
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

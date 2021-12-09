@@ -3,23 +3,18 @@ package fi.metropolia.practisecalorie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import java.time.LocalDate;
 
+import fi.metropolia.practisecalorie.user.LoggedUser;
+import fi.metropolia.practisecalorie.user.UserDatabase;
 import fi.metropolia.practisecalorie.data.Food;
-import fi.metropolia.practisecalorie.data.FoodDB;
 
 public class AddFoodItems extends AppCompatActivity {
 
@@ -73,9 +68,9 @@ public class AddFoodItems extends AppCompatActivity {
         intTotalCalorieForEntry = intKcalInput * intPortions;
         tvNumTotalCalorie.setText("" + intTotalCalorieForEntry);
 
-        FoodDB foodDB = FoodDB.get(this);
+        UserDatabase foodDB = UserDatabase.getUserDatabase(this);
 
-        Food test = new Food(LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry);
+        Food test = new Food(LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry, LoggedUser.getUserID());
         Long newId = foodDB.foodDAO().create(test);
         Log.d(TAG, "Added " + test + " database");
 

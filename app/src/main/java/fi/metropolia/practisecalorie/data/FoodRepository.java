@@ -9,16 +9,23 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import fi.metropolia.practisecalorie.user.LoggedUser;
+import fi.metropolia.practisecalorie.user.UserDatabase;
+
 public class FoodRepository {
     private FoodDAO foodDAO;
     private LiveData<List<Food>> allFoods;
+    private LiveData<List<Food>> foodsByDate;
     private Double total;
+    private LocalDate day;
 
     public FoodRepository(Application application){
-        FoodDB foodDB = FoodDB.get(application);
-        foodDAO = foodDB.foodDAO();
-        allFoods = foodDAO.getByDay(LocalDate.now());
+        UserDatabase userDatabase = UserDatabase.getUserDatabase(application);
+        foodDAO = userDatabase.foodDAO();
+        allFoods = foodDAO.getByDay(LocalDate.now(), LoggedUser.getUserID());
         total = foodDAO.getTotal(LocalDate.now());
+        foodsByDate = foodDAO.getByDay(day, LoggedUser.getUserID() );
+
     }
 
     public void create (Food food) {
@@ -49,11 +56,14 @@ public class FoodRepository {
                 foodDAO.delete(food);
             }
         });
-
     }
 
     public double total(){
       return total;
+    }
+
+    public LiveData<List<Food>> getFoodsByDate() {
+        return foodsByDate;
     }
 
     public LiveData<List<Food>> getAllFoods(){

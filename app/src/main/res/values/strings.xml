@@ -44,6 +44,9 @@
     <string name="portion_size">(portion size = 100 grams)</string>
     <string name="add_to_your_day">Add to your day</string>
     <string name="filter_by_day">Filter by day</string>
+    <string name="app_logo">app logo</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="create_account">Create Account</string>
 
 
 </resources>

@@ -3,21 +3,22 @@ package fi.metropolia.practisecalorie;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import fi.metropolia.practisecalorie.User.User;
-import fi.metropolia.practisecalorie.User.UserDao;
-import fi.metropolia.practisecalorie.User.UserDatabase;
+import fi.metropolia.practisecalorie.user.LoggedUser;
+import fi.metropolia.practisecalorie.user.User;
+import fi.metropolia.practisecalorie.user.UserDao;
+import fi.metropolia.practisecalorie.user.UserDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     Button createBtn, loginBtn;
     EditText etUserName, etPassword;
+//    public static final String FROM_DB_CALORIE_REQUIREMENT = "Calorie Requirement";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,24 +50,36 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
                     final UserDao userDao = userDatabase.userDao();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            User user = userDao.login(userName,password);
-                            if (null == user){
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else {
-                                Intent loginIntent = new Intent(MainActivity.this, Overview.class);
-                                startActivity(loginIntent);
-                            }
+                    User user = userDao.login(userName,password);
+                    if(null == user){
+                        Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        LoggedUser loggedUser  = LoggedUser.getInstance();
+                        loggedUser.setUserID(user.getId());
+                        Intent loginIntent = new Intent(MainActivity.this, Overview.class);
+                        startActivity(loginIntent);
+                    }
 
-                        }
-                    }).start();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            User user = userDao.login(userName,password);
+////                            String calorieRequirement = String.valueOf(userDao.calorie(userName));
+//                            if (null == user){
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                            } else {
+//                                Intent loginIntent = new Intent(getApplicationContext(), Overview.class);
+////                                loginIntent.putExtra(FROM_DB_CALORIE_REQUIREMENT, calorieRequirement);
+//                                startActivity(loginIntent);
+//                            }
+//
+//                        }
+//                    }).start();
 
                 }
 

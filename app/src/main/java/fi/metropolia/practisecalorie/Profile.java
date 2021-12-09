@@ -23,8 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import fi.metropolia.practisecalorie.User.User;
-import fi.metropolia.practisecalorie.User.UserDatabase;
+import fi.metropolia.practisecalorie.user.User;
+import fi.metropolia.practisecalorie.user.UserDatabase;
 
 
 public class Profile extends AppCompatActivity {

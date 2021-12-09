@@ -1,4 +1,4 @@
-package fi.metropolia.practisecalorie.User;
+package fi.metropolia.practisecalorie.user;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -20,5 +20,9 @@ public interface UserDao {
 
     @Query("SELECT * FROM users WHERE userName = :userName and password = :password")
     User login(String userName, String password);
+
+//    @Query("SELECT calorieRequirement FROM users WHERE userName = :userName")
+//    User calorie(String userName);
+
 
 }

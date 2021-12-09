@@ -1,7 +1,6 @@
 package fi.metropolia.practisecalorie;
 
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,9 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 
-import fi.metropolia.practisecalorie.data.Food;
+import fi.metropolia.practisecalorie.user.UserDatabase;
 import fi.metropolia.practisecalorie.data.FoodDAO;
-import fi.metropolia.practisecalorie.data.FoodDB;
 import fi.metropolia.practisecalorie.data.FoodViewModel;
 
 public class Overview extends AppCompatActivity {
@@ -104,14 +101,17 @@ public class Overview extends AppCompatActivity {
 
         Log.d("Overview", "On create");
 
-        tvTotalCalorieRequirement = findViewById(R.id.tvCalorieRequirement);
+        tvTotalCalorieRequirement = findViewById(R.id.tvTotalCalorieRequirement);
         tvCalorieConsumedNum = findViewById(R.id.tvTotalCalorieNum);
 
-//        FoodDB foodDB = FoodDB.get(getApplicationContext());
-//        final FoodDAO foodDAO = foodDB.foodDAO();
-//        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now());
-//        Toast.makeText(getApplicationContext(), " sum: " + sumConsumedCalorie, Toast.LENGTH_SHORT).show();
+        UserDatabase foodDB = UserDatabase.getUserDatabase(getApplicationContext());
+        final FoodDAO foodDAO = foodDB.foodDAO();
+        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now());
+//        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
 
+//        Intent fromLogin = getIntent();
+//        String calorieRequirement = fromLogin.getStringExtra(MainActivity.FROM_DB_CALORIE_REQUIREMENT);
+//        tvTotalCalorieRequirement.setText(calorieRequirement);
 
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -164,7 +164,7 @@ public class Overview extends AppCompatActivity {
 
         //complete day button
         findViewById(R.id.completeBtn).setOnClickListener(v -> {
-            Intent completedDayIntent = new Intent(Overview.this, CompletedDay.class);
+            Intent completedDayIntent = new Intent(Overview.this, History.class);
             startActivity(completedDayIntent);
         });
 

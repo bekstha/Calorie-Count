@@ -1,6 +1,7 @@
 package fi.metropolia.practisecalorie;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -11,12 +12,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import fi.metropolia.practisecalorie.data.FoodViewModel;
+
 public class History extends AppCompatActivity {
 
     TextView tvCalendar;
 
     DatePickerDialog.OnDateSetListener dateSetListener;
     String chosenDate, todayDate;
+    private FoodViewModel foodViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +51,10 @@ public class History extends AppCompatActivity {
             chosenDate = dayOfMonth + "/" + month1 + "/" + year1;
             tvCalendar.setText(chosenDate);
         };
+
+
+        FoodAdapter adapter=new FoodAdapter();
+        foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+        foodViewModel.getFoodsByDate().observe(this, adapter::setFoods);
     }
 }

@@ -49,7 +49,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etPortion"
+            android:id="@+id/etUpdatePortion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/etUpdateCaloriePer100Gram"
@@ -70,7 +70,7 @@
             android:id="@+id/updatePortionSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/etPortion"
+            android:layout_below="@id/etUpdatePortion"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:text="@string/portion_size"
@@ -101,7 +101,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="120dp"
             android:layout_marginTop="5dp"
-            android:text=""
+            android:text="40"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />

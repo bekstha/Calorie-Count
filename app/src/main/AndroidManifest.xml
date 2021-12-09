@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PractiseCalorie">
         <activity
+            android:name=".EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".History"
             android:exported="false" />
         <activity
@@ -30,6 +33,9 @@
             android:exported="false" />
         <activity
             android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".EditFood"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

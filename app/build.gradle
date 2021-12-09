@@ -41,9 +41,8 @@ dependencies {
 
     def lifecycle_version = "2.4.0"
     def arch_version = "2.1.0"
+
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-    // ViewModel
-    //implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     // Lifecycles only (without ViewModel or LiveData)
@@ -57,13 +56,17 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
 
-
     implementation 'net.danlew:android.joda:2.10.12.2'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation "androidx.drawerlayout:drawerlayout:1.1.1"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+
 
 
 

@@ -12,7 +12,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:id="@+id/progressBarCardView"
@@ -34,9 +34,10 @@
             app:trackThickness="15dp" />
 
         <TextView
+            android:id="@+id/tvConsumedCalorieNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/consumed_calorie"
+            android:text="@string/tv_consumed"
             android:textColor="#FF4C4C"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -44,6 +45,7 @@
             android:layout_marginTop="70dp" />
 
         <TextView
+            android:id="@+id/tvTotalCalorieRequirement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -67,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="@string/food"
+            android:text="@string/day_Overview"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -80,11 +82,12 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="2dp"
         tools:listitem="@layout/recycle_view_layout"
         android:layout_weight="1" />
 
     <RelativeLayout
+        android:id="@+id/buttonsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -116,9 +119,12 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/navigationLayoutOverview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-
-
+        />
 
 
 

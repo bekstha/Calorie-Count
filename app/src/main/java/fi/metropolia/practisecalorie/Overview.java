@@ -144,7 +144,7 @@ public class Overview extends AppCompatActivity {
                    // To Click on home, it will stay in overview activity.
 
                     case R.id.home:
-                        Toast.makeText(Overview.this, "Home clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Overview.this, "Home", Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(getApplicationContext(),
                                 Overview.class));

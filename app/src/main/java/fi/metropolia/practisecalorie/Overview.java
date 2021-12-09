@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.time.LocalDate;
 
@@ -30,6 +34,12 @@ public class Overview extends AppCompatActivity {
     public static final String KEY_FOOD_KCAL = "Kcal per 100 gram";
     public static final String KEY_PORTIONS = "portions";
     public static final String KEY_ENTRY_KCAL = "total calories for entry";
+
+
+    //For the bottom navigation View
+    BottomNavigationView view;
+
+
 
     //trying to update progress bar
     TextView tvCalorieConsumedNum, tvTotalCalorieRequirement;
@@ -107,10 +117,73 @@ public class Overview extends AppCompatActivity {
         tvTotalCalorieRequirement = findViewById(R.id.tvCalorieRequirement);
         tvCalorieConsumedNum = findViewById(R.id.tvTotalCalorieNum);
 
+
+        //To get the bottomNavigation view by Id
+        view = findViewById(R.id.bottomNavigation);
+
+
+        view.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+
+                //To click on Profile, the profile activity will open
+
+                switch (item.getItemId()) {
+                    case R.id.profile:
+                        Toast.makeText(getApplicationContext(), "My Profile", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),
+                                Profile.class));
+                        overridePendingTransition(0, 0);
+
+                        break;
+
+
+
+                   // To Click on home, it will stay in overview activity.
+
+                    case R.id.home:
+                        Toast.makeText(Overview.this, "Home clicked", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(getApplicationContext(),
+                                Overview.class));
+                        overridePendingTransition(0, 0);
+                        break;
+
+
+                        //To click on history it will go to history activity
+
+                    case R.id.history:
+                        Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(getApplicationContext(),
+                                History.class));
+                        overridePendingTransition(0, 0);
+
+                        break;
+
+
+                }
+
+                return true;
+            }
+            });
+
+
+
+
+
+
+
+
 //        FoodDB foodDB = FoodDB.get(getApplicationContext());
 //        final FoodDAO foodDAO = foodDB.foodDAO();
 //        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now());
 //        Toast.makeText(getApplicationContext(), " sum: " + sumConsumedCalorie, Toast.LENGTH_SHORT).show();
+
+
+
 
 
 

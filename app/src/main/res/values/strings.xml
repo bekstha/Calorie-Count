@@ -47,6 +47,9 @@
     <string name="app_logo">app logo</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="create_account">Create Account</string>
+    <string name="number">number</string>
+    <string name="kcal">Kcal</string>
+    <string name="confirm_changes">Confirm changes</string>
 
 
 </resources>

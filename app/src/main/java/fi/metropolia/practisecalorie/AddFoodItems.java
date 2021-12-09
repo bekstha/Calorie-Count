@@ -26,8 +26,6 @@ public class AddFoodItems extends AppCompatActivity {
 
     public static final String TAG = "ROOM";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,50 +37,34 @@ public class AddFoodItems extends AppCompatActivity {
         addToDayBtn = findViewById(R.id.addToDay);
         tvNumTotalCalorie = findViewById(R.id.tvNumTotalCalorie);
 
-//        Intent fromEditIntent = getIntent();
-//        foodInput.setText(fromEditIntent.getStringExtra(Overview.KEY_FOOD_NAME));
-//        kcalInput.setText(fromEditIntent.getStringExtra(Overview.KEY_FOOD_KCAL));
-//        portionsInput.setText(fromEditIntent.getStringExtra(Overview.KEY_PORTIONS));
-//        tvNumTotalCalorie.setText(fromEditIntent.getStringExtra(Overview.KEY_ENTRY_KCAL));
-
 
         addToDayBtn.setOnClickListener(v -> {
-            saveFood();
+            if (foodInput.getText().toString().trim().isEmpty() || kcalInput.getText().toString().trim().isEmpty() || portionsInput.getText().toString().trim().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                return;
+            } else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0) {
+                Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                foodName = foodInput.getText().toString().trim();
+                intKcalInput = Double.parseDouble(kcalInput.getText().toString());
+                intPortions = Double.parseDouble(portionsInput.getText().toString());
+            }
+
+            intTotalCalorieForEntry = intKcalInput * intPortions;
+            tvNumTotalCalorie.setText("" + intTotalCalorieForEntry);
+
+            UserDatabase foodDB = UserDatabase.getUserDatabase(this);
+
+            Food test = new Food(LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry, LoggedUser.getUserID());
+            Long newId = foodDB.foodDAO().create(test);
+
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
         });
-
     }
 
-    private void saveFood() {
-        if (foodInput.getText().toString().trim().isEmpty() || kcalInput.getText().toString().trim().isEmpty() || portionsInput.getText().toString().trim().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
-            return;
-        } else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0) {
-            Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
-            foodName = foodInput.getText().toString().trim();
-            intKcalInput = Double.parseDouble(kcalInput.getText().toString());
-            intPortions = Double.parseDouble(portionsInput.getText().toString());
-        }
-
-        intTotalCalorieForEntry = intKcalInput * intPortions;
-        tvNumTotalCalorie.setText("" + intTotalCalorieForEntry);
-
-        UserDatabase foodDB = UserDatabase.getUserDatabase(this);
-
-        Food test = new Food(LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry, LoggedUser.getUserID());
-        Long newId = foodDB.foodDAO().create(test);
-        Log.d(TAG, "Added " + test + " database");
-
-        Intent intent = new Intent();
-//            intent.putExtra(KEY_FOOD_NAME, foodName);
-//            intent.putExtra(KEY_FOOD_KCAL, String.valueOf(intKcalInput));
-//            intent.putExtra(KEY_PORTIONS, String.valueOf(intPortions));
-//            intent.putExtra(KEY_ENTRY_KCAL, String.valueOf(intTotalCalorieForEntry));
-        setResult(RESULT_OK, intent);
-        finish();
-
-    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

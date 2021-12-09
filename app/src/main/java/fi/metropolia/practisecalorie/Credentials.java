@@ -9,6 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import fi.metropolia.practisecalorie.user.User;
+import fi.metropolia.practisecalorie.user.UserDao;
+import fi.metropolia.practisecalorie.user.UserDatabase;
+
 public class Credentials extends AppCompatActivity {
 
     Button nextBtn;
@@ -20,12 +26,10 @@ public class Credentials extends AppCompatActivity {
     public static final String EXTRA_USER_NAME = "user name";
     public static final String EXTRA_PASSWORD = " password";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credentials);
-
 
         nextBtn = findViewById(R.id.nextBtn);
         etFirstName = findViewById(R.id.etFirstName);
@@ -33,7 +37,6 @@ public class Credentials extends AppCompatActivity {
         etUsername = findViewById(R.id.etUserName);
         etPassword = findViewById(R.id.etPassword);
         etReTypePassword = findViewById(R.id.etReTypePassword);
-
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,14 +49,26 @@ public class Credentials extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
 
-                } else if (!etPassword.getText().toString().trim().equals(etReTypePassword.getText().toString().trim())){
+                } else if (!etPassword.getText().toString().trim().equals(etReTypePassword.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
-                }else{
 
+                }else{
                     firstName = etFirstName.getText().toString().trim();
                     lastName = etLastName.getText().toString().trim();
                     userName = etUsername.getText().toString().trim();
                     password = etPassword.getText().toString().trim();
+
+
+                    //TRYING TO CHECK IF USERNAME ALREADY EXISTS
+
+
+//                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+//                    final UserDao userDao = userDatabase.userDao();
+//                    User user = userDao.login(userName,password);
+//                    userDatabase.userDao().checkUserName(userName);
+//                    if (etUsername.getText().toString().trim().equals() {
+//
+//                    Toast.makeText(getApplicationContext(), "Username already exists!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(Credentials.this, Profile.class);
                     intent.putExtra(EXTRA_FIRST_NAME, firstName);
@@ -63,9 +78,6 @@ public class Credentials extends AppCompatActivity {
 
                     startActivity(intent);
                 }
-
-
-
             }
         });
     }

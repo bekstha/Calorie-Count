@@ -15,16 +15,21 @@ import fi.metropolia.practisecalorie.user.UserDatabase;
 public class FoodRepository {
     private FoodDAO foodDAO;
     private LiveData<List<Food>> allFoods;
-    private LiveData<List<Food>> foodsByDate;
     private Double total;
+
+    //try to sort food by user and date
+    private LiveData<List<Food>> foodsByDate;
+
+
     private LocalDate day;
 
     public FoodRepository(Application application){
         UserDatabase userDatabase = UserDatabase.getUserDatabase(application);
         foodDAO = userDatabase.foodDAO();
         allFoods = foodDAO.getByDay(LocalDate.now(), LoggedUser.getUserID());
-        total = foodDAO.getTotal(LocalDate.now());
-        foodsByDate = foodDAO.getByDay(day, LoggedUser.getUserID() );
+        total = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
+
+        foodsByDate = foodDAO.getByDay(day, LoggedUser.getUserID());
 
     }
 
@@ -66,6 +71,7 @@ public class FoodRepository {
         return foodsByDate;
     }
 
+    //try to sort food by user and date
     public LiveData<List<Food>> getAllFoods(){
         return allFoods;
     }

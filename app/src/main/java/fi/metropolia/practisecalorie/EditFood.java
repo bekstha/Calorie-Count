@@ -10,16 +10,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import fi.metropolia.practisecalorie.data.Food;
+import fi.metropolia.practisecalorie.user.LoggedUser;
+import fi.metropolia.practisecalorie.user.UserDatabase;
 
 public class EditFood extends AppCompatActivity {
 
     EditText updateFoodInput, updateKcalInput, updatePortionsInput;
     Button confirmChanges;
     TextView updateTvNumTotalCalorie;
-
     double udIntKcalInput, udIntPortions, udIntTotalCalorieForEntry;
     String udFoodName;
 
@@ -27,7 +29,6 @@ public class EditFood extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_food);
-
 
         updateFoodInput = findViewById(R.id.etUpdateFoodName);
         updateKcalInput = findViewById(R.id.etUpdateCaloriePer100Gram);
@@ -37,13 +38,10 @@ public class EditFood extends AppCompatActivity {
 
         Bundle fromEditIntent = getIntent().getExtras();
 
-
         updateFoodInput.setText(fromEditIntent.getString("foodName"));
         updateKcalInput.setText(fromEditIntent.getString("kcalPerPortion"));
         updatePortionsInput.setText(fromEditIntent.getString("portion"));
         updateTvNumTotalCalorie.setText(fromEditIntent.getString("totalKcalPerEntry"));
-
-
 
         confirmChanges.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,14 +58,15 @@ public class EditFood extends AppCompatActivity {
                     udIntKcalInput = Double.parseDouble(updateKcalInput.getText().toString());
                     udIntPortions = Double.parseDouble(updatePortionsInput.getText().toString());
                 }
-
                 udIntTotalCalorieForEntry = udIntKcalInput * udIntPortions;
                 updateTvNumTotalCalorie.setText("" + udIntTotalCalorieForEntry);
 
+                LoggedUser loggedUser =LoggedUser.getInstance();
+                Food food = new Food(LocalDate.now(),udFoodName,udIntKcalInput, udIntPortions, udIntTotalCalorieForEntry, LoggedUser.getUserID());
 
-
-//                Intent afterEditIntent = new Intent();
-//                setResult(EDIT_FOOD_REQUEST,afterEditIntent);
+                Toast.makeText(getApplicationContext(), "" + food , Toast.LENGTH_SHORT).show();
+                UserDatabase foodDb = UserDatabase.getUserDatabase(getApplicationContext());
+                foodDb.foodDAO().update(food);
             }
         });
     }

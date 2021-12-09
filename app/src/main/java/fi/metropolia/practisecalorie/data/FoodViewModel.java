@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -38,7 +39,7 @@ public class FoodViewModel extends AndroidViewModel {
         return allFoods;
     }
 
-    public LiveData<List<Food>> getFoodsByDate() {
+    public LiveData<List<Food>> getFoodsByDate(LocalDate of, int userID) {
         return foodsByDate;
     }
 }

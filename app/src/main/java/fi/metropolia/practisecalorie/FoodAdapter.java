@@ -21,7 +21,6 @@ import fi.metropolia.practisecalorie.data.Food;
 public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     private List<Food> foods = new ArrayList<>();
-//    private  OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -48,21 +47,15 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                 double portion = currentFood.getPortion();
                 double totalCaloriePerEntry = currentFood.getTotalKcalPerEntry();
 
-                //checking if this works
-                Toast.makeText(holder.cardView.getContext(), foodName + "/n" + kcalPerPortion + "/n" +  portion + "/n" +  totalCaloriePerEntry, Toast.LENGTH_SHORT).show();
 
-               Intent editIntent = new Intent(holder.cardView.getContext(), EditFood.class);
+                Intent editIntent = new Intent(holder.cardView.getContext(), EditFood.class);
                 editIntent.putExtra("foodName", foodName);
                 editIntent.putExtra("kcalPerPortion", String.valueOf(kcalPerPortion));
                 editIntent.putExtra("portion", String.valueOf(portion));
                 editIntent.putExtra("totalCaloriePerEntry", String.valueOf(totalCaloriePerEntry));
                 holder.cardView.getContext().startActivity(editIntent);
-
-
             }
         });
-
-
 
     }
 
@@ -84,7 +77,6 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         private TextView tvFoodName,tvCaloriePer100Gram,tvPortion,tvTotalCalorieNum;
         CardView cardView;
 
-
         public FoodHolder(View itemView){
             super(itemView);
             tvFoodName = itemView.findViewById(R.id.tvFoodName);
@@ -94,24 +86,10 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
             cardView = itemView.findViewById(R.id.cardView);
 
-
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int position = getAbsoluteAdapterPosition();
-//                    listener.onItemClick(foods.get(position));
-//                }
-//            });
         }
     }
 
-//    public interface OnItemClickListener {
-//        void onItemClick(Food food);
-//    }
-//
-//    public void setOnItemClickListener(OnItemClickListener listener){
-//        this.listener =listener;
-//    }
+
 
 
 }

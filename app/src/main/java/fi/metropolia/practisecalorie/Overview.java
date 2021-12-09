@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 
+import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 import fi.metropolia.practisecalorie.data.FoodDAO;
 import fi.metropolia.practisecalorie.data.FoodViewModel;
@@ -31,11 +32,7 @@ public class Overview extends AppCompatActivity {
     //trying to update progress bar
     TextView tvCalorieConsumedNum, tvTotalCalorieRequirement;
 
-
-    String foodName;
-    double kcalPerPortion, portion, kcalPerEntry;
-
-    private FoodViewModel foodViewModel, totalViewModel;
+    private FoodViewModel foodViewModel;
     FoodAdapter adapter;
 
     private final String TAG = this.getClass().getSimpleName();
@@ -45,54 +42,14 @@ public class Overview extends AppCompatActivity {
     String today;
 
     ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-
         foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         foodViewModel.getAllFoods().observe(this, adapter::setFoods);
-//        if (result != null && result.getResultCode() == RESULT_OK) {
-//            if (result.getData() != null
-//                    && result.getData().getStringExtra(EditFoodItems.KEY_FOOD_NAME) != null
-//                    && result.getData().getStringExtra(EditFoodItems.KEY_FOOD_KCAL) != null
-//                    && result.getData().getStringExtra(EditFoodItems.KEY_PORTIONS) != null
-//                    && result.getData().getStringExtra(EditFoodItems.KEY_ENTRY_KCAL) != null) {
-//                foodName = result.getData().getStringExtra(EditFoodItems.KEY_FOOD_NAME);
-//                kcalPerPortion = Double.parseDouble(result.getData().getStringExtra(EditFoodItems.KEY_FOOD_KCAL));
-//                portion = Double.parseDouble(result.getData().getStringExtra(EditFoodItems.KEY_PORTIONS));
-//                kcalPerEntry = Double.parseDouble(result.getData().getStringExtra(EditFoodItems.KEY_ENTRY_KCAL));
-//
-//                Toast.makeText(getApplicationContext(), "Entry saved! ", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(getApplicationContext(), " Entry cannot be saved!", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//        sumConsumedCalorie = sumConsumedCalorie + kcalPerEntry;
-//        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
+        UserDatabase foodDB = UserDatabase.getUserDatabase(getApplicationContext());
+        final FoodDAO foodDAO = foodDB.foodDAO();
+        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
+        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
+
     });
-
-
-
-
-//    ActivityResultLauncher<Intent> startForEditResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-//                foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
-//                foodViewModel.getAllFoods().observe(this, adapter::setFoods);
-
-//        if(result != null && result.getResultCode() == EDIT_FOOD_REQUEST){
-//            if(result.getData() != null && result.getData().getStringExtra(EditFoodItems.KEY_FOOD_ID) != null){
-//                int id = result.getData().getIntExtra(EditFoodItems.KEY_FOOD_ID, -1);
-//                if (id == -1){
-//                    Toast.makeText(getApplicationContext(),"Entry cannot be updated!", Toast.LENGTH_SHORT).show();
-//                }
-//                foodName = result.getData().getStringExtra(EditFoodItems.KEY_FOOD_NAME);
-//                kcalPerPortion = Double.parseDouble(result.getData().getStringExtra(EditFoodItems.KEY_FOOD_KCAL));
-//                portion = Double.parseDouble(result.getData().getStringExtra(EditFoodItems.KEY_PORTIONS));
-//                kcalPerEntry = Double.parseDouble(result.getData().getStringExtra(EditFoodItems.KEY_ENTRY_KCAL));
-//
-//                Food food = new Food(id, LocalDate.now(),foodName, kcalPerPortion, portion,kcalPerEntry);
-//                foodViewModel.update(food);
-//                Toast.makeText(getApplicationContext(), "Entry was updated!", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//
-//    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,16 +59,12 @@ public class Overview extends AppCompatActivity {
         Log.d("Overview", "On create");
 
         tvTotalCalorieRequirement = findViewById(R.id.tvTotalCalorieRequirement);
-        tvCalorieConsumedNum = findViewById(R.id.tvTotalCalorieNum);
+        tvCalorieConsumedNum = findViewById(R.id.tvConsumedCalorieNum);
 
         UserDatabase foodDB = UserDatabase.getUserDatabase(getApplicationContext());
         final FoodDAO foodDAO = foodDB.foodDAO();
-        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now());
-//        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
-
-//        Intent fromLogin = getIntent();
-//        String calorieRequirement = fromLogin.getStringExtra(MainActivity.FROM_DB_CALORIE_REQUIREMENT);
-//        tvTotalCalorieRequirement.setText(calorieRequirement);
+        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
+        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
 
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -120,6 +73,8 @@ public class Overview extends AppCompatActivity {
         adapter = new FoodAdapter();
         recyclerView.setAdapter(adapter);
 
+
+        // have to make change here so that only the logged in user can view their food
         foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         foodViewModel.getAllFoods().observe(this, adapter::setFoods);
 
@@ -142,19 +97,6 @@ public class Overview extends AppCompatActivity {
             }
 
         }).attachToRecyclerView(recyclerView);
-
-        //editFood
-//        adapter.setOnItemClickListener(food -> {
-//            Intent editIntent = new Intent(Overview.this, EditFood.class);
-////                editIntent.putExtra(KEY_FOOD_ID, food.getId());
-////                editIntent.putExtra(KEY_FOOD_NAME, food.getFoodName());
-////                editIntent.putExtra(KEY_FOOD_KCAL, food.getKcalPerPortion());
-////                editIntent.putExtra(KEY_PORTIONS, food.getPortion());
-////                editIntent.putExtra(KEY_ENTRY_KCAL, food.getTotalKcalPerEntry());
-////                setResult(EDIT_FOOD_REQUEST,editIntent);
-//            startActivity(editIntent);
-//        });
-
 
         //addFood
         findViewById(R.id.addFoodBtn).setOnClickListener(v -> {

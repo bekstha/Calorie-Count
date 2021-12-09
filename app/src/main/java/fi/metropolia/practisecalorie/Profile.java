@@ -23,7 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.User;
+import fi.metropolia.practisecalorie.user.UserDao;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
 
@@ -39,9 +41,9 @@ public class Profile extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener dateSetListener;
 
     public static final String EXTRA_CALORIE_REQUIREMENT = "Calorie requirement";
+    public static final String EXTRA_USERNAME = "username ";
+    public static final String EXTRA_PASSWORD = "password ";
     public static final String TAG = "Calorie";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,15 +189,15 @@ public class Profile extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Enter a valid weight",Toast.LENGTH_SHORT).show();
 
             }else{
-
                 UserDatabase userDatabase = UserDatabase.getUserDatabase(this);
                 User user = new User(0, firstName, lastName, userName, password, typeOfUser, age,  intWeight,intCurrentHeight, calorieRequirement);
                 userDatabase.userDao().register(user);
 
-                Log.d(TAG, "the user are" + firstName + lastName + userName + password + typeOfUser + age + intWeight + intCurrentHeight + calorieRequirement);
 
                 Intent intent = new Intent(Profile.this, CalorieRequirement.class);
-                intent.putExtra(EXTRA_CALORIE_REQUIREMENT, calorieRequirement) ;
+                intent.putExtra(EXTRA_CALORIE_REQUIREMENT, calorieRequirement);
+                intent.putExtra(EXTRA_USERNAME,userName);
+                intent.putExtra(EXTRA_PASSWORD,password);
                 startActivity(intent);
             }
         });

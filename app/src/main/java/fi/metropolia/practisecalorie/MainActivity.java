@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     Button createBtn, loginBtn;
     EditText etUserName, etPassword;
 //    public static final String FROM_DB_CALORIE_REQUIREMENT = "Calorie Requirement";
+
+    public static final String TAG = "SignIn";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,33 +59,12 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         LoggedUser loggedUser  = LoggedUser.getInstance();
                         loggedUser.setUserID(user.getId());
+                        Log.d(TAG, "the user are with user id " +LoggedUser.getUserID());
+
                         Intent loginIntent = new Intent(MainActivity.this, Overview.class);
                         startActivity(loginIntent);
                     }
-
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            User user = userDao.login(userName,password);
-////                            String calorieRequirement = String.valueOf(userDao.calorie(userName));
-//                            if (null == user){
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                            } else {
-//                                Intent loginIntent = new Intent(getApplicationContext(), Overview.class);
-////                                loginIntent.putExtra(FROM_DB_CALORIE_REQUIREMENT, calorieRequirement);
-//                                startActivity(loginIntent);
-//                            }
-//
-//                        }
-//                    }).start();
-
                 }
-
             }
         });
     }

@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_gravity="center"
         android:padding="10dp"
         android:background="@drawable/card_background"
         android:orientation="horizontal">

@@ -2,12 +2,20 @@ package fi.metropolia.practisecalorie;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+
+import java.time.LocalDate;
+
+import fi.metropolia.practisecalorie.data.Food;
+import fi.metropolia.practisecalorie.data.FoodDB;
 
 public class FoodItems extends AppCompatActivity {
 
@@ -17,6 +25,7 @@ public class FoodItems extends AppCompatActivity {
     double intKcalInput, intPortions, intTotalCalorieForEntry;
     String foodName;
 
+    public static final String TAG = "ROOM";
     public static final String KEY_FOOD_NAME = "Food Name";
     public static final String KEY_FOOD_KCAL= "Kcal per 100 gram";
     public static final String KEY_PORTIONS = "portions";
@@ -34,6 +43,7 @@ public class FoodItems extends AppCompatActivity {
         portionsInput = findViewById(R.id.etPortion);
         addToDayBtn = findViewById(R.id.addToDay);
         tvNumTotalCalorie = findViewById(R.id.tvNumTotalCalorie);
+
 
 
         addToDayBtn.setOnClickListener(v -> {
@@ -78,6 +88,14 @@ public class FoodItems extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Not added",Toast.LENGTH_SHORT).show();
             } else{
                 Toast.makeText(getApplicationContext(),"Added successfully!",Toast.LENGTH_SHORT).show();
+
+                FoodDB foodDB = FoodDB.get(this);
+
+                Food test = new Food(0,LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry);
+                Long newId = foodDB.foodDAO().create(test);
+                Log.d(TAG,"new food added to database with new id " + newId);
+
+
                 Intent intent = new Intent();
                 intent.putExtra(KEY_FOOD_NAME, foodName);
                 intent.putExtra(KEY_FOOD_KCAL, intKcalInput);

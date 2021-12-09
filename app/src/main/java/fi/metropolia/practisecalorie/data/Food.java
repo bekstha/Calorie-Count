@@ -16,8 +16,7 @@ public class Food {
     private double portion;
     private double totalKcalPerEntry;
 
-    public Food(long id, LocalDate day, String foodName, double kcalPerPortion, double portion, double totalKcalPerEntry) {
-        this.id = id;
+    public Food(LocalDate day, String foodName, double kcalPerPortion, double portion, double totalKcalPerEntry) {
         this.day = day;
         this.foodName = foodName;
         this.kcalPerPortion = kcalPerPortion;
@@ -25,6 +24,9 @@ public class Food {
         this.totalKcalPerEntry = totalKcalPerEntry;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;

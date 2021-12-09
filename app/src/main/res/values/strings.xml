@@ -17,13 +17,12 @@
     <string name="calorie_requirement_page">Calorie_requirement_page</string>
     <string name="daily_requirement"> Your daily calorie requirement is 1500 Kcal</string>
     <string name="start">Start</string>
-    <string name="tv_consumed">300</string>
-    <string name="food">Food Overview</string>
-    <string name="remaining_calorie">of 1500 kcal</string>
+    <string name="tv_consumed">0</string>
+    <string name="day_Overview">Day Overview</string>
+    <string name="remaining_calorie">of total kcal</string>
     <string name="add">Add</string>
     <string name="complete_your_day">Complete your day</string>
     <string name="number_of_calories">Number of Calories</string>
-    <string name="consumed_calorie">300</string>
     <string name="et_password">Password</string>
     <string name="welcome">WELCOME TO CALORIE COUNT</string>
     <string name="username">Username</string>
@@ -44,6 +43,7 @@
     <string name="total_calorie_for_entry">The total calorie for this entry is</string>
     <string name="portion_size">(portion size = 100 grams)</string>
     <string name="add_to_your_day">Add to your day</string>
+    <string name="filter_by_day">Filter by day</string>
 
 
 </resources>

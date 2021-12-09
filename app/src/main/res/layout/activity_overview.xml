@@ -84,6 +84,7 @@
         android:layout_weight="1" />
 
     <RelativeLayout
+        android:id="@+id/buttonsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -114,6 +115,14 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/navigationLayoutOverview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        />
+
 
 
 </LinearLayout>

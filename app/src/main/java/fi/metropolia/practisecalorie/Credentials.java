@@ -41,6 +41,8 @@ public class Credentials extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
                 if (etFirstName.getText().toString().trim().isEmpty() ||
                         etLastName.getText().toString().trim().isEmpty() ||
                         etUsername.getText().toString().trim().isEmpty() ||
@@ -52,23 +54,13 @@ public class Credentials extends AppCompatActivity {
                 } else if (!etPassword.getText().toString().trim().equals(etReTypePassword.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
 
+                }else if (userDatabase.userDao().checkUser(etUsername.getText().toString().trim()) != null) {
+                        Toast.makeText(getApplicationContext(), "The username already exists!", Toast.LENGTH_SHORT).show();
                 }else{
                     firstName = etFirstName.getText().toString().trim();
                     lastName = etLastName.getText().toString().trim();
                     userName = etUsername.getText().toString().trim();
                     password = etPassword.getText().toString().trim();
-
-
-                    //TRYING TO CHECK IF USERNAME ALREADY EXISTS
-
-
-//                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
-//                    final UserDao userDao = userDatabase.userDao();
-//                    User user = userDao.login(userName,password);
-//                    userDatabase.userDao().checkUserName(userName);
-//                    if (etUsername.getText().toString().trim().equals() {
-//
-//                    Toast.makeText(getApplicationContext(), "Username already exists!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(Credentials.this, Profile.class);
                     intent.putExtra(EXTRA_FIRST_NAME, firstName);

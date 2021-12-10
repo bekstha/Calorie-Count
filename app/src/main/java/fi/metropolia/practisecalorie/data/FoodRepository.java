@@ -67,14 +67,22 @@ public class FoodRepository {
       return total;
     }
 
-    public LiveData<List<Food>> getFoodsByDate() {
+    public void setDay(LocalDate day){
+        this.day = day;
+    }
+
+
+    public LiveData<List<Food>> getFoodsByDate(LocalDate day) {
+        this.day = day;
+        foodsByDate = foodDAO.getByDay(day,LoggedUser.getUserID());
         return foodsByDate;
     }
 
-    //try to sort food by user and date
+    //try to sort food by user and today
     public LiveData<List<Food>> getAllFoods(){
         return allFoods;
     }
+
 
 
 }

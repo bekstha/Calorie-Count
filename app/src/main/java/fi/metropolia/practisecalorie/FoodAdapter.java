@@ -53,6 +53,7 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                 editIntent.putExtra("kcalPerPortion", String.valueOf(kcalPerPortion));
                 editIntent.putExtra("portion", String.valueOf(portion));
                 editIntent.putExtra("totalCaloriePerEntry", String.valueOf(totalCaloriePerEntry));
+                editIntent.putExtra("FoodId", currentFood.getId());
                 holder.cardView.getContext().startActivity(editIntent);
             }
         });

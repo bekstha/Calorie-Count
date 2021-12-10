@@ -26,9 +26,13 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE userName = :userName and password = :password")
     User login(String userName, String password);
 
+    @Query("SELECT * FROM users WHERE userName = :userName LIMIT 1")
+    User checkUser(String userName);
 
-//    @Query("SELECT calorieRequirement FROM users WHERE id = :id")
-//    User searchCalorieRequirement(int id);
+
+
+    @Query("SELECT calorieRequirement FROM users WHERE id = :id")
+    int searchCalorieRequirement(int id);
 
 //    @Query("SELECT calorieRequirement FROM users WHERE userName = :userName")
 //    User calorie(String userName);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,7 +64,9 @@ public class EditFood extends AppCompatActivity {
 
                 LoggedUser loggedUser =LoggedUser.getInstance();
                 Food food = new Food(LocalDate.now(),udFoodName,udIntKcalInput, udIntPortions, udIntTotalCalorieForEntry, LoggedUser.getUserID());
+                food.setId(fromEditIntent.getLong("FoodId"));
 
+                Log.d("EditFood", "" + food);
                 Toast.makeText(getApplicationContext(), "" + food , Toast.LENGTH_SHORT).show();
                 UserDatabase foodDb = UserDatabase.getUserDatabase(getApplicationContext());
                 foodDb.foodDAO().update(food);

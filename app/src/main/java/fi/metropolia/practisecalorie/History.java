@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class History extends AppCompatActivity {
             // month starts from 0 in java so need to add 1 to it
             month1 = month1 +1;
             chosenDate = dayOfMonth + "/" + month1 + "/" + year1;
+            LocalDate selectedDay = LocalDate.of(year1, month1, dayOfMonth);
             tvCalendar.setText(chosenDate);
 
             Toast.makeText(getApplicationContext(),""+ year1 +"/" + month1 + "/" + dayOfMonth , Toast.LENGTH_SHORT).show();
@@ -68,8 +70,10 @@ public class History extends AppCompatActivity {
             FoodAdapter adapter =new FoodAdapter();
             historyRecyclerView.setAdapter(adapter);
 
+            Log.d("History", "" + selectedDay + " " + LoggedUser.getUserID());
+
             foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
-            foodViewModel.getAllFoods().observe(this, adapter::setFoods);
+            foodViewModel.getFoodsByDate(selectedDay).observe(this, adapter::setFoods);
 
 
 

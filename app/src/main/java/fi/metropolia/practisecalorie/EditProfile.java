@@ -94,16 +94,6 @@ public class EditProfile extends AppCompatActivity {
         });
 
         // On-click listener for both image buttons that increases and decreases the weight
-//        updateWeightIncrement.setOnClickListener(v -> {
-//            initialWeight = initialWeight + 1;
-//            updateWeight.setText(String.valueOf(initialWeight));
-//        });
-//
-//        updateWeightDecrement.setOnClickListener(v -> {
-//            initialWeight = initialWeight - 1;
-//            updateWeight.setText(String.valueOf(initialWeight));
-//        });
-
         updateWeightIncrement.setOnClickListener(v -> {
                 initialWeight = initialWeight +1;
                 updateWeight.setText(String.valueOf(initialWeight));

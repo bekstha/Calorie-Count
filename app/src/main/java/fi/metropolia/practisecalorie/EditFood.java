@@ -26,6 +26,8 @@ public class EditFood extends AppCompatActivity {
     double udIntKcalInput, udIntPortions, udIntTotalCalorieForEntry;
     String udFoodName;
 
+    public static final int RESULT_EDITED = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,11 @@ public class EditFood extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "" + food , Toast.LENGTH_SHORT).show();
                 UserDatabase foodDb = UserDatabase.getUserDatabase(getApplicationContext());
                 foodDb.foodDAO().update(food);
+
+                Intent intent = new Intent(EditFood.this, Overview.class);
+                startActivity(intent);
+
+
             }
         });
     }

@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+
 import java.time.LocalDate;
 
 import fi.metropolia.practisecalorie.user.LoggedUser;
@@ -39,7 +41,9 @@ public class Overview extends AppCompatActivity {
 
     double sumConsumedCalorie;
 
-    String today;
+    double calorieRequirement;
+
+    CircularProgressIndicator circularProgressIndicator;
 
     ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
@@ -48,7 +52,6 @@ public class Overview extends AppCompatActivity {
         final FoodDAO foodDAO = foodDB.foodDAO();
         sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
         tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
-
     });
 
     @Override
@@ -65,6 +68,12 @@ public class Overview extends AppCompatActivity {
         final FoodDAO foodDAO = foodDB.foodDAO();
         sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
         tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
+
+        UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+        LoggedUser loggedUser = LoggedUser.getInstance();
+        calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
+        Toast.makeText(getApplicationContext(),"calorieRequirement : " + calorieRequirement, Toast.LENGTH_SHORT).show();
+        tvTotalCalorieRequirement.setText(String.valueOf("of "+calorieRequirement + " Kcal"));
 
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -93,6 +102,11 @@ public class Overview extends AppCompatActivity {
                     case ItemTouchHelper.LEFT:
                         foodViewModel.delete(adapter.getFoodAt(viewHolder.getAbsoluteAdapterPosition()));
                         Toast.makeText(Overview.this, "Entry deleted", Toast.LENGTH_SHORT).show();
+                        UserDatabase foodDB = UserDatabase.getUserDatabase(getApplicationContext());
+                        final FoodDAO foodDAO = foodDB.foodDAO();
+                        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
+                        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
+
                 }
             }
 
@@ -106,7 +120,7 @@ public class Overview extends AppCompatActivity {
 
         //complete day button
         findViewById(R.id.completeBtn).setOnClickListener(v -> {
-            Intent completedDayIntent = new Intent(Overview.this, History.class);
+            Intent completedDayIntent = new Intent(Overview.this, EditProfile.class);
             startActivity(completedDayIntent);
         });
 

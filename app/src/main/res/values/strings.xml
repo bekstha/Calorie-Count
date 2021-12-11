@@ -2,7 +2,7 @@
     <string name="app_name">Practise Calorie</string>
 
     <string name="create_button"> Create a profile </string>
-    <string name="height">Height</string>
+    <string name="height">Height (in cm)</string>
     <string name="dd_mm_yyyy">DD/MM/YYYY</string>
     <string name="date_of_birth">Date Of Birth</string>
     <string name="_170">170</string>
@@ -12,8 +12,8 @@
     <string name="male">Male</string>
     <string name="female_image">Female_Image</string>
     <string name="female">Female</string>
-    <string name="weight">Weight (in kg)</string>
-    <string name="in_kgs">in Kgs</string>
+    <string name="weight">Weight</string>
+    <string name="in_kgs">Kgs</string>
     <string name="calorie_requirement_page">Calorie_requirement_page</string>
     <string name="daily_requirement"> Your daily calorie requirement is 1500 Kcal</string>
     <string name="start">Start</string>

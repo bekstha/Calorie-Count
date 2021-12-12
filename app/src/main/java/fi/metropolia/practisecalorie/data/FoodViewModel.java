@@ -20,7 +20,6 @@ public class FoodViewModel extends AndroidViewModel {
         super(application);
         foodRepository = new FoodRepository(application);
         allFoods = foodRepository.getAllFoods();
-//        foodsByDate= foodRepository.getFoodsByDate(of);
     }
 
     public void create(Food food) {

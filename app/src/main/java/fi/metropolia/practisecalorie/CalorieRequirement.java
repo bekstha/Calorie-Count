@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Objects;
-
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.User;
 import fi.metropolia.practisecalorie.user.UserDao;
@@ -36,6 +34,8 @@ public class CalorieRequirement extends AppCompatActivity {
         Button startBtn = findViewById(R.id.startBtn);
         startBtn.setOnClickListener(v -> {
 
+            //after creating the user profile, making sure that the user is set as logged in, so
+            //only user-specific data are shown
             UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
             final UserDao userDao = userDatabase.userDao();
             User user = userDao.login(userName,password);

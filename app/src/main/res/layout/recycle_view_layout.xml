@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -26,7 +27,8 @@
             android:text="@string/food_name"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
 
         <TextView
             android:id="@+id/tvCaloriePer100Gram"
@@ -35,7 +37,7 @@
             android:layout_below="@+id/tvFoodName"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="2000"
+            android:text="@string/_2000"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -62,7 +64,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:minHeight="48dp"
-            android:text="100"
+            android:text="@string/portions"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />

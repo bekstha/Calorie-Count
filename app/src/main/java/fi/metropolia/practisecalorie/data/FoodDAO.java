@@ -35,9 +35,6 @@ public interface FoodDAO {
     @Query("Select * FROM food WHERE id = :foodId")
     Food getById(long foodId);
 
-//    @Query("SELECT * FROM food WHERE day = :day")
-//    LiveData<List<Food>> getByDay(LocalDate day);
-
     @Query("SELECT SUM(totalKcalPerEntry) FROM food WHERE day = :day AND userID = :userID")
     double getTotal(LocalDate day, int userID);
 
@@ -47,11 +44,4 @@ public interface FoodDAO {
     @Transaction
     @Query("SELECT * FROM users WHERE id = :id")
     UserFood getUserFood(int id);
-
-    @Query("SELECT SUM(totalKcalPerEntry) FROM food WHERE day = :day AND userID = :userID")
-    double getTotalUserForDay(LocalDate day, int userID);
-
-
-
-
 }

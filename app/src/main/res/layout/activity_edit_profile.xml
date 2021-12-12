@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -26,7 +26,6 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:inputType="text"
                 android:text="@string/username"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
@@ -40,7 +39,6 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:inputType="text"
                 android:text="@string/username"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
@@ -65,13 +63,14 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
-                android:hint="Firstname"
+                android:hint="@string/first_name"
                 android:inputType="text"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:autofillHints="first name" />
 
             <EditText
                 android:id="@+id/updateLastName"
@@ -80,13 +79,14 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="25dp"
                 android:gravity="center"
-                android:hint="Lastname"
+                android:hint="@string/last_name"
                 android:inputType="text"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:autofillHints="last name" />
 
         </LinearLayout>
 
@@ -104,12 +104,13 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:hint="New password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:autofillHints="password" />
 
         </LinearLayout>
 
@@ -127,12 +128,13 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:hint="Re-type Password"
+                android:hint="@string/re_type_password"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:autofillHints="Re-type password" />
 
         </LinearLayout>
 
@@ -214,7 +216,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:minHeight="48dp"
-                android:text="60"
+                android:text="@string/sixty_text"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="30sp"
@@ -234,7 +236,8 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="70dp"
-                    android:background="@drawable/ic_minus" />
+                    android:background="@drawable/ic_minus"
+                    android:contentDescription="@string/decrement" />
 
                 <TextView
                     android:id="@+id/updateTextKgs"
@@ -243,7 +246,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:minHeight="48dp"
-                    android:text="kgs"
+                    android:text="@string/in_kgs"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="30sp"
@@ -256,7 +259,8 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="15dp"
-                    android:background="@drawable/ic_add" />
+                    android:background="@drawable/ic_add"
+                    android:contentDescription="@string/increment" />
 
 
             </LinearLayout>
@@ -270,7 +274,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:background="@drawable/add_button_background"
-            android:text="Update"
+            android:text="@string/update"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />

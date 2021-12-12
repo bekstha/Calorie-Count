@@ -1,18 +1,15 @@
 package fi.metropolia.practisecalorie;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.time.LocalDate;
-import java.util.Objects;
 
 import fi.metropolia.practisecalorie.data.Food;
 import fi.metropolia.practisecalorie.user.LoggedUser;
@@ -26,8 +23,6 @@ public class EditFood extends AppCompatActivity {
     double udIntKcalInput, udIntPortions, udIntTotalCalorieForEntry;
     String udFoodName;
 
-    public static final int RESULT_EDITED = 3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,44 +35,45 @@ public class EditFood extends AppCompatActivity {
         updateTvNumTotalCalorie = findViewById(R.id.tvNumTotalCalorie);
 
         Bundle fromEditIntent = getIntent().getExtras();
-
         updateFoodInput.setText(fromEditIntent.getString("foodName"));
         updateKcalInput.setText(fromEditIntent.getString("kcalPerPortion"));
         updatePortionsInput.setText(fromEditIntent.getString("portion"));
         updateTvNumTotalCalorie.setText(fromEditIntent.getString("totalKcalPerEntry"));
 
-        confirmChanges.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (updateFoodInput.getText().toString().trim().isEmpty() || updateKcalInput.getText().toString().trim().isEmpty() || updatePortionsInput.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if ((Double.parseDouble(updateKcalInput.getText().toString()) <= 0) || Double.parseDouble(updatePortionsInput.getText().toString()) <= 0) {
-                    Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    udFoodName = updateFoodInput.getText().toString().trim();
-                    udIntKcalInput = Double.parseDouble(updateKcalInput.getText().toString());
-                    udIntPortions = Double.parseDouble(updatePortionsInput.getText().toString());
-                }
-                udIntTotalCalorieForEntry = udIntKcalInput * udIntPortions;
-                updateTvNumTotalCalorie.setText("" + udIntTotalCalorieForEntry);
-
-                LoggedUser loggedUser =LoggedUser.getInstance();
-                Food food = new Food(LocalDate.now(),udFoodName,udIntKcalInput, udIntPortions, udIntTotalCalorieForEntry, LoggedUser.getUserID());
-                food.setId(fromEditIntent.getLong("FoodId"));
-
-                Log.d("EditFood", "" + food);
-                Toast.makeText(getApplicationContext(), "" + food , Toast.LENGTH_SHORT).show();
-                UserDatabase foodDb = UserDatabase.getUserDatabase(getApplicationContext());
-                foodDb.foodDAO().update(food);
-
-                Intent intent = new Intent(EditFood.this, Overview.class);
-                startActivity(intent);
-
-
+        //click listener
+        confirmChanges.setOnClickListener(v -> {
+            //checking if all the fields are filled by the user
+            if (updateFoodInput.getText().toString().trim().isEmpty() ||
+                    updateKcalInput.getText().toString().trim().isEmpty() ||
+                    updatePortionsInput.getText().toString().trim().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                return;
+                //checking if user inputs 0 or less
+            } else if ((Double.parseDouble(updateKcalInput.getText().toString()) <= 0) ||
+                    Double.parseDouble(updatePortionsInput.getText().toString()) <= 0) {
+                Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                udFoodName = updateFoodInput.getText().toString().trim();
+                udIntKcalInput = Double.parseDouble(updateKcalInput.getText().toString());
+                udIntPortions = Double.parseDouble(updatePortionsInput.getText().toString());
             }
+            //updating the total calorie for the entry
+            udIntTotalCalorieForEntry = udIntKcalInput * udIntPortions;
+            updateTvNumTotalCalorie.setText(String.valueOf(udIntTotalCalorieForEntry));
+
+            Food food = new Food(LocalDate.now(), udFoodName, udIntKcalInput, udIntPortions, udIntTotalCalorieForEntry, LoggedUser.getUserID());
+            food.setId(fromEditIntent.getLong("FoodId"));
+
+            //updating the food entry
+            Toast.makeText(getApplicationContext(), "The entry was successfully updated!", Toast.LENGTH_SHORT).show();
+            UserDatabase foodDb = UserDatabase.getUserDatabase(getApplicationContext());
+            foodDb.foodDAO().update(food);
+
+            Intent intent = new Intent(EditFood.this, Overview.class);
+            startActivity(intent);
+
+
         });
     }
 }

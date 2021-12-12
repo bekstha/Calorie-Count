@@ -72,7 +72,7 @@
                 android:autofillHints="Password"
                 android:background="#474646"
                 android:ems="10"
-                android:hint="@string/et_password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="5dp"
                 android:textColor="@color/white"
@@ -106,7 +106,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/createBtn"
+                android:id="@+id/tvCreate"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
                 android:layout_below="@+id/loginBtn"

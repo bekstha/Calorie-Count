@@ -59,11 +59,4 @@ public interface UserDao {
 
     @Query("SELECT password FROM users WHERE id = :id")
     String searchPassword(int id);
-
-
-
-//    @Query("SELECT calorieRequirement FROM users WHERE userName = :userName")
-//    User calorie(String userName);
-
-
 }

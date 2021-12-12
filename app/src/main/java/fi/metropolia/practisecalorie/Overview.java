@@ -1,14 +1,21 @@
 package fi.metropolia.practisecalorie;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -58,6 +65,8 @@ public class Overview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+        getSupportActionBar().setTitle("Home");
+
 
         Log.d("Overview", "On create");
 
@@ -74,6 +83,7 @@ public class Overview extends AppCompatActivity {
         calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
         Toast.makeText(getApplicationContext(),"calorieRequirement : " + calorieRequirement, Toast.LENGTH_SHORT).show();
         tvTotalCalorieRequirement.setText(String.valueOf("of "+calorieRequirement + " Kcal"));
+
 
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -127,4 +137,38 @@ public class Overview extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                AlertDialog.Builder builder = new AlertDialog.Builder(Overview.this);
+
+                builder.setTitle("logging out")
+                        .setMessage("Are you sure you want to logout?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent logoutIntent = new Intent(Overview.this, MainActivity.class);
+                                startActivity(logoutIntent);
+                            }
+                        });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

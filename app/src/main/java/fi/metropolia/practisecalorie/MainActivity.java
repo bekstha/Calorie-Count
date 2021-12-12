@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import fi.metropolia.practisecalorie.user.LoggedUser;
@@ -17,7 +18,8 @@ import fi.metropolia.practisecalorie.user.UserDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button createBtn, loginBtn;
+    Button  loginBtn;
+    TextView createBtn;
     EditText etUserName, etPassword;
 //    public static final String FROM_DB_CALORIE_REQUIREMENT = "Calorie Requirement";
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         etUserName = findViewById(R.id.etUserName);
         etPassword = findViewById(R.id.etPassword);

@@ -50,6 +50,8 @@
     <string name="number">number</string>
     <string name="kcal">Kcal</string>
     <string name="confirm_changes">Confirm changes</string>
+    <string name="delete_profile">Delete my profile</string>
+
 
 
 </resources>

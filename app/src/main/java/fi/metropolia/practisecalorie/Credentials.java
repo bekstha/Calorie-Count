@@ -30,6 +30,7 @@ public class Credentials extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credentials);
+        getSupportActionBar().hide();
 
         nextBtn = findViewById(R.id.nextBtn);
         etFirstName = findViewById(R.id.etFirstName);

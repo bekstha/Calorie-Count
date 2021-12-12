@@ -1,7 +1,9 @@
 package fi.metropolia.practisecalorie;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +22,7 @@ public class EditProfile extends AppCompatActivity {
 
     EditText updateFirstName, updateLastName, updatePassword, retypeUpdatePassword;
     TextView  updateUsername,updateHeight,updateWeight;
-    Button updateProfileBtn;
+    Button updateProfileBtn, deleteProfileBtn;
     ImageView updateWeightIncrement, updateWeightDecrement;
 
     String udFirstName, udLastName, udPassword, username;
@@ -36,6 +38,7 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        getSupportActionBar().hide();
 
 
         updateFirstName = findViewById(R.id.updateFirstName);
@@ -50,6 +53,7 @@ public class EditProfile extends AppCompatActivity {
         updateWeightIncrement = findViewById(R.id.updateWeightIncrement);
         updateWeightDecrement = findViewById(R.id.updateWeightDecrement);
         updateSeekBarHeight = findViewById(R.id.updateSeekBarHeight);
+        deleteProfileBtn = findViewById(R.id.deleteProfile);
 
 
         UserDatabase userDB = UserDatabase.getUserDatabase(getApplicationContext());
@@ -154,6 +158,38 @@ public class EditProfile extends AppCompatActivity {
         });
 
 
+        deleteProfileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"HIII!", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(EditProfile.this);
+
+                builder.setIcon(R.drawable.ic_warninig)
+                        .setCancelable(false)
+                        .setTitle("Delete the profile")
+                        .setMessage("Are you sure you want to delete your profile?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                UserDatabase userDB = UserDatabase.getUserDatabase(getApplicationContext());
+                                User user = new User(userId, udFirstName, udLastName, username, udPassword, gender, age, udWeight, udHeight, udCalorieRequirement);
+                                userDB.userDao().delete(user);
+
+
+                                Intent deleteIntent = new Intent(EditProfile.this, MainActivity.class);
+                                startActivity(deleteIntent);
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.show();
+            }
+        });
 
 
 

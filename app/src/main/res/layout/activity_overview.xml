@@ -131,8 +131,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:menu="@menu/menu"
-            app:itemTextColor="#FFF8E1"
-            android:background="@drawable/button_background"
+            app:itemTextColor="@drawable/selctor"
+            app:itemIconTint="@color/white"
+            android:defaultFocusHighlightEnabled="true"
+            android:background="#2c2c2c"
             android:id="@+id/bottomNavigation"/>
 
         </RelativeLayout>

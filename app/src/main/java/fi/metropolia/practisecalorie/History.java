@@ -41,6 +41,13 @@ public class History extends AppCompatActivity {
         view = findViewById(R.id.bottomNavigation);
 
 
+        //Set HISTORY selected
+
+        view.setSelectedItemId(R.id.history);
+
+
+
+
 
 
         tvCalendar = findViewById(R.id.tvCalendar);
@@ -50,6 +57,9 @@ public class History extends AppCompatActivity {
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+
 
 
 
@@ -89,9 +99,9 @@ public class History extends AppCompatActivity {
                     case R.id.history:
                         Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(getApplicationContext(),
-                                History.class));
-                        overridePendingTransition(0, 0);
+                       // startActivity(new Intent(getApplicationContext(),
+                        //        History.class));
+                      //  overridePendingTransition(0, 0);
 
                         break;
 

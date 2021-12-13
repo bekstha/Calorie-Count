@@ -122,6 +122,12 @@ public class Overview extends AppCompatActivity {
         view = findViewById(R.id.bottomNavigation);
 
 
+
+        //Set home selected
+
+        view.setSelectedItemId(R.id.home);
+
+
         view.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -54,8 +54,9 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@drawable/button_background"
-        app:itemTextColor="#FFF8E1"
+        android:background="#2c2c2c"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu" />
 

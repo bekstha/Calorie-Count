@@ -23,7 +23,6 @@ public class FoodRepository {
     //try to sort food by user and date
     private LiveData<List<Food>> foodsByDate;
 
-
     private LocalDate day;
 
     public FoodRepository(Application application){
@@ -33,7 +32,6 @@ public class FoodRepository {
         Double total = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
 
         foodsByDate = foodDAO.getByDay(day, LoggedUser.getUserID());
-
     }
 
     public void create (Food food) {
@@ -50,7 +48,6 @@ public class FoodRepository {
         ExecutorService deleteService = Executors.newSingleThreadExecutor();
         deleteService.execute(() -> foodDAO.delete(food));
     }
-
 
     public LiveData<List<Food>> getFoodsByDate(LocalDate day) {
         this.day = day;

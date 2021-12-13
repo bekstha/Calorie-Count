@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -33,19 +35,12 @@ public class Overview extends AppCompatActivity {
     double sumConsumedCalorie, calorieRequirement;
     private FoodViewModel foodViewModel;
     FoodAdapter adapter;
+    CircularProgressIndicator circularProgressIndicator;
 
     //After user successfully adds the food then user is directed back to overview activity and
-    //the recycler view and corresponding text views are updated
-    ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-        foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
-        foodViewModel.getAllFoods().observe(this, adapter::setFoods);
-        UserDatabase foodDB = UserDatabase.getUserDatabase(getApplicationContext());
-        final FoodDAO foodDAO = foodDB.foodDAO();
-        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
-        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
-    });
+    //the recycler view, corresponding text views and progress bar are updated
+    ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> updateUI());
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,27 +49,17 @@ public class Overview extends AppCompatActivity {
 
         tvTotalCalorieRequirement = findViewById(R.id.tvTotalCalorieRequirement);
         tvCalorieConsumedNum = findViewById(R.id.tvConsumedCalorieNum);
-
-        UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
-        final FoodDAO foodDAO = userDatabase.foodDAO();
-        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
-        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
-
-//        UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
-        calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
-        tvTotalCalorieRequirement.setText("of " + calorieRequirement + " Kcal");
+        circularProgressIndicator = findViewById(R.id.progressCircular);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new FoodAdapter();
         recyclerView.setAdapter(adapter);
+        //updating the UI when user starts the application
+        updateUI();
 
-        foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
-        foodViewModel.getAllFoods().observe(this, adapter::setFoods);
-
-
-        //item touch helper to swipe on each item so that user can delete their entry and updates
-        //database as well as the view and corresponding text views
+        //item touch helper that allows user to swipe on each item so that user can delete their
+        //entry and updates database as well as the view and corresponding text views
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT) {
             @Override
@@ -89,10 +74,8 @@ public class Overview extends AppCompatActivity {
                 if (direction == ItemTouchHelper.LEFT) {
                     foodViewModel.delete(adapter.getFoodAt(viewPosition));
                     Toast.makeText(Overview.this, "Entry deleted", Toast.LENGTH_SHORT).show();
-                    UserDatabase foodDB = UserDatabase.getUserDatabase(getApplicationContext());
-                    final FoodDAO foodDAO = foodDB.foodDAO();
-                    sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
-                    tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
+                    // updating the UI when user deletes a food entry
+                    updateUI();
                 }
             }
 
@@ -116,7 +99,7 @@ public class Overview extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         //inflating menu with the logout item that was created in the drawables
-        // https://youtu.be/oh4YOj9VkVE
+        //https://youtu.be/oh4YOj9VkVE
         inflater.inflate(R.menu.top_logout_menu, menu);
         return true;
     }
@@ -140,4 +123,25 @@ public class Overview extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * updates the UI of the overview activity whenever the user starts the application
+     * and whenever the user adds, edits or deletes a food entry.
+     */
+    @SuppressLint("SetTextI18n")
+    public void updateUI(){
+        foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+        foodViewModel.getAllFoods().observe(this, adapter::setFoods);
+
+        UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+        final FoodDAO foodDAO = userDatabase.foodDAO();
+        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
+        tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
+
+        calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
+        tvTotalCalorieRequirement.setText("of " + calorieRequirement + " Kcal");
+
+        circularProgressIndicator.setProgress((int) ((sumConsumedCalorie/calorieRequirement)*100), true);
+    }
+
 }

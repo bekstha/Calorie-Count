@@ -19,7 +19,7 @@ import fi.metropolia.practisecalorie.user.UserDatabase;
 public class MainActivity extends AppCompatActivity {
 
     Button  loginBtn;
-    TextView create;
+    TextView create, forgotPassword;
     EditText etUserName, etPassword;
 
     @Override
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         create = findViewById(R.id.tvCreate);
         loginBtn = findViewById(R.id.loginBtn);
+        forgotPassword = findViewById(R.id.forgotPassword);
 
         //setting on click listener to take user to another activity to create their profile
         create.setOnClickListener(v -> {
@@ -64,5 +65,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //resetting password
+        forgotPassword.setOnClickListener(v -> {
+            Intent resetPasswordIntent = new Intent(MainActivity.this, ResetPassword.class);
+            startActivity(resetPasswordIntent);
+        });
+
     }
 }

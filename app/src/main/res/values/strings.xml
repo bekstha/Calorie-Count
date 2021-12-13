@@ -62,6 +62,10 @@
     <string name="update">update</string>
     <string name="_2000">2000</string>
     <string name="portions">0.1</string>
+    <string name="new_password">New password</string>
+    <string name="your_password">Your password:</string>
+    <string name="reveal_my_password">Reveal my password</string>
+    <string name="go_back_to_login">Go back to login</string>
 
 
 </resources>

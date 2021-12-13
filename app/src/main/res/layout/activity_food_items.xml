@@ -18,7 +18,7 @@
 
         <EditText
             android:id="@+id/etFoodName"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
@@ -35,13 +35,13 @@
 
         <EditText
             android:id="@+id/etCaloriePer100Gram"
-            android:background="@drawable/text_background"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
             android:layout_below="@+id/etFoodName"
             android:layout_centerInParent="true"
+            android:layout_marginTop="8dp"
             android:autofillHints="Your hint here"
+            android:background="@drawable/text_background"
             android:hint="@string/calorie_per_100_gram"
             android:inputType="numberDecimal"
             android:minHeight="48dp"
@@ -55,7 +55,7 @@
             android:id="@+id/etPortion"
             android:layout_marginTop="8dp"
             android:background="@drawable/text_background"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_below="@id/etCaloriePer100Gram"
             android:layout_centerInParent="true"

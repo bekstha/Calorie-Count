@@ -50,7 +50,7 @@
             android:layout_marginTop="100dp"
             android:text="@string/remaining_calorie"
             android:textColor="#8D6E63"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
 

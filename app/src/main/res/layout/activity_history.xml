@@ -52,10 +52,13 @@
         tools:listitem="@layout/recycle_view_layout" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
+        android:id="@+id/bottomNavigationHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1d1e1e"
+        android:background="#2C2c2c"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@color/icon_color"
+        app:itemIconSize="35dp"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu" />
 

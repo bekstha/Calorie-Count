@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.time.LocalDate;
@@ -36,6 +38,7 @@ public class Overview extends AppCompatActivity {
     private FoodViewModel foodViewModel;
     FoodAdapter adapter;
     CircularProgressIndicator circularProgressIndicator;
+    BottomNavigationView bottomNavigationOverview;
 
     //After user successfully adds the food then user is directed back to overview activity and
     //the recycler view, corresponding text views and progress bar are updated
@@ -50,6 +53,9 @@ public class Overview extends AppCompatActivity {
         tvTotalCalorieRequirement = findViewById(R.id.tvTotalCalorieRequirement);
         tvCalorieConsumedNum = findViewById(R.id.tvConsumedCalorieNum);
         circularProgressIndicator = findViewById(R.id.progressCircular);
+
+        bottomNavigationOverview = findViewById(R.id.bottomNavigationOverview);
+        bottomNavigationOverview.setSelectedItemId(R.id.home);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -90,9 +96,35 @@ public class Overview extends AppCompatActivity {
 
         //setting on click listener on complete button so that the user can complete their day
         findViewById(R.id.completeBtn).setOnClickListener(v -> {
-            Intent completedDayIntent = new Intent(Overview.this, History.class);
+            Intent completedDayIntent = new Intent(Overview.this, CompletedDay.class);
             startActivity(completedDayIntent);
         });
+
+
+        bottomNavigationOverview.setOnItemSelectedListener(item -> {
+            //To click on Profile, the profile activity will open
+            if (item.getItemId() == R.id.profile) {
+
+                startActivity(new Intent(getApplicationContext(),
+                        EditProfile.class));
+                overridePendingTransition(0, 0);
+
+                // To Click on home, it will stay in overview activity.
+            } else if (item.getItemId() == R.id.home) {
+                startActivity(new Intent(getApplicationContext(),
+                        Overview.class));
+                overridePendingTransition(0, 0);
+
+                //To click on history it will go to history activity
+            } else {
+                startActivity(new Intent(getApplicationContext(),
+                        History.class));
+                overridePendingTransition(0, 0);
+            }
+            return true;
+        });
+
+
     }
 
     // creating a menu from which the user can logout from the application
@@ -107,7 +139,7 @@ public class Overview extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.logout){
+        if (item.getItemId() == R.id.logout) {
             //when logout is clicked a dialog box appears to ask confirmation from the user
             //https://www.youtube.com/watch?v=MXDlY0n6mkc&t=254s
             AlertDialog.Builder builder = new AlertDialog.Builder(Overview.this);
@@ -130,7 +162,7 @@ public class Overview extends AppCompatActivity {
      * and whenever the user adds, edits or deletes a food entry.
      */
     @SuppressLint("SetTextI18n")
-    public void updateUI(){
+    public void updateUI() {
         foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         foodViewModel.getAllFoods().observe(this, adapter::setFoods);
 
@@ -142,7 +174,7 @@ public class Overview extends AppCompatActivity {
         calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
         tvTotalCalorieRequirement.setText("of " + calorieRequirement + " Kcal");
 
-        circularProgressIndicator.setProgress((int) ((sumConsumedCalorie/calorieRequirement)*100), true);
+        circularProgressIndicator.setProgress((int) ((sumConsumedCalorie / calorieRequirement) * 100), true);
     }
 
 }

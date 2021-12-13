@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.Objects;
 
 import fi.metropolia.practisecalorie.user.LoggedUser;
@@ -27,6 +30,8 @@ public class EditProfile extends AppCompatActivity {
     String udFirstName, udLastName, udPassword, username;
     int udHeight, udWeight, udCalorieRequirement, fromDbHeight;
     SeekBar updateSeekBarHeight;
+    BottomNavigationView bottomNavigationProfile;
+
 
     //getting the user's weight from database
     UserDatabase userDatabase = UserDatabase.getUserDatabase(this);
@@ -50,6 +55,11 @@ public class EditProfile extends AppCompatActivity {
         updateWeightDecrement = findViewById(R.id.updateWeightDecrement);
         updateSeekBarHeight = findViewById(R.id.updateSeekBarHeight);
         deleteProfileBtn = findViewById(R.id.deleteProfile);
+        bottomNavigationProfile = findViewById(R.id.bottomNavigationProfile);
+
+        bottomNavigationProfile = findViewById(R.id.bottomNavigationProfile);
+        bottomNavigationProfile.setSelectedItemId(R.id.profile);
+
 
         UserDatabase userDB = UserDatabase.getUserDatabase(getApplicationContext());
 
@@ -179,6 +189,29 @@ public class EditProfile extends AppCompatActivity {
             //when user selects no
             builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
             builder.show();
+        });
+
+        bottomNavigationProfile.setOnItemSelectedListener(item -> {
+            //To click on Profile, the profile activity will open
+            if (item.getItemId() == R.id.profile) {
+                startActivity(new Intent(getApplicationContext(),
+                        EditProfile.class));
+                overridePendingTransition(0, 0);
+
+                // To Click on home, it will stay in overview activity.
+            } else if (item.getItemId() == R.id.home) {
+                startActivity(new Intent(getApplicationContext(),
+                        Overview.class));
+                overridePendingTransition(0, 0);
+
+                //To click on history it will go to history activity
+            } else {
+                startActivity(new Intent(getApplicationContext(),
+                        History.class));
+                overridePendingTransition(0, 0);
+
+            }
+            return true;
         });
 
 

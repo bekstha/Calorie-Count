@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#1e1d1d"
     android:orientation="vertical"
     tools:context=".Profile">
@@ -30,7 +31,7 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
                 android:textSize="20sp"
-                android:textStyle="italic" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/updateUsername"
@@ -48,37 +49,30 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/card_background"
-            android:orientation="horizontal">
-
             <EditText
                 android:id="@+id/updateFirstName"
-                android:layout_width="100dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
                 android:hint="@string/first_name"
                 android:inputType="text"
                 android:textAlignment="center"
+                android:padding="10dp"
+                android:background="@drawable/text_background"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:autofillHints="first name" />
+                android:autofillHints="first name"/>
 
             <EditText
                 android:id="@+id/updateLastName"
-                android:layout_width="100dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
+                android:background="@drawable/text_background"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="25dp"
-                android:gravity="center"
                 android:hint="@string/last_name"
                 android:inputType="text"
                 android:textAlignment="center"
@@ -88,23 +82,17 @@
                 android:textStyle="bold"
                 android:autofillHints="last name" />
 
-        </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/card_background">
 
             <EditText
                 android:id="@+id/updatePassword"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
+                android:background="@drawable/text_background"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/password"
+                android:textAlignment="center"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
@@ -112,22 +100,15 @@
                 android:textStyle="bold"
                 android:autofillHints="password" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/card_background"
-            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/retypeUpdatePassword"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
+                android:background="@drawable/text_background"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
                 android:hint="@string/re_type_password"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
@@ -136,7 +117,6 @@
                 android:textStyle="bold"
                 android:autofillHints="Re-type password" />
 
-        </LinearLayout>
 
 
         <LinearLayout
@@ -144,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/card_background"
+            android:background="@drawable/text_background"
             android:orientation="vertical">
 
 
@@ -195,7 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/card_background"
+            android:background="@drawable/text_background"
             android:orientation="vertical">
 
             <TextView
@@ -266,7 +246,6 @@
             </LinearLayout>
         </LinearLayout>
 
-
         <android.widget.Button
             android:id="@+id/updateProfileBtn"
             android:layout_width="300dp"
@@ -278,7 +257,6 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
-
 
         <android.widget.Button
             android:id="@+id/deleteProfile"
@@ -293,8 +271,18 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2C2c2c"
+            app:itemIconSize="35dp"
+            app:itemIconTint="@color/icon_color"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/menu" />
 
     </LinearLayout>
+
 
 
 </ScrollView>

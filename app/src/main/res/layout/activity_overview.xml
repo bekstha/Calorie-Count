@@ -9,12 +9,12 @@
     tools:context=".Overview">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:id="@+id/progressBarCardView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         app:cardBackgroundColor="#2C2C2C">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -35,12 +35,12 @@
             android:id="@+id/tvConsumedCalorieNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="70dp"
             android:text="@string/tv_consumed"
             android:textColor="#FF4C4C"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="70dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvTotalCalorieRequirement"
@@ -58,7 +58,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp">
 
@@ -69,8 +69,31 @@
             android:layout_marginStart="20dp"
             android:text="@string/day_Overview"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
+
+        <android.widget.ImageButton
+            android:id="@+id/completeBtn"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/add_button_background"
+            android:src="@drawable/ic_check" />
+
+        <android.widget.ImageButton
+            android:id="@+id/addFoodBtn"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="40dp"
+            android:layout_toStartOf="@+id/completeBtn"
+            android:background="@drawable/add_button_background"
+            android:src="@drawable/ic_add_white" />
+
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -78,38 +101,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="2dp"
-        tools:listitem="@layout/recycle_view_layout"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        tools:listitem="@layout/recycle_view_layout" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationOverview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
-
-        <android.widget.Button
-            android:id="@+id/addFoodBtn"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/button_background"
-            android:text="@string/add_food"
-            android:textColor="#FFF8E1"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <android.widget.Button
-            android:id="@+id/completeBtn"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/button_background"
-            android:text="@string/complete_your_day"
-            android:textColor="#FFF8E1"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
+        android:background="#2C2c2c"
+        app:itemIconSize="35dp"
+        app:itemIconTint="@color/icon_color"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/menu" />
 </LinearLayout>

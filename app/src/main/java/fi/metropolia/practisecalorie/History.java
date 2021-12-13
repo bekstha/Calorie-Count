@@ -30,7 +30,7 @@ public class History extends AppCompatActivity {
     private FoodViewModel foodViewModel;
 
     //For the bottom navigation View
-    BottomNavigationView view;
+    BottomNavigationView bottomNavigationHistory;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -39,10 +39,10 @@ public class History extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         //To get the bottomNavigation view by Id
-        view = findViewById(R.id.bottomNavigation);
+        bottomNavigationHistory = findViewById(R.id.bottomNavigationHistory);
 
         //Set HISTORY selected
-        view.setSelectedItemId(R.id.history);
+        bottomNavigationHistory.setSelectedItemId(R.id.history);
 
         tvCalendar = findViewById(R.id.tvCalendar);
 
@@ -78,28 +78,25 @@ public class History extends AppCompatActivity {
         };
 
 
-        view.setOnItemSelectedListener(item -> {
+        bottomNavigationHistory.setOnItemSelectedListener(item -> {
             //To click on Profile, the profile activity will open
-            switch (item.getItemId()) {
-                case R.id.profile:
-                    startActivity(new Intent(getApplicationContext(),
-                            EditProfile.class));
-                    overridePendingTransition(0, 0);
-                    break;
+            if (item.getItemId() == R.id.profile) {
+                startActivity(new Intent(getApplicationContext(),
+                        EditProfile.class));
+                overridePendingTransition(0, 0);
 
                 // To Click on home, it will stay in overview activity.
-                case R.id.home:
-                    startActivity(new Intent(getApplicationContext(),
-                            Overview.class));
-                    overridePendingTransition(0, 0);
-                    break;
+            } else if (item.getItemId() == R.id.home) {
+                startActivity(new Intent(getApplicationContext(),
+                        Overview.class));
+                overridePendingTransition(0, 0);
 
                 //To click on history it will go to history activity
-                case R.id.history:
-                    startActivity(new Intent(getApplicationContext(),
-                         History.class));
-                  overridePendingTransition(0, 0);
-                    break;
+            } else {
+                startActivity(new Intent(getApplicationContext(),
+                        History.class));
+                overridePendingTransition(0, 0);
+
             }
             return true;
         });

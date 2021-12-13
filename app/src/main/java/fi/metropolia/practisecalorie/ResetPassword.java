@@ -32,7 +32,6 @@ public class ResetPassword extends AppCompatActivity {
         revealPassword = findViewById(R.id.revealPassword);
         goBackToLogin = findViewById(R.id.goBackLogin);
 
-        //
         revealBtn.setOnClickListener(v -> {
             UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
 
@@ -53,6 +52,7 @@ public class ResetPassword extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "No user found!", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         goBackToLogin.setOnClickListener(v -> {
             Intent goBackToLogin = new Intent(ResetPassword.this, MainActivity.class);

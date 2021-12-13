@@ -25,7 +25,8 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:padding="10dp" />
+            android:padding="10dp"
+            tools:ignore="RelativeOverlap" />
 
         <TextView
             android:id="@+id/tvCalendar"

@@ -29,6 +29,9 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE userName = :userName LIMIT 1")
     User checkUser(String userName);
 
+    @Query("SELECT password FROM users WHERE userName = :userName and firstName = :firstName and lastname = :lastName LIMIT 1")
+    String checkPassword(String userName, String firstName, String lastName);
+
 
     @Query("SELECT calorieRequirement FROM users WHERE id = :id")
     double searchCalorieRequirement(int id);
@@ -59,11 +62,4 @@ public interface UserDao {
 
     @Query("SELECT password FROM users WHERE id = :id")
     String searchPassword(int id);
-
-
-
-//    @Query("SELECT calorieRequirement FROM users WHERE userName = :userName")
-//    User calorie(String userName);
-
-
 }

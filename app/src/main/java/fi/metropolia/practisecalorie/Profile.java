@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,10 +21,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
-import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.User;
-import fi.metropolia.practisecalorie.user.UserDao;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
 
@@ -43,12 +41,12 @@ public class Profile extends AppCompatActivity {
     public static final String EXTRA_CALORIE_REQUIREMENT = "Calorie requirement";
     public static final String EXTRA_USERNAME = "username ";
     public static final String EXTRA_PASSWORD = "password ";
-    public static final String TAG = "Calorie";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         Intent fromCredentials = getIntent();
         String firstName = fromCredentials.getStringExtra(Credentials.EXTRA_FIRST_NAME);
@@ -188,10 +186,10 @@ public class Profile extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Enter a valid weight", Toast.LENGTH_SHORT).show();
 
             } else {
+                //registering the user in the database
                 UserDatabase userDatabase = UserDatabase.getUserDatabase(this);
                 User user = new User(0, firstName, lastName, userName, password, typeOfUser, age, intWeight, intCurrentHeight, calorieRequirement);
                 userDatabase.userDao().register(user);
-
 
                 Intent intent = new Intent(Profile.this, CalorieRequirement.class);
                 intent.putExtra(EXTRA_CALORIE_REQUIREMENT, calorieRequirement);
@@ -199,9 +197,6 @@ public class Profile extends AppCompatActivity {
                 intent.putExtra(EXTRA_PASSWORD, password);
                 startActivity(intent);
             }
-
-
-
-    });
-}
+        });
+    }
 }

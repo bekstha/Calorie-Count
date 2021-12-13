@@ -1,4 +1,4 @@
-package fi.metropolia.practisecalorie.User;
+package fi.metropolia.practisecalorie.user;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -8,6 +8,7 @@ public class User {
 
     @PrimaryKey(autoGenerate = true)
     int id;
+
 
     private String firstName;
     private String lastName;

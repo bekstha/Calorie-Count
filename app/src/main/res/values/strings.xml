@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Practise Calorie</string>
+    <string name="app_name">Calorie Count</string>
 
     <string name="create_button"> Create a profile </string>
-    <string name="height">Height</string>
+    <string name="height">Height (in cm)</string>
     <string name="dd_mm_yyyy">DD/MM/YYYY</string>
     <string name="date_of_birth">Date Of Birth</string>
     <string name="_170">170</string>
@@ -12,18 +12,18 @@
     <string name="male">Male</string>
     <string name="female_image">Female_Image</string>
     <string name="female">Female</string>
-    <string name="weight">Weight (in kg)</string>
-    <string name="in_kgs">in Kgs</string>
+    <string name="weight">Weight</string>
+    <string name="in_kgs">Kgs</string>
     <string name="calorie_requirement_page">Calorie_requirement_page</string>
     <string name="daily_requirement"> Your daily calorie requirement is 1500 Kcal</string>
-    <string name="start">Start</string>
+    <string name="start">Start your day</string>
     <string name="tv_consumed">0</string>
     <string name="day_Overview">Day Overview</string>
     <string name="remaining_calorie">of total kcal</string>
     <string name="add">Add</string>
     <string name="complete_your_day">Complete your day</string>
     <string name="number_of_calories">Number of Calories</string>
-    <string name="et_password">Password</string>
+    <string name="password">Password</string>
     <string name="welcome">WELCOME TO CALORIE COUNT</string>
     <string name="username">Username</string>
     <string name="login">Login</string>
@@ -38,12 +38,34 @@
     <string name="calories">Calories</string>
     <string name="add_food">Add food</string>
     <string name="autofill_hint">Your hint here</string>
-    <string name="completed_day">Congratulations! Your calorie intake for the day was 1200 Kcal which is 300 Kcal lower than recommended. If you continue like this, you will be loosing weight.</string>
+    <string name="completed_day">Congratulations! Your calorie intake for the day was 1200 Kcal which is 300 Kcal lower than recommended. If you continue like this, you will be losing weight.</string>
     <string name="create_an_account">Create an account</string>
     <string name="total_calorie_for_entry">The total calorie for this entry is</string>
     <string name="portion_size">(portion size = 100 grams)</string>
     <string name="add_to_your_day">Add to your day</string>
     <string name="filter_by_day">Filter by day</string>
+    <string name="app_logo">app logo</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="create_account">Create Account</string>
+    <string name="number">number</string>
+    <string name="kcal">Kcal</string>
+    <string name="confirm_changes">Confirm changes</string>
+    <string name="delete_profile">Delete my profile</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="user_name">User Name</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="next">Next</string>
+    <string name="sixty_text">60</string>
+    <string name="decrement">decrement</string>
+    <string name="increment">increment</string>
+    <string name="update">update</string>
+    <string name="_2000">2000</string>
+    <string name="portions">0.1</string>
+    <string name="new_password">New password</string>
+    <string name="your_password">Your password:</string>
+    <string name="reveal_my_password">Reveal my password</string>
+    <string name="go_back_to_login">Go back to login</string>
 
 
 </resources>

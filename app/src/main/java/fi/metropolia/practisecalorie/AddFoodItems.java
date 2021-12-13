@@ -2,24 +2,18 @@ package fi.metropolia.practisecalorie;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import java.time.LocalDate;
 
 import fi.metropolia.practisecalorie.data.Food;
-import fi.metropolia.practisecalorie.data.FoodDB;
+import fi.metropolia.practisecalorie.user.LoggedUser;
+import fi.metropolia.practisecalorie.user.UserDatabase;
 
 public class AddFoodItems extends AppCompatActivity {
 
@@ -28,10 +22,6 @@ public class AddFoodItems extends AppCompatActivity {
     TextView tvNumTotalCalorie;
     double intKcalInput, intPortions, intTotalCalorieForEntry;
     String foodName;
-
-    public static final String TAG = "ROOM";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,67 +34,34 @@ public class AddFoodItems extends AppCompatActivity {
         addToDayBtn = findViewById(R.id.addToDay);
         tvNumTotalCalorie = findViewById(R.id.tvNumTotalCalorie);
 
-//        Intent fromEditIntent = getIntent();
-//        foodInput.setText(fromEditIntent.getStringExtra(Overview.KEY_FOOD_NAME));
-//        kcalInput.setText(fromEditIntent.getStringExtra(Overview.KEY_FOOD_KCAL));
-//        portionsInput.setText(fromEditIntent.getStringExtra(Overview.KEY_PORTIONS));
-//        tvNumTotalCalorie.setText(fromEditIntent.getStringExtra(Overview.KEY_ENTRY_KCAL));
-
-
+        //click listener to add the food to the database
         addToDayBtn.setOnClickListener(v -> {
-            saveFood();
+            //checking if all the fields are input by the user
+            if (foodInput.getText().toString().trim().isEmpty() || kcalInput.getText().toString().trim().isEmpty() || portionsInput.getText().toString().trim().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                return;
+            } else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0) {
+                Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                foodName = foodInput.getText().toString().trim();
+                intKcalInput = Double.parseDouble(kcalInput.getText().toString());
+                intPortions = Double.parseDouble(portionsInput.getText().toString());
+            }
+            //calculates the total calories for that particular entry
+            intTotalCalorieForEntry = intKcalInput * intPortions;
+            tvNumTotalCalorie.setText(String.valueOf(intTotalCalorieForEntry));
+
+            //inserting the created food in the database
+            UserDatabase foodDB = UserDatabase.getUserDatabase(this);
+            Food food = new Food(LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry, LoggedUser.getUserID());
+            foodDB.foodDAO().create(food);
+
+            //going back to the overview page after a successful entry
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
         });
-
     }
 
-    private void saveFood() {
-        if (foodInput.getText().toString().trim().isEmpty() || kcalInput.getText().toString().trim().isEmpty() || portionsInput.getText().toString().trim().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
-            return;
-        } else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0) {
-            Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
-            foodName = foodInput.getText().toString().trim();
-            intKcalInput = Double.parseDouble(kcalInput.getText().toString());
-            intPortions = Double.parseDouble(portionsInput.getText().toString());
-        }
-
-        intTotalCalorieForEntry = intKcalInput * intPortions;
-        tvNumTotalCalorie.setText("" + intTotalCalorieForEntry);
-
-        FoodDB foodDB = FoodDB.get(this);
-
-        Food test = new Food(LocalDate.now(), foodName, intKcalInput, intPortions, intTotalCalorieForEntry);
-        Long newId = foodDB.foodDAO().create(test);
-        Log.d(TAG, "Added " + test + " database");
-
-        Intent intent = new Intent();
-//            intent.putExtra(KEY_FOOD_NAME, foodName);
-//            intent.putExtra(KEY_FOOD_KCAL, String.valueOf(intKcalInput));
-//            intent.putExtra(KEY_PORTIONS, String.valueOf(intPortions));
-//            intent.putExtra(KEY_ENTRY_KCAL, String.valueOf(intTotalCalorieForEntry));
-        setResult(RESULT_OK, intent);
-        finish();
-
-    }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.menu.add_food_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.save_food:
-//                saveFood();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//
-//        }
-//    }
 }

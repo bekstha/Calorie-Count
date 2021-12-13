@@ -15,7 +15,7 @@ import fi.metropolia.practisecalorie.user.UserDatabase;
 
 public class ResetPassword extends AppCompatActivity {
     EditText resetFirstName, resetLastName, resetUserName;
-    Button resetBtn;
+    Button revealBtn;
     TextView revealPassword, goBackToLogin;
     String checkFirstName, checkLastName, checkUserName;
 
@@ -28,11 +28,11 @@ public class ResetPassword extends AppCompatActivity {
         resetFirstName = findViewById(R.id.resetFirstName);
         resetLastName = findViewById(R.id.resetLastName);
         resetUserName = findViewById(R.id.resetUserName);
-        resetBtn = findViewById(R.id.resetBtn);
+        revealBtn = findViewById(R.id.revealBtn);
         revealPassword = findViewById(R.id.revealPassword);
         goBackToLogin = findViewById(R.id.goBackLogin);
 
-        resetBtn.setOnClickListener(v -> {
+        revealBtn.setOnClickListener(v -> {
             UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
 
             if (resetUserName.getText().toString().trim().isEmpty() ||

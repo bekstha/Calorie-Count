@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#1e1d1d"
     tools:context=".History">
 
@@ -49,6 +50,14 @@
         android:layout_below="@+id/historyHeader"
         android:layout_marginTop="30dp"
         tools:listitem="@layout/recycle_view_layout" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1d1e1e"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/menu" />
 
 
 </RelativeLayout>

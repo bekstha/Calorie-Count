@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +9,7 @@
     android:background="#1e1d1d"
     android:orientation="vertical"
     tools:context=".Overview">
+
 
     <com.google.android.material.card.MaterialCardView
         android:layout_marginTop="20dp"
@@ -112,4 +115,30 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/navigationLayoutOverview"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/menu"
+            app:itemTextColor="@drawable/selctor"
+            app:itemIconTint="@color/white"
+            android:defaultFocusHighlightEnabled="true"
+            android:background="#2c2c2c"
+            android:id="@+id/bottomNavigation"/>
+
+        </RelativeLayout>
+
+
+
+
+
+
 </LinearLayout>

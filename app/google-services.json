@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "586634054937",
+    "project_id": "login-7a75e",
+    "storage_bucket": "login-7a75e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586634054937:android:6c8f5b7229f4e9d501c988",
+        "android_client_info": {
+          "package_name": "fi.metropolia.practisecalorie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586634054937-jqp5c9rgc858rmanvc7cq8705fqm9vbf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHNtf-ZDCWjuIUhU5RfUrwcDJ6eFqCess"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586634054937-jqp5c9rgc858rmanvc7cq8705fqm9vbf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

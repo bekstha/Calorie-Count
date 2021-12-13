@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Practise Calorie</string>
+
+    <string name="create_button"> Create a profile </string>
+    <string name="height">Height</string>
+    <string name="dd_mm_yyyy">DD/MM/YYYY</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="_170">170</string>
+    <string name="cm">cm</string>
+    <string name="calculate">Calculate</string>
+    <string name="male_image">Male_Image</string>
+    <string name="male">Male</string>
+    <string name="female_image">Female_Image</string>
+    <string name="female">Female</string>
+    <string name="weight">Weight (in kg)</string>
+    <string name="in_kgs">in Kgs</string>
+    <string name="calorie_requirement_page">Calorie_requirement_page</string>
+    <string name="daily_requirement"> Your daily calorie requirement is 1500 Kcal</string>
+    <string name="start">Start</string>
+    <string name="tv_consumed">0</string>
+    <string name="day_Overview">Day Overview</string>
+    <string name="remaining_calorie">of total kcal</string>
+    <string name="add">Add</string>
+    <string name="complete_your_day">Complete your day</string>
+    <string name="number_of_calories">Number of Calories</string>
+    <string name="et_password">Password</string>
+    <string name="welcome">WELCOME TO CALORIE COUNT</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="get_started">Let\'s get started</string>
+    <string name="food_name">Food name</string>
+    <string name="calorie_per_100_gram">kcal per 100 grams</string>
+    <string name="portion">portion</string>
+    <string name="total_calories">Total Calories (in Kcal)</string>
+    <string name="total_calorie_num">200</string>
+    <string name="confirm_to_add_food_to_diary">confirm to add food to diary</string>
+    <string name="delete_food">delete food</string>
+    <string name="calories">Calories</string>
+    <string name="add_food">Add food</string>
+    <string name="autofill_hint">Your hint here</string>
+    <string name="completed_day">Congratulations! Your calorie intake for the day was 1200 Kcal which is 300 Kcal lower than recommended. If you continue like this, you will be loosing weight.</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="total_calorie_for_entry">The total calorie for this entry is</string>
+    <string name="portion_size">(portion size = 100 grams)</string>
+    <string name="add_to_your_day">Add to your day</string>
+    <string name="filter_by_day">Filter by day</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_myProfile">My Profile</string>
+    <string name="menu_logout">Logout</string>
+
+
+</resources>

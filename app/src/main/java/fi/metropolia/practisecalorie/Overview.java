@@ -105,20 +105,17 @@ public class Overview extends AppCompatActivity {
             //To click on Profile, the profile activity will open
             if (item.getItemId() == R.id.profile) {
 
-                startActivity(new Intent(getApplicationContext(),
-                        EditProfile.class));
+                startActivity(new Intent(getApplicationContext(), EditProfile.class));
                 overridePendingTransition(0, 0);
 
                 // To Click on home, it will stay in overview activity.
             } else if (item.getItemId() == R.id.home) {
-                startActivity(new Intent(getApplicationContext(),
-                        Overview.class));
+                startActivity(new Intent(getApplicationContext(), Overview.class));
                 overridePendingTransition(0, 0);
 
                 //To click on history it will go to history activity
             } else {
-                startActivity(new Intent(getApplicationContext(),
-                        History.class));
+                startActivity(new Intent(getApplicationContext(), History.class));
                 overridePendingTransition(0, 0);
             }
             return true;

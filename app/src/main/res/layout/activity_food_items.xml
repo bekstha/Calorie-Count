@@ -18,11 +18,12 @@
 
         <EditText
             android:id="@+id/etFoodName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
             android:autofillHints="Your hint here"
+            android:background="@drawable/text_background"
             android:hint="@string/food_name"
             android:inputType="text"
             android:textAlignment="center"
@@ -34,8 +35,10 @@
 
         <EditText
             android:id="@+id/etCaloriePer100Gram"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/text_background"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:layout_below="@+id/etFoodName"
             android:layout_centerInParent="true"
             android:autofillHints="Your hint here"
@@ -50,8 +53,10 @@
 
         <EditText
             android:id="@+id/etPortion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/text_background"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_below="@id/etCaloriePer100Gram"
             android:layout_centerInParent="true"
             android:layout_marginStart="90dp"

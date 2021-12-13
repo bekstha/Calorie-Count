@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import fi.metropolia.practisecalorie.data.Food;
 import fi.metropolia.practisecalorie.user.LoggedUser;
@@ -27,6 +28,7 @@ public class AddFoodItems extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_items);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         foodInput = findViewById(R.id.etFoodName);
         kcalInput = findViewById(R.id.etCaloriePer100Gram);

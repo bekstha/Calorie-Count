@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.User;
 import fi.metropolia.practisecalorie.user.UserDao;
@@ -22,6 +24,7 @@ public class CalorieRequirement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calorie_requirement);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         Intent intent = getIntent();
         int calorieRequirement = intent.getIntExtra(Profile.EXTRA_CALORIE_REQUIREMENT,0);

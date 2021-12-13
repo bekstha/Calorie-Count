@@ -27,9 +27,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
-import fi.metropolia.practisecalorie.User.User;
-import fi.metropolia.practisecalorie.User.UserDatabase;
+import fi.metropolia.practisecalorie.user.User;
+import fi.metropolia.practisecalorie.user.UserDatabase;
 
 
 public class Profile extends AppCompatActivity {
@@ -44,9 +45,8 @@ public class Profile extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener dateSetListener;
 
     public static final String EXTRA_CALORIE_REQUIREMENT = "Calorie requirement";
-    public static final String TAG = "Calorie";
-
-
+    public static final String EXTRA_USERNAME = "username ";
+    public static final String EXTRA_PASSWORD = "password ";
 
 
 
@@ -55,6 +55,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
 
 
@@ -77,14 +78,14 @@ public class Profile extends AppCompatActivity {
 
         //setting on-click Listener for the male and female layout
         maleLayout.setOnClickListener(v -> {
-            maleLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.focus));
-            femaleLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.no_focus));
+            maleLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.focus));
+            femaleLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.no_focus));
             typeOfUser = "Male";
         });
 
         femaleLayout.setOnClickListener(v -> {
-            femaleLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.focus));
-            maleLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.no_focus));
+            femaleLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.focus));
+            maleLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.no_focus));
             typeOfUser = "Female";
         });
 
@@ -113,15 +114,14 @@ public class Profile extends AppCompatActivity {
 
         // On-click listener for both image buttons that increases and decreases the weight
         weightIncrement.setOnClickListener(v -> {
-            intWeight = intWeight+1;
+            intWeight = intWeight + 1;
             tvWeight.setText(String.valueOf(intWeight));
         });
 
         weightDecrement.setOnClickListener(v -> {
-            intWeight = intWeight-1;
+            intWeight = intWeight - 1;
             tvWeight.setText(String.valueOf(intWeight));
         });
-
 
 
         // Calling Calender class from java util and setting on click listener
@@ -135,14 +135,14 @@ public class Profile extends AppCompatActivity {
         todayDate = simpleDateFormat.format(Calendar.getInstance().getTime());
 
         tvDOB.setOnClickListener(v -> {
-            DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(),dateSetListener,year,month,day);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(), dateSetListener, year, month, day);
             datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
             datePickerDialog.show();
         });
 
         dateSetListener = (view, year1, month1, dayOfMonth) -> {
             // month starts from 0 in java so need to add 1 to it
-            month1 = month1 +1;
+            month1 = month1 + 1;
             birthDate = dayOfMonth + "/" + month1 + "/" + year1;
             tvDOB.setText(birthDate);
         };
@@ -152,9 +152,9 @@ public class Profile extends AppCompatActivity {
         calculateBtn.setOnClickListener(v -> {
 
             // checking if date of birth is selected and then calculating user's age
-            if(birthDate == null){
+            if (birthDate == null) {
                 Toast.makeText(getApplicationContext(), "Enter your birth date", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     Date date1 = simpleDateFormat1.parse(birthDate);
@@ -165,7 +165,7 @@ public class Profile extends AppCompatActivity {
                     assert date2 != null;
                     long endDate = date2.getTime();
 
-                    Period period = new Period(startDate,endDate, PeriodType.yearMonthDay());
+                    Period period = new Period(startDate, endDate, PeriodType.yearMonthDay());
                     age = period.getYears();
 
                 } catch (ParseException e) {
@@ -174,42 +174,42 @@ public class Profile extends AppCompatActivity {
             }
 
             //calculate calorie requirement based on gender
-            if (typeOfUser.equals("Male")){
-                calorieRequirement = (int) Math.ceil((1.2*(66 + (6.3 * (intWeight * 2.20462)) + (12.9 * (intCurrentHeight * 0.393701)) - (6.8 * age))));
+            if (typeOfUser.equals("Male")) {
+                calorieRequirement = (int) Math.ceil((1.2 * (66 + (6.3 * (intWeight * 2.20462)) + (12.9 * (intCurrentHeight * 0.393701)) - (6.8 * age))));
 
-            }else if (typeOfUser.equals("Female")){
-                calorieRequirement = (int) Math.ceil((1.2*(655 + (4.3 * (intWeight * 2.20462) + (4.7 * (intCurrentHeight *0.393701)) -(4.7 * age)))));
+            } else if (typeOfUser.equals("Female")) {
+                calorieRequirement = (int) Math.ceil((1.2 * (655 + (4.3 * (intWeight * 2.20462) + (4.7 * (intCurrentHeight * 0.393701)) - (4.7 * age)))));
             }
 
             // if-statements to check that all the parameters are entered by the user and only then
             // go on to the next activity
-            if(birthDate == null) {
+            if (birthDate == null) {
                 Toast.makeText(getApplicationContext(), "Enter your birth date", Toast.LENGTH_SHORT).show();
 
-            }else if(typeOfUser.equals("0")){
+            } else if (typeOfUser.equals("0")) {
 
-                Toast.makeText(getApplicationContext(),"Select a gender",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Select a gender", Toast.LENGTH_SHORT).show();
 
-            }else if(intCurrentHeight == 0){
+            } else if (intCurrentHeight == 0) {
 
-                Toast.makeText(getApplicationContext(),"Select a height",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Select a height", Toast.LENGTH_SHORT).show();
 
-            }else if( intWeight <= 0){
+            } else if (intWeight <= 0) {
 
-                Toast.makeText(getApplicationContext(),"Enter a valid weight",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Enter a valid weight", Toast.LENGTH_SHORT).show();
 
-            }else{
-
+            } else {
+                //registering the user in the database
                 UserDatabase userDatabase = UserDatabase.getUserDatabase(this);
-                User user = new User(0, firstName, lastName, userName, password, typeOfUser, age,  intWeight,intCurrentHeight, calorieRequirement);
+                User user = new User(0, firstName, lastName, userName, password, typeOfUser, age, intWeight, intCurrentHeight, calorieRequirement);
                 userDatabase.userDao().register(user);
 
-                Log.d(TAG, "the user are" + firstName + lastName + userName + password + typeOfUser + age + intWeight + intCurrentHeight + calorieRequirement);
-
                 Intent intent = new Intent(Profile.this, CalorieRequirement.class);
-                intent.putExtra(EXTRA_CALORIE_REQUIREMENT, calorieRequirement) ;
+                intent.putExtra(EXTRA_CALORIE_REQUIREMENT, calorieRequirement);
+                intent.putExtra(EXTRA_USERNAME, userName);
+                intent.putExtra(EXTRA_PASSWORD, password);
                 startActivity(intent);
             }
         });
-     }
+    }
 }

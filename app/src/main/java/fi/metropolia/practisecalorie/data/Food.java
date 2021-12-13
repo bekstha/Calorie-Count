@@ -16,12 +16,16 @@ public class Food {
     private double portion;
     private double totalKcalPerEntry;
 
-    public Food(LocalDate day, String foodName, double kcalPerPortion, double portion, double totalKcalPerEntry) {
+    private int userID;
+
+    public Food(LocalDate day, String foodName, double kcalPerPortion, double portion, double totalKcalPerEntry, int userID) {
         this.day = day;
         this.foodName = foodName;
         this.kcalPerPortion = kcalPerPortion;
         this.portion = portion;
         this.totalKcalPerEntry = totalKcalPerEntry;
+        this.userID = userID;
+
     }
 
     public void setId(long id) {
@@ -50,6 +54,14 @@ public class Food {
 
     public double getTotalKcalPerEntry() {
         return totalKcalPerEntry;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     @Override

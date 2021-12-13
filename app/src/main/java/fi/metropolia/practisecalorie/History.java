@@ -41,6 +41,7 @@ public class History extends AppCompatActivity {
         view = findViewById(R.id.bottomNavigation);
 
 
+
         //Set HISTORY selected
 
         view.setSelectedItemId(R.id.history);
@@ -99,9 +100,9 @@ public class History extends AppCompatActivity {
                     case R.id.history:
                         Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
 
-                       // startActivity(new Intent(getApplicationContext(),
-                        //        History.class));
-                      //  overridePendingTransition(0, 0);
+                        startActivity(new Intent(getApplicationContext(),
+                             History.class));
+                      overridePendingTransition(0, 0);
 
                         break;
 

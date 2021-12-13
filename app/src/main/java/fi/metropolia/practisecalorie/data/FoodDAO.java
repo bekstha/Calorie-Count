@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.time.LocalDate;
@@ -34,10 +35,13 @@ public interface FoodDAO {
     @Query("Select * FROM food WHERE id = :foodId")
     Food getById(long foodId);
 
-    @Query("SELECT * FROM food WHERE day = :day")
-    LiveData<List<Food>> getByDay(LocalDate day);
+    @Query("SELECT SUM(totalKcalPerEntry) FROM food WHERE day = :day AND userID = :userID")
+    double getTotal(LocalDate day, int userID);
 
-    @Query("SELECT SUM(totalKcalPerEntry) FROM food WHERE day = :day")
-    double getTotal(LocalDate day);
+    @Query("SELECT * FROM food WHERE day = :day AND userID = :userID")
+    LiveData<List<Food>> getByDay(LocalDate day, int userID);
 
+    @Transaction
+    @Query("SELECT * FROM users WHERE id = :id")
+    UserFood getUserFood(int id);
 }

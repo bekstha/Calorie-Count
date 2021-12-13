@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
             //checking if the user inputs all both their username and password to login
             if (userName.isEmpty() || password.isEmpty()){
-                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
             }else{
                 UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
                 final UserDao userDao = userDatabase.userDao();
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //checking if the user exists in the database
                 if(null == user){
-                    Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.invalid), Toast.LENGTH_SHORT).show();
                 } else {
                     LoggedUser loggedUser  = LoggedUser.getInstance();
                     loggedUser.setUserID(user.getId());
@@ -72,5 +73,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(resetPasswordIntent);
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.exit))
+                .setMessage(getResources().getString(R.string.sure_exit))
+                .setNegativeButton(getResources().getString(R.string.no), null)
+                .setPositiveButton(getResources().getString(R.string.yes), (arg0, arg1) -> MainActivity.super.onBackPressed()).create().show();
     }
 }

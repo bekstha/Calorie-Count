@@ -47,14 +47,14 @@ public class Credentials extends AppCompatActivity {
                     etPassword.getText().toString().trim().isEmpty() ||
                     etReTypePassword.getText().toString().trim().isEmpty()){
 
-                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
 
                 //checking that the entered passwords match
             } else if (!etPassword.getText().toString().trim().equals(etReTypePassword.getText().toString().trim())) {
-                Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.passwords_do_not_match), Toast.LENGTH_SHORT).show();
                 //checking if a user with same username exists or not
             }else if (userDatabase.userDao().checkUser(etUsername.getText().toString().trim()) != null) {
-                    Toast.makeText(getApplicationContext(), "The username already exists!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.user_exists), Toast.LENGTH_SHORT).show();
             }else{
                 firstName = etFirstName.getText().toString().trim();
                 lastName = etLastName.getText().toString().trim();

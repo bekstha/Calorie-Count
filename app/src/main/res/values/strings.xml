@@ -68,6 +68,28 @@
     <string name="of_total">of %1$s kcal</string>
     <string name="no_entry">No entry has been made for today!</string>
     <string name="your_daily_requirement">Your daily calorie requirement is %1$s.</string>
+    <string name="Delete_profile">Delete the profile</string>
+    <string name="confirm_delete_profile">Are you sure you want to delete your profile?"</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="successfully_deleted">The profile was successfully deleted!</string>
+    <string name="successfully_updated">The profile was successfully updated!</string>
+    <string name="values_less_than_zero"> Values cannot be less or equal to 0! </string>
+    <string name="fields_required"> All fields required!</string>
+    <string name="entry_successfully_updated">The entry was successfully updated!</string>
+    <string name="passwords_do_not_match"> Passwords do not match!</string>
+    <string name="user_exists"> The username already exists! </string>
+    <string name="invalid"> Invalid credentials! </string>
+    <string name="sure_exit"> Are you sure you want to exit? </string>
+    <string name="exit"> Really exit?</string>
+    <string name="log_out"> Logging out?</string>
+    <string name="sure_logout">Are you sure you want to logout?</string>
+    <string name="home">Home</string>
+    <string name="enter_birth_date">Enter your birth date</string>
+    <string name="gender_selection"> Select a gender </string>
+    <string name="height_selection"> Select a height </string>
+    <string name="weight_selection"> Enter a valid weight</string>
+    <string name="no_user">No user found</string>
 
 
 </resources>

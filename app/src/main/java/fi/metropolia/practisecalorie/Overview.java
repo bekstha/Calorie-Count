@@ -1,13 +1,10 @@
 package fi.metropolia.practisecalorie;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +46,7 @@ public class Overview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.home));
 
         tvTotalCalorieRequirement = findViewById(R.id.tvTotalCalorieRequirement);
         tvCalorieConsumedNum = findViewById(R.id.tvConsumedCalorieNum);
@@ -141,14 +138,14 @@ public class Overview extends AppCompatActivity {
             //when logout is clicked a dialog box appears to ask confirmation from the user
             //https://www.youtube.com/watch?v=MXDlY0n6mkc&t=254s
             AlertDialog.Builder builder = new AlertDialog.Builder(Overview.this);
-            builder.setTitle("logging out")
+            builder.setTitle(getResources().getString(R.string.log_out))
                     .setCancelable(false)
-                    .setMessage("Are you sure you want to logout?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
+                    .setMessage(getResources().getString(R.string.sure_logout))
+                    .setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> {
                         Intent logoutIntent = new Intent(Overview.this, MainActivity.class);
                         startActivity(logoutIntent);
                     });
-            builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> dialog.dismiss());
             builder.show();
             return true;
         }

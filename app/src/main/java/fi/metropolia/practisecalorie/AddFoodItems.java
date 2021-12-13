@@ -39,11 +39,14 @@ public class AddFoodItems extends AppCompatActivity {
         //click listener to add the food to the database
         addToDayBtn.setOnClickListener(v -> {
             //checking if all the fields are input by the user
-            if (foodInput.getText().toString().trim().isEmpty() || kcalInput.getText().toString().trim().isEmpty() || portionsInput.getText().toString().trim().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+            if (foodInput.getText().toString().trim().isEmpty() ||
+                    kcalInput.getText().toString().trim().isEmpty() ||
+                    portionsInput.getText().toString().trim().isEmpty()) {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
                 return;
-            } else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) || Double.parseDouble(portionsInput.getText().toString()) <= 0) {
-                Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
+            } else if ((Double.parseDouble(kcalInput.getText().toString()) <= 0) ||
+                    Double.parseDouble(portionsInput.getText().toString()) <= 0) {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.values_less_than_zero), Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 foodName = foodInput.getText().toString().trim();

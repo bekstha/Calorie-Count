@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
@@ -123,16 +122,16 @@ public class EditProfile extends AppCompatActivity {
                     updateHeight.getText().toString().trim().isEmpty() ||
                     updateWeight.getText().toString().trim().isEmpty()) {
 
-                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
                 return;
                 //checking if both passwords match
             } else if (updatePassword.getText().toString().trim().isEmpty() !=
                     retypeUpdatePassword.getText().toString().trim().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.values_less_than_zero), Toast.LENGTH_SHORT).show();
                 return;
                 //checking if both heights and weights are not set to zero or less
             } else if ((Double.parseDouble(updateHeight.getText().toString()) <= 0) || Double.parseDouble(updateWeight.getText().toString()) <= 0) {
-                Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 udFirstName = updateFirstName.getText().toString().trim();
@@ -143,7 +142,7 @@ public class EditProfile extends AppCompatActivity {
             }
 
             //updating calorie requirement based on gender
-            if (gender.equals("Male")) {
+            if (gender.equals(getResources().getString(R.string.male))) {
                 udCalorieRequirement = (int) Math.ceil((1.2 * (66 + (6.3 * (udWeight * 2.20462)) +
                         (12.9 * (udHeight * 0.393701)) - (6.8 * age))));
 
@@ -157,8 +156,7 @@ public class EditProfile extends AppCompatActivity {
             User user = new User(userId, udFirstName, udLastName, username, udPassword, gender, age,
                     udWeight, udHeight, udCalorieRequirement);
             userDatabase.userDao().update(user);
-            Toast.makeText(getApplicationContext(),
-                    "The profile was successfully updated!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.successfully_updated), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(EditProfile.this, Overview.class);
             startActivity(intent);
@@ -171,23 +169,22 @@ public class EditProfile extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(EditProfile.this);
             builder.setIcon(R.drawable.ic_warninig)
                     .setCancelable(false)
-                    .setTitle("Delete the profile")
-                    .setMessage("Are you sure you want to delete your profile?")
+                    .setTitle(getResources().getString(R.string.Delete_profile))
+                    .setMessage(getResources().getString(R.string.confirm_delete_profile))
                     //when user selects yes option
-                    .setPositiveButton("Yes", (dialog, which) -> {
+                    .setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> {
                         UserDatabase deleteUser = UserDatabase.getUserDatabase(getApplicationContext());
                         User user = new User(userId, udFirstName, udLastName, username, udPassword,
                                 gender, age, udWeight, udHeight, udCalorieRequirement);
                         deleteUser.userDao().delete(user);
                         deleteUser.foodDAO().deleteFoodALso(LoggedUser.getUserID());
-                        Toast.makeText(getApplicationContext(),
-                                "The profile was successfully deleted!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.successfully_deleted), Toast.LENGTH_SHORT).show();
 
                         Intent deleteIntent = new Intent(EditProfile.this, MainActivity.class);
                         startActivity(deleteIntent);
                     });
             //when user selects no
-            builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> dialog.dismiss());
             builder.show();
         });
 

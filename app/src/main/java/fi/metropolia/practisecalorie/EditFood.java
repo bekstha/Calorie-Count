@@ -48,12 +48,12 @@ public class EditFood extends AppCompatActivity {
             if (updateFoodInput.getText().toString().trim().isEmpty() ||
                     updateKcalInput.getText().toString().trim().isEmpty() ||
                     updatePortionsInput.getText().toString().trim().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
                 return;
                 //checking if user inputs 0 or less
             } else if ((Double.parseDouble(updateKcalInput.getText().toString()) <= 0) ||
                     Double.parseDouble(updatePortionsInput.getText().toString()) <= 0) {
-                Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.values_less_than_zero), Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 udFoodName = updateFoodInput.getText().toString().trim();
@@ -68,7 +68,7 @@ public class EditFood extends AppCompatActivity {
             food.setId(fromEditIntent.getLong("FoodId"));
 
             //updating the food entry
-            Toast.makeText(getApplicationContext(), "The entry was successfully updated!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.entry_successfully_updated), Toast.LENGTH_SHORT).show();
             UserDatabase foodDb = UserDatabase.getUserDatabase(getApplicationContext());
             foodDb.foodDAO().update(food);
 

@@ -38,7 +38,7 @@ public class ResetPassword extends AppCompatActivity {
             if (resetUserName.getText().toString().trim().isEmpty() ||
                     resetFirstName.getText().toString().trim().isEmpty() ||
                     resetLastName.getText().toString().trim().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 checkFirstName = resetFirstName.getText().toString().trim();
@@ -49,7 +49,7 @@ public class ResetPassword extends AppCompatActivity {
             if (userDatabase.userDao().checkPassword(checkUserName, checkFirstName, checkLastName) != null) {
                 revealPassword.setText(userDatabase.userDao().checkPassword(checkUserName, checkFirstName, checkLastName));
             } else {
-                Toast.makeText(getApplicationContext(), "No user found!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_user), Toast.LENGTH_SHORT).show();
             }
         });
 

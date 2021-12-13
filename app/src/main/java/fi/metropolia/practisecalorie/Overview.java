@@ -3,8 +3,6 @@ package fi.metropolia.practisecalorie;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,7 +50,6 @@ public class Overview extends AppCompatActivity {
         tvTotalCalorieRequirement = findViewById(R.id.tvTotalCalorieRequirement);
         tvCalorieConsumedNum = findViewById(R.id.tvConsumedCalorieNum);
         circularProgressIndicator = findViewById(R.id.progressCircular);
-
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -145,10 +141,6 @@ public class Overview extends AppCompatActivity {
 
         calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
         tvTotalCalorieRequirement.setText("of " + calorieRequirement + " Kcal");
-
-        Log.d("juha consumed calorie", String.valueOf(sumConsumedCalorie ));
-        Log.d("juha calorie requirement", String.valueOf(calorieRequirement));
-        Log.d("juha test", String.valueOf(LoggedUser.getUserID()));
 
         circularProgressIndicator.setProgress((int) ((sumConsumedCalorie/calorieRequirement)*100), true);
     }

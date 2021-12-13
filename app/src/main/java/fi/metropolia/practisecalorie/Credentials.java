@@ -64,7 +64,7 @@ public class Credentials extends AppCompatActivity {
                 Intent intent = new Intent(Credentials.this, Profile.class);
                 intent.putExtra(EXTRA_FIRST_NAME, firstName);
                 intent.putExtra(EXTRA_LAST_NAME, lastName);
-                intent.putExtra(EXTRA_USER_NAME,lastName);
+                intent.putExtra(EXTRA_USER_NAME,userName);
                 intent.putExtra(EXTRA_PASSWORD,password);
 
                 startActivity(intent);

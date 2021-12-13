@@ -42,7 +42,6 @@ public class CalorieRequirement extends AppCompatActivity {
             UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
             final UserDao userDao = userDatabase.userDao();
             User user = userDao.login(userName,password);
-
             LoggedUser loggedUser  = LoggedUser.getInstance();
             loggedUser.setUserID(user.getId());
 

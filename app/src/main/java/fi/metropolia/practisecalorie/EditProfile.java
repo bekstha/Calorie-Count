@@ -66,7 +66,7 @@ public class EditProfile extends AppCompatActivity {
         //setting the initial values of user's parameters in the corresponding views
         updateFirstName.setText(userDB.userDao().searchFirstName(LoggedUser.getUserID()));
         updateLastName.setText(userDB.userDao().searchLastName(LoggedUser.getUserID()));
-        updateUsername.setText(userDB.userDao().searchLastName(LoggedUser.getUserID()));
+        updateUsername.setText(userDB.userDao().searchUserName(LoggedUser.getUserID()));
         updateHeight.setText(String.valueOf(userDB.userDao().searchHeight(LoggedUser.getUserID())));
         updateWeight.setText(String.valueOf(userDB.userDao().searchWeight(LoggedUser.getUserID())));
         updatePassword.setText(userDB.userDao().searchPassword(LoggedUser.getUserID()));

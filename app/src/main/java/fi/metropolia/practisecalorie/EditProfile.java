@@ -165,10 +165,11 @@ public class EditProfile extends AppCompatActivity {
                     .setMessage("Are you sure you want to delete your profile?")
                     //when user selects yes option
                     .setPositiveButton("Yes", (dialog, which) -> {
-                        UserDatabase userDB1 = UserDatabase.getUserDatabase(getApplicationContext());
+                        UserDatabase deleteUser = UserDatabase.getUserDatabase(getApplicationContext());
                         User user = new User(userId, udFirstName, udLastName, username, udPassword,
                                 gender, age, udWeight, udHeight, udCalorieRequirement);
-                        userDB1.userDao().delete(user);
+                        deleteUser.userDao().delete(user);
+                        deleteUser.foodDAO().deleteFoodALso(LoggedUser.getUserID());
                         Toast.makeText(getApplicationContext(),
                                 "The profile was successfully deleted!", Toast.LENGTH_SHORT).show();
 

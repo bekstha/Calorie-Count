@@ -45,8 +45,6 @@ public class History extends AppCompatActivity {
         //Set HISTORY selected
         view.setSelectedItemId(R.id.history);
 
-
-
         tvCalendar = findViewById(R.id.tvCalendar);
 
         RecyclerView historyRecyclerView = findViewById(R.id.historyRecycleView);
@@ -82,20 +80,16 @@ public class History extends AppCompatActivity {
 
 
         view.setOnItemSelectedListener(item -> {
-
             //To click on Profile, the profile activity will open
             switch (item.getItemId()) {
                 case R.id.profile:
-                    Toast.makeText(getApplicationContext(), "My Profile", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),
-                            Profile.class));
+                            EditProfile.class));
                     overridePendingTransition(0, 0);
                     break;
 
                 // To Click on home, it will stay in overview activity.
                 case R.id.home:
-                    Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
-
                     startActivity(new Intent(getApplicationContext(),
                             Overview.class));
                     overridePendingTransition(0, 0);
@@ -103,7 +97,6 @@ public class History extends AppCompatActivity {
 
                 //To click on history it will go to history activity
                 case R.id.history:
-                    Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),
                          History.class));
                   overridePendingTransition(0, 0);

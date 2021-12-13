@@ -41,6 +41,9 @@ public interface FoodDAO {
     @Query("SELECT * FROM food WHERE day = :day AND userID = :userID")
     LiveData<List<Food>> getByDay(LocalDate day, int userID);
 
+    @Query("DELETE  FROM food WHERE userID = :userID")
+    void deleteFoodALso(int userID);
+
     @Transaction
     @Query("SELECT * FROM users WHERE id = :id")
     UserFood getUserFood(int id);

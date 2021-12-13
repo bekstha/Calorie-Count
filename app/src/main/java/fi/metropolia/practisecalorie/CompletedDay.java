@@ -30,21 +30,21 @@ public class CompletedDay extends AppCompatActivity {
 
         completedView = findViewById(R.id.completedView);
 
-        if (sumOfCalorieConsumed < calorieRequirement){
-            completedView.setText("Your calorie intake for the day was " + sumOfCalorieConsumed + " Kcal which is " + (calorieRequirement - sumOfCalorieConsumed) + " Kcal lower than recommended. If you continue like this, you will be losing weight.");
-        }else if (sumOfCalorieConsumed > calorieRequirement){
-            completedView.setText("Your calorie intake for the day was " + sumOfCalorieConsumed + " Kcal which is " + (sumOfCalorieConsumed - calorieRequirement) + " Kcal higher than recommended. If you continue like this, you will be gaining weight.");
-        } else {
-            completedView.setText("Your calorie intake for the day was " + sumOfCalorieConsumed + " Kcal. You are on course to maintain your current weight.");
-        }
+        if (sumOfCalorieConsumed == 0) {
+            completedView.setText(getResources().getString(R.string.no_entry));
+        }else if (sumOfCalorieConsumed < calorieRequirement){
+            double loseWeightNum = calorieRequirement - sumOfCalorieConsumed;
+                completedView.setText(getResources().getString(R.string.loose_weight,String.valueOf(sumOfCalorieConsumed),String.valueOf(loseWeightNum)));
+            }else if (sumOfCalorieConsumed > calorieRequirement){
+            double gainWeightNum = sumOfCalorieConsumed - calorieRequirement;
+                completedView.setText(getResources().getString(R.string.gain_weight, String.valueOf(sumOfCalorieConsumed), String.valueOf(gainWeightNum)));
+            } else {
+                completedView.setText( getResources().getString(R.string.maintain_weight, String.valueOf(sumOfCalorieConsumed)));
+            }
+
 
         endDayBtn = findViewById(R.id.endDayBtn);
-        endDayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CompletedDay.this, MainActivity.class));
-            }
-        });
+        endDayBtn.setOnClickListener(v -> startActivity(new Intent(CompletedDay.this, MainActivity.class)));
 
 
 

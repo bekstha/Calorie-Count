@@ -2,6 +2,7 @@ package fi.metropolia.practisecalorie;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -158,7 +159,6 @@ public class Overview extends AppCompatActivity {
      * updates the UI of the overview activity whenever the user starts the application
      * and whenever the user adds, edits or deletes a food entry.
      */
-    @SuppressLint("SetTextI18n")
     public void updateUI() {
         foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         foodViewModel.getAllFoods().observe(this, adapter::setFoods);
@@ -169,7 +169,7 @@ public class Overview extends AppCompatActivity {
         tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
 
         calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
-        tvTotalCalorieRequirement.setText("of " + calorieRequirement + " Kcal");
+        tvTotalCalorieRequirement.setText(getResources().getString(R.string.of_total, String.valueOf(calorieRequirement)));
 
         circularProgressIndicator.setProgress((int) ((sumConsumedCalorie / calorieRequirement) * 100), true);
     }

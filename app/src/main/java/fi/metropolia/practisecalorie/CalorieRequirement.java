@@ -19,7 +19,7 @@ public class CalorieRequirement extends AppCompatActivity {
 
     TextView tvCalorieRequirement;
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,7 @@ public class CalorieRequirement extends AppCompatActivity {
         String password = intent.getStringExtra(Profile.EXTRA_PASSWORD);
 
         tvCalorieRequirement = findViewById(R.id.tvCalorieRequirement);
-        tvCalorieRequirement.setText("Your daily calorie requirement is " + calorieRequirement + " Kcal");
+        tvCalorieRequirement.setText(getResources().getString(R.string.your_daily_requirement, String.valueOf(calorieRequirement)));
 
         Button startBtn = findViewById(R.id.startBtn);
         startBtn.setOnClickListener(v -> {

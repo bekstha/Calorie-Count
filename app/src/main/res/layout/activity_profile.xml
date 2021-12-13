@@ -128,7 +128,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="50sp"
-            android:text="@string/_170"
+            android:text="@string/empty"
             android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold">
@@ -180,7 +180,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
             android:minHeight="48dp"
-            android:text="@string/sixty_text"
+            android:text="@string/empty"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"

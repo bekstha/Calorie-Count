@@ -77,7 +77,7 @@ public class History extends AppCompatActivity {
             LocalDate selectedDay = LocalDate.of(year1, month1, dayOfMonth);
             tvCalendar.setText(chosenDate);
 
-            FoodAdapter adapter =new FoodAdapter();
+            HistoryAdapter adapter =new HistoryAdapter();
             historyRecyclerView.setAdapter(adapter);
             foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
             foodViewModel.getFoodsByDate(selectedDay).observe(this, adapter::setFoods);

@@ -62,6 +62,7 @@ public class Profile extends AppCompatActivity {
         weightIncrement = findViewById(R.id.weightIncrement);
         weightDecrement = findViewById(R.id.weightDecrement);
         tvWeight = findViewById(R.id.tvWeight);
+        tvWeight.setText(String.valueOf(intWeight));
 
         //setting on-click Listener for the male and female layout
         maleLayout.setOnClickListener(v -> {
@@ -81,6 +82,7 @@ public class Profile extends AppCompatActivity {
         seekBarHeight.setMax(300);
         seekBarHeight.setProgress(170);
         intCurrentHeight = 170;
+        currentHeight.setText(String.valueOf(intCurrentHeight));
         seekBarHeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -98,6 +100,7 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+
 
         // On-click listener for both image buttons that increases and decreases the weight
         weightIncrement.setOnClickListener(v -> {

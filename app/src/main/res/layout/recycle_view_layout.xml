@@ -37,7 +37,7 @@
             android:layout_below="@+id/tvFoodName"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/_2000"
+            android:text="@string/empty"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -64,7 +64,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:minHeight="48dp"
-            android:text="@string/portions"
+            android:text="@string/empty"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -104,7 +104,7 @@
             android:layout_below="@id/tvTotalCalorieText"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="40dp"
-            android:text="@string/total_calorie_num"
+            android:text="@string/empty"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />

@@ -26,7 +26,10 @@ import java.util.Objects;
 import fi.metropolia.practisecalorie.user.User;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
-
+/**
+ * In this activity, user can set their physical parameters so that the app can calculate their
+ * calorie requirement
+ */
 public class Profile extends AppCompatActivity {
 
     RelativeLayout maleLayout, femaleLayout;

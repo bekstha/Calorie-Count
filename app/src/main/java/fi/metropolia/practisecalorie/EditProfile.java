@@ -20,6 +20,9 @@ import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.User;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * Activity where user can edit their profile
+ */
 public class EditProfile extends AppCompatActivity {
 
     EditText updateFirstName, updateLastName, updatePassword, retypeUpdatePassword;

@@ -12,6 +12,9 @@ import java.util.Objects;
 
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * Activity where the user can enter their credentials to create a profile
+ */
 public class Credentials extends AppCompatActivity {
 
     Button nextBtn;

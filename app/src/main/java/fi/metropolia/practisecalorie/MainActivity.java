@@ -17,6 +17,10 @@ import fi.metropolia.practisecalorie.user.User;
 import fi.metropolia.practisecalorie.user.UserDao;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * Main activity of the application where the user can login, sign up or search for their forgotten
+ * password
+ */
 public class MainActivity extends AppCompatActivity {
 
     Button  loginBtn;
@@ -78,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
     //calling onBackPressed method when user click back on the main activity and asking if user wants
     //to log out of the application
+
+    /**
+     * method when user presses back on the main activity is shown an alert dialog box if the user
+     * wants to exit the application
+     */
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

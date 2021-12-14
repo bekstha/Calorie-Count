@@ -13,6 +13,10 @@ import java.util.Objects;
 
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+
+/**
+ * Activity where user can find their password in case they forget their password
+ */
 public class ResetPassword extends AppCompatActivity {
     EditText resetFirstName, resetLastName, resetUserName;
     Button revealBtn;

@@ -13,6 +13,9 @@ import java.util.Objects;
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * When the user completes the day, user is shown a review of their day
+ */
 public class CompletedDay extends AppCompatActivity {
     TextView completedView;
     Button endDayBtn;
@@ -26,7 +29,6 @@ public class CompletedDay extends AppCompatActivity {
         UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
         double calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
         double sumOfCalorieConsumed = userDatabase.foodDAO().getTotal(LocalDate.now(), LoggedUser.getUserID());
-
 
         completedView = findViewById(R.id.completedView);
         //on completed view, checking if user has made any entry for the day and responding likewise

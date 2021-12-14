@@ -29,6 +29,9 @@ import fi.metropolia.practisecalorie.data.FoodViewModel;
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * In this activity, the user can see the food entry of their day.
+ */
 public class Overview extends AppCompatActivity {
 
     TextView tvCalorieConsumedNum, tvTotalCalorieRequirement;
@@ -123,6 +126,11 @@ public class Overview extends AppCompatActivity {
     }
 
     // creating a menu from which the user can logout from the application
+    /**
+     * Inflating the top bar with a menu
+     * @param menu that allows user to see option to logout
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -132,6 +140,12 @@ public class Overview extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Menu item which shows logout option to the user, on which user can click to logout from the
+     * application
+     * @param item logout item
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.logout) {

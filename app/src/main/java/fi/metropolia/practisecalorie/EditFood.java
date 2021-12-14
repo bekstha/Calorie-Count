@@ -16,6 +16,9 @@ import fi.metropolia.practisecalorie.data.Food;
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * Activity where the user can edit their food entry
+ */
 public class EditFood extends AppCompatActivity {
 
     EditText updateFoodInput, updateKcalInput, updatePortionsInput;

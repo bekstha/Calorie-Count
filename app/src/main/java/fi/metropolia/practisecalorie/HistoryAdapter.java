@@ -17,6 +17,9 @@ import fi.metropolia.practisecalorie.data.Food;
 
 public class HistoryAdapter extends RecyclerView.Adapter <HistoryAdapter.HistoryHolder>{
 
+    /**
+     * List of foods
+     */
     private List<Food> foods = new ArrayList<>();
 
     @NonNull
@@ -51,6 +54,10 @@ public class HistoryAdapter extends RecyclerView.Adapter <HistoryAdapter.History
         private final TextView tvFoodName,tvCaloriePer100Gram,tvPortion,tvTotalCalorieNum;
         CardView cardView;
 
+        /**
+         * View holds each food with food's name and caloric information
+         * @param itemView is food item entered by the user
+         */
         public HistoryHolder(View itemView){
             super(itemView);
             tvFoodName = itemView.findViewById(R.id.tvFoodName);

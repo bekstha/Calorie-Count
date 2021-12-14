@@ -23,6 +23,9 @@ import fi.metropolia.practisecalorie.data.FoodViewModel;
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * Activity where user can view a history of food they have entered in the database
+ */
 public class History extends AppCompatActivity {
 
 

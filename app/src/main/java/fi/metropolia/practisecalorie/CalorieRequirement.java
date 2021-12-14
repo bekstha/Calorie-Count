@@ -14,6 +14,10 @@ import fi.metropolia.practisecalorie.user.User;
 import fi.metropolia.practisecalorie.user.UserDao;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+
+/**
+ * The activity where user is show their caloric requirement
+ */
 public class CalorieRequirement extends AppCompatActivity {
 
     TextView tvCalorieRequirement;

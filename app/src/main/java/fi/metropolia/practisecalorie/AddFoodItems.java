@@ -16,6 +16,9 @@ import fi.metropolia.practisecalorie.data.Food;
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * The activity where the user can add the food to the database
+ */
 public class AddFoodItems extends AppCompatActivity {
 
     EditText foodInput, kcalInput, portionsInput;

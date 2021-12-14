@@ -20,6 +20,11 @@ import fi.metropolia.practisecalorie.user.UserDatabase;
 /**
  * Main activity of the application where the user can login, sign up or search for their forgotten
  * password
+ *
+ * @link :-  https://www.youtube.com/playlist?list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118
+ * @link :-  https://www.youtube.com/watch?v=UydBl58KJZQ
+ * @link :- https://www.youtube.com/watch?v=MXDlY0n6mkc&t=254s
+ * @link :- https://youtu.be/JjfSjMs0ImQ
  */
 public class MainActivity extends AppCompatActivity {
 

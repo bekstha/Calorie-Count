@@ -39,7 +39,8 @@
             android:text="@string/dd_mm_yyyy"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
 

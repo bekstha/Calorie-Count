@@ -16,6 +16,6 @@ public class LoggedUser {
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
+        LoggedUser.userID = userID;
     }
 }

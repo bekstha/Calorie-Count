@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    //calling onBackPressed method when user click back on the main activity and asking if user wants
+    //to log out of the application
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

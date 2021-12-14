@@ -59,7 +59,6 @@ public class EditProfile extends AppCompatActivity {
         bottomNavigationProfile = findViewById(R.id.bottomNavigationProfile);
         bottomNavigationProfile.setSelectedItemId(R.id.profile);
 
-
         UserDatabase userDB = UserDatabase.getUserDatabase(getApplicationContext());
 
         //setting the initial values of user's parameters in the corresponding views
@@ -188,13 +187,13 @@ public class EditProfile extends AppCompatActivity {
             builder.show();
         });
 
+        //bottom navigation bar click listener
         bottomNavigationProfile.setOnItemSelectedListener(item -> {
             //To click on Profile, the profile activity will open
             if (item.getItemId() == R.id.profile) {
                 startActivity(new Intent(getApplicationContext(),
                         EditProfile.class));
                 overridePendingTransition(0, 0);
-
                 // To Click on home, it will stay in overview activity.
             } else if (item.getItemId() == R.id.home) {
                 startActivity(new Intent(getApplicationContext(),

@@ -1,5 +1,6 @@
 package fi.metropolia.practisecalorie.user;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -20,7 +21,19 @@ public class User {
     private int height;
     private int calorieRequirement;
 
-
+    /**
+     * Creates a user with following parameters
+     * @param id primary key auto-generated when a user is created
+     * @param firstName first name of the user
+     * @param lastName last name of the user
+     * @param userName username selected by the user
+     * @param password password set by the user
+     * @param gender user's biological representation
+     * @param age user's age
+     * @param weight user's weight
+     * @param height user's height
+     * @param calorieRequirement calculated by the program after user enters their physical parameters
+     */
     public User(int id, String firstName, String lastName, String userName, String password, String gender,int age, int weight, int height, int calorieRequirement) {
         this.id = id;
         this.firstName = firstName;
@@ -74,6 +87,7 @@ public class User {
         return age;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "User{" +

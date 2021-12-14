@@ -33,6 +33,7 @@ public class CalorieRequirement extends AppCompatActivity {
         tvCalorieRequirement = findViewById(R.id.tvCalorieRequirement);
         tvCalorieRequirement.setText(getResources().getString(R.string.your_daily_requirement, String.valueOf(calorieRequirement)));
 
+        //click listener for the start button
         Button startBtn = findViewById(R.id.startBtn);
         startBtn.setOnClickListener(v -> {
 

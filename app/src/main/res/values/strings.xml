@@ -67,7 +67,7 @@
     <string name="loose_weight"> Your calorie intake for the day was %1$s Kcal which is %2$s lower than recommended. If you continue like this, you will be losing weight.  </string>
     <string name="of_total">of %1$s kcal</string>
     <string name="no_entry">No entry has been made for today!</string>
-    <string name="your_daily_requirement">Your daily calorie requirement is %1$s.</string>
+    <string name="your_daily_requirement">Your daily calorie requirement is %1$s kcal.</string>
     <string name="Delete_profile">Delete the profile</string>
     <string name="confirm_delete_profile">Are you sure you want to delete your profile?"</string>
     <string name="yes">Yes</string>

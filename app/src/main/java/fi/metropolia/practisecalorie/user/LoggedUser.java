@@ -9,7 +9,6 @@ public class LoggedUser {
     }
 
     private  LoggedUser(){
-
     }
 
     public static int getUserID() {

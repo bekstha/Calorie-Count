@@ -62,7 +62,7 @@ public class History extends AppCompatActivity {
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         todayDate = simpleDateFormat.format(Calendar.getInstance().getTime());
-
+        //view click listener that opens a calendar dialog for use to choose their desired date from
         tvCalendar.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(),dateSetListener,year,month,day);
             datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
@@ -70,6 +70,7 @@ public class History extends AppCompatActivity {
 
         });
 
+        //calendar click listener
         dateSetListener = (view, year1, month1, dayOfMonth) -> {
             // month starts from 0 in java so need to add 1 to it
             month1 = month1 +1;
@@ -77,6 +78,8 @@ public class History extends AppCompatActivity {
             LocalDate selectedDay = LocalDate.of(year1, month1, dayOfMonth);
             tvCalendar.setText(chosenDate);
 
+            //after user chooses the date, the view is populated with the list of foods entered by
+            //user on that specific day
             HistoryAdapter adapter =new HistoryAdapter();
             historyRecyclerView.setAdapter(adapter);
             foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
@@ -87,6 +90,7 @@ public class History extends AppCompatActivity {
         };
 
 
+        //bottom navigation bar click listener
         bottomNavigationHistory.setOnItemSelectedListener(item -> {
             //To click on Profile, the profile activity will open
             if (item.getItemId() == R.id.profile) {

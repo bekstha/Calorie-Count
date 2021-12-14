@@ -27,8 +27,9 @@ public class CompletedDay extends AppCompatActivity {
         double calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
         double sumOfCalorieConsumed = userDatabase.foodDAO().getTotal(LocalDate.now(), LoggedUser.getUserID());
 
-        completedView = findViewById(R.id.completedView);
 
+        completedView = findViewById(R.id.completedView);
+        //on completed view, checking if user has made any entry for the day and responding likewise
         if (sumOfCalorieConsumed == 0) {
             completedView.setText(getResources().getString(R.string.no_entry));
         }else if (sumOfCalorieConsumed < calorieRequirement){
@@ -41,11 +42,8 @@ public class CompletedDay extends AppCompatActivity {
                 completedView.setText( getResources().getString(R.string.maintain_weight, String.valueOf(sumOfCalorieConsumed)));
             }
 
-
         endDayBtn = findViewById(R.id.endDayBtn);
         endDayBtn.setOnClickListener(v -> startActivity(new Intent(CompletedDay.this, MainActivity.class)));
-
-
 
     }
 }

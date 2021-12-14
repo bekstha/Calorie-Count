@@ -48,6 +48,8 @@
         android:id="@+id/historyRecycleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomNavigationHistory"
+        android:layout_marginBottom="2dp"
         android:layout_below="@+id/totalForDay"
         android:layout_marginTop="20dp"
         tools:listitem="@layout/recycle_view_layout" />

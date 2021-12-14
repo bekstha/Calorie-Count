@@ -13,7 +13,7 @@ import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
 
-// this playlist has very good information about android architecture components
+// this playlist about android architecture components
 // https://www.youtube.com/playlist?list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118
 
 public class FoodRepository {
@@ -29,7 +29,6 @@ public class FoodRepository {
         UserDatabase userDatabase = UserDatabase.getUserDatabase(application);
         foodDAO = userDatabase.foodDAO();
         allFoods = foodDAO.getByDay(LocalDate.now(), LoggedUser.getUserID());
-        Double total = foodDAO.getTotal(LocalDate.now(), LoggedUser.getUserID());
 
         foodsByDate = foodDAO.getByDay(day, LoggedUser.getUserID());
     }

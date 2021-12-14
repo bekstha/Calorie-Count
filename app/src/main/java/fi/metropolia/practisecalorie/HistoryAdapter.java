@@ -22,6 +22,7 @@ public class HistoryAdapter extends RecyclerView.Adapter <HistoryAdapter.History
      */
     private List<Food> foods = new ArrayList<>();
 
+
     @NonNull
     @Override
     public HistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +33,7 @@ public class HistoryAdapter extends RecyclerView.Adapter <HistoryAdapter.History
 
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.HistoryHolder holder, int position) {
+
         Food currentFood = foods.get(position);
         holder.tvFoodName.setText(currentFood.getFoodName());
         holder.tvCaloriePer100Gram.setText(String.valueOf(currentFood.getKcalPerPortion()));

@@ -1,15 +1,10 @@
 package fi.metropolia.practisecalorie.user;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
-import java.util.List;
-
-import fi.metropolia.practisecalorie.data.Food;
 
 @Dao
 public interface UserDao {
@@ -31,7 +26,6 @@ public interface UserDao {
 
     @Query("SELECT password FROM users WHERE userName = :userName and firstName = :firstName and lastname = :lastName LIMIT 1")
     String checkPassword(String userName, String firstName, String lastName);
-
 
     @Query("SELECT calorieRequirement FROM users WHERE id = :id")
     double searchCalorieRequirement(int id);

@@ -12,6 +12,9 @@ import java.util.Objects;
 
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * Activity where the user can enter their credentials to create a profile
+ */
 public class Credentials extends AppCompatActivity {
 
     Button nextBtn;
@@ -47,14 +50,14 @@ public class Credentials extends AppCompatActivity {
                     etPassword.getText().toString().trim().isEmpty() ||
                     etReTypePassword.getText().toString().trim().isEmpty()){
 
-                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
 
                 //checking that the entered passwords match
             } else if (!etPassword.getText().toString().trim().equals(etReTypePassword.getText().toString().trim())) {
-                Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.passwords_do_not_match), Toast.LENGTH_SHORT).show();
                 //checking if a user with same username exists or not
             }else if (userDatabase.userDao().checkUser(etUsername.getText().toString().trim()) != null) {
-                    Toast.makeText(getApplicationContext(), "The username already exists!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.user_exists), Toast.LENGTH_SHORT).show();
             }else{
                 firstName = etFirstName.getText().toString().trim();
                 lastName = etLastName.getText().toString().trim();
@@ -64,7 +67,7 @@ public class Credentials extends AppCompatActivity {
                 Intent intent = new Intent(Credentials.this, Profile.class);
                 intent.putExtra(EXTRA_FIRST_NAME, firstName);
                 intent.putExtra(EXTRA_LAST_NAME, lastName);
-                intent.putExtra(EXTRA_USER_NAME,lastName);
+                intent.putExtra(EXTRA_USER_NAME,userName);
                 intent.putExtra(EXTRA_PASSWORD,password);
 
                 startActivity(intent);

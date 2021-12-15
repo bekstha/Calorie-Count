@@ -12,12 +12,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.Objects;
 
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.User;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * Activity where user can edit their profile
+ */
 public class EditProfile extends AppCompatActivity {
 
     EditText updateFirstName, updateLastName, updatePassword, retypeUpdatePassword;
@@ -27,6 +32,8 @@ public class EditProfile extends AppCompatActivity {
     String udFirstName, udLastName, udPassword, username;
     int udHeight, udWeight, udCalorieRequirement, fromDbHeight;
     SeekBar updateSeekBarHeight;
+    BottomNavigationView bottomNavigationProfile;
+
 
     //getting the user's weight from database
     UserDatabase userDatabase = UserDatabase.getUserDatabase(this);
@@ -50,13 +57,17 @@ public class EditProfile extends AppCompatActivity {
         updateWeightDecrement = findViewById(R.id.updateWeightDecrement);
         updateSeekBarHeight = findViewById(R.id.updateSeekBarHeight);
         deleteProfileBtn = findViewById(R.id.deleteProfile);
+        bottomNavigationProfile = findViewById(R.id.bottomNavigationProfile);
+
+        bottomNavigationProfile = findViewById(R.id.bottomNavigationProfile);
+        bottomNavigationProfile.setSelectedItemId(R.id.profile);
 
         UserDatabase userDB = UserDatabase.getUserDatabase(getApplicationContext());
 
         //setting the initial values of user's parameters in the corresponding views
         updateFirstName.setText(userDB.userDao().searchFirstName(LoggedUser.getUserID()));
         updateLastName.setText(userDB.userDao().searchLastName(LoggedUser.getUserID()));
-        updateUsername.setText(userDB.userDao().searchLastName(LoggedUser.getUserID()));
+        updateUsername.setText(userDB.userDao().searchUserName(LoggedUser.getUserID()));
         updateHeight.setText(String.valueOf(userDB.userDao().searchHeight(LoggedUser.getUserID())));
         updateWeight.setText(String.valueOf(userDB.userDao().searchWeight(LoggedUser.getUserID())));
         updatePassword.setText(userDB.userDao().searchPassword(LoggedUser.getUserID()));
@@ -113,16 +124,16 @@ public class EditProfile extends AppCompatActivity {
                     updateHeight.getText().toString().trim().isEmpty() ||
                     updateWeight.getText().toString().trim().isEmpty()) {
 
-                Toast.makeText(getApplicationContext(), "All fields required!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
                 return;
                 //checking if both passwords match
             } else if (updatePassword.getText().toString().trim().isEmpty() !=
                     retypeUpdatePassword.getText().toString().trim().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.values_less_than_zero), Toast.LENGTH_SHORT).show();
                 return;
                 //checking if both heights and weights are not set to zero or less
             } else if ((Double.parseDouble(updateHeight.getText().toString()) <= 0) || Double.parseDouble(updateWeight.getText().toString()) <= 0) {
-                Toast.makeText(getApplicationContext(), "Values cannot be less or equal to 0!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 udFirstName = updateFirstName.getText().toString().trim();
@@ -133,7 +144,7 @@ public class EditProfile extends AppCompatActivity {
             }
 
             //updating calorie requirement based on gender
-            if (gender.equals("Male")) {
+            if (gender.equals(getResources().getString(R.string.male))) {
                 udCalorieRequirement = (int) Math.ceil((1.2 * (66 + (6.3 * (udWeight * 2.20462)) +
                         (12.9 * (udHeight * 0.393701)) - (6.8 * age))));
 
@@ -147,8 +158,7 @@ public class EditProfile extends AppCompatActivity {
             User user = new User(userId, udFirstName, udLastName, username, udPassword, gender, age,
                     udWeight, udHeight, udCalorieRequirement);
             userDatabase.userDao().update(user);
-            Toast.makeText(getApplicationContext(),
-                    "The profile was successfully updated!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.successfully_updated), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(EditProfile.this, Overview.class);
             startActivity(intent);
@@ -161,23 +171,46 @@ public class EditProfile extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(EditProfile.this);
             builder.setIcon(R.drawable.ic_warninig)
                     .setCancelable(false)
-                    .setTitle("Delete the profile")
-                    .setMessage("Are you sure you want to delete your profile?")
+                    .setTitle(getResources().getString(R.string.Delete_profile))
+                    .setMessage(getResources().getString(R.string.confirm_delete_profile))
                     //when user selects yes option
-                    .setPositiveButton("Yes", (dialog, which) -> {
-                        UserDatabase userDB1 = UserDatabase.getUserDatabase(getApplicationContext());
+                    .setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> {
+                        UserDatabase deleteUser = UserDatabase.getUserDatabase(getApplicationContext());
                         User user = new User(userId, udFirstName, udLastName, username, udPassword,
                                 gender, age, udWeight, udHeight, udCalorieRequirement);
-                        userDB1.userDao().delete(user);
-                        Toast.makeText(getApplicationContext(),
-                                "The profile was successfully deleted!", Toast.LENGTH_SHORT).show();
+                        deleteUser.userDao().delete(user);
+                        deleteUser.foodDAO().deleteFoodALso(LoggedUser.getUserID());
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.successfully_deleted), Toast.LENGTH_SHORT).show();
 
                         Intent deleteIntent = new Intent(EditProfile.this, MainActivity.class);
                         startActivity(deleteIntent);
                     });
             //when user selects no
-            builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> dialog.dismiss());
             builder.show();
+        });
+
+        //bottom navigation bar click listener
+        bottomNavigationProfile.setOnItemSelectedListener(item -> {
+            //To click on Profile, the profile activity will open
+            if (item.getItemId() == R.id.profile) {
+                startActivity(new Intent(getApplicationContext(),
+                        EditProfile.class));
+                overridePendingTransition(0, 0);
+                // To Click on home, it will stay in overview activity.
+            } else if (item.getItemId() == R.id.home) {
+                startActivity(new Intent(getApplicationContext(),
+                        Overview.class));
+                overridePendingTransition(0, 0);
+
+                //To click on history it will go to history activity
+            } else {
+                startActivity(new Intent(getApplicationContext(),
+                        History.class));
+                overridePendingTransition(0, 0);
+
+            }
+            return true;
         });
 
 

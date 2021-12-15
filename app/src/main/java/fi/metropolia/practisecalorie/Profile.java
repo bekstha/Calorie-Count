@@ -32,7 +32,10 @@ import java.util.Objects;
 import fi.metropolia.practisecalorie.user.User;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
-
+/**
+ * In this activity, user can set their physical parameters so that the app can calculate their
+ * calorie requirement
+ */
 public class Profile extends AppCompatActivity {
 
     RelativeLayout maleLayout, femaleLayout;
@@ -75,6 +78,7 @@ public class Profile extends AppCompatActivity {
         weightIncrement = findViewById(R.id.weightIncrement);
         weightDecrement = findViewById(R.id.weightDecrement);
         tvWeight = findViewById(R.id.tvWeight);
+        tvWeight.setText(String.valueOf(intWeight));
 
         //setting on-click Listener for the male and female layout
         maleLayout.setOnClickListener(v -> {
@@ -94,6 +98,7 @@ public class Profile extends AppCompatActivity {
         seekBarHeight.setMax(300);
         seekBarHeight.setProgress(170);
         intCurrentHeight = 170;
+        currentHeight.setText(String.valueOf(intCurrentHeight));
         seekBarHeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -111,6 +116,7 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+
 
         // On-click listener for both image buttons that increases and decreases the weight
         weightIncrement.setOnClickListener(v -> {
@@ -153,7 +159,7 @@ public class Profile extends AppCompatActivity {
 
             // checking if date of birth is selected and then calculating user's age
             if (birthDate == null) {
-                Toast.makeText(getApplicationContext(), "Enter your birth date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.enter_birth_date), Toast.LENGTH_SHORT).show();
             } else {
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                 try {
@@ -174,29 +180,29 @@ public class Profile extends AppCompatActivity {
             }
 
             //calculate calorie requirement based on gender
-            if (typeOfUser.equals("Male")) {
+            if (typeOfUser.equals(getResources().getString(R.string.male))) {
                 calorieRequirement = (int) Math.ceil((1.2 * (66 + (6.3 * (intWeight * 2.20462)) + (12.9 * (intCurrentHeight * 0.393701)) - (6.8 * age))));
 
-            } else if (typeOfUser.equals("Female")) {
+            } else if (typeOfUser.equals(getResources().getString(R.string.female))) {
                 calorieRequirement = (int) Math.ceil((1.2 * (655 + (4.3 * (intWeight * 2.20462) + (4.7 * (intCurrentHeight * 0.393701)) - (4.7 * age)))));
             }
 
             // if-statements to check that all the parameters are entered by the user and only then
             // go on to the next activity
             if (birthDate == null) {
-                Toast.makeText(getApplicationContext(), "Enter your birth date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.enter_birth_date), Toast.LENGTH_SHORT).show();
 
             } else if (typeOfUser.equals("0")) {
 
-                Toast.makeText(getApplicationContext(), "Select a gender", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.gender_selection), Toast.LENGTH_SHORT).show();
 
             } else if (intCurrentHeight == 0) {
 
-                Toast.makeText(getApplicationContext(), "Select a height", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.height_selection), Toast.LENGTH_SHORT).show();
 
             } else if (intWeight <= 0) {
 
-                Toast.makeText(getApplicationContext(), "Enter a valid weight", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.weight_selection), Toast.LENGTH_SHORT).show();
 
             } else {
                 //registering the user in the database

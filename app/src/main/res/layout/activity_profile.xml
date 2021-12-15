@@ -110,6 +110,7 @@
         android:background="@drawable/card_background">
 
         <TextView
+            android:id="@+id/TvHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -125,10 +126,10 @@
             android:id="@+id/currentHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@id/TvHeight"
+            android:layout_marginTop="5dp"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="50sp"
-            android:text="@string/_170"
+            android:text="@string/empty"
             android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold">
@@ -138,12 +139,14 @@
 
 
         <SeekBar
+            android:layout_below="@+id/currentHeight"
+            android:layout_marginTop="5dp"
             android:id="@+id/seekBarHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="13dp"
             android:progressTint="#FF4C4C">
 
         </SeekBar>
@@ -153,7 +156,7 @@
 
     <RelativeLayout
         android:id="@+id/currentWeight"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="150dp"
         android:layout_below="@+id/heightLayout"
         android:layout_marginTop="85dp"
@@ -180,7 +183,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
             android:minHeight="48dp"
-            android:text="@string/sixty_text"
+            android:text="@string/empty"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -192,7 +195,7 @@
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="13dp"
             android:layout_marginBottom="18dp"
             android:background="@drawable/ic_add"
             android:contentDescription="@string/increment" />
@@ -211,7 +214,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="150dp"
         android:background="@drawable/card_background"
         android:layout_toEndOf="@id/centerVerticalLine"
@@ -242,7 +245,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
     </RelativeLayout>
 

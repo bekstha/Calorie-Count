@@ -9,7 +9,6 @@ public class LoggedUser {
     }
 
     private  LoggedUser(){
-
     }
 
     public static int getUserID() {
@@ -17,6 +16,6 @@ public class LoggedUser {
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
+        LoggedUser.userID = userID;
     }
 }

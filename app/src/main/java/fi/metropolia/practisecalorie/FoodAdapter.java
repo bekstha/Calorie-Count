@@ -16,8 +16,12 @@ import java.util.List;
 
 import fi.metropolia.practisecalorie.data.Food;
 
+
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
+    /**
+     * list of foods
+     */
     private List<Food> foods = new ArrayList<>();
 
     @NonNull
@@ -49,6 +53,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
             editIntent.putExtra("portion", String.valueOf(portion));
             editIntent.putExtra("totalCaloriePerEntry", String.valueOf(totalCaloriePerEntry));
             editIntent.putExtra("FoodId", currentFood.getId());
+            //user can now click on each food item and edit the food
             holder.cardView.getContext().startActivity(editIntent);
         });
     }
@@ -72,6 +77,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         private final TextView tvFoodName,tvCaloriePer100Gram,tvPortion,tvTotalCalorieNum;
         CardView cardView;
 
+        /**
+         * FoodHolder holds each food item with its name and caloric information
+         * @param itemView holds the food item
+         */
         public FoodHolder(View itemView){
             super(itemView);
             tvFoodName = itemView.findViewById(R.id.tvFoodName);

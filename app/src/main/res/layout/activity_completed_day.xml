@@ -27,6 +27,7 @@
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/completedView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -38,8 +39,22 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
-
     </RelativeLayout>
+
+
+    <android.widget.Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/endDayBtn"
+        android:padding="10dp"
+        android:background="@drawable/add_button_background"
+        android:text="@string/let_s_start_over_tomorrow"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="100dp"
+        android:textStyle="bold" />
 
 
 

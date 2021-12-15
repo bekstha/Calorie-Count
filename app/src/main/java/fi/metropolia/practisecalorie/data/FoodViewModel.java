@@ -11,8 +11,8 @@ import java.util.List;
 
 
 public class FoodViewModel extends AndroidViewModel {
-    private FoodRepository foodRepository;
-    private LiveData<List<Food>> allFoods;
+    private final FoodRepository foodRepository;
+    private final LiveData<List<Food>> allFoods;
     private LiveData<List<Food>> foodsByDate;
 
 

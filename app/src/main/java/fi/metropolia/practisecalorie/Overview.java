@@ -1,6 +1,5 @@
 package fi.metropolia.practisecalorie;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +18,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.time.LocalDate;
@@ -29,6 +29,9 @@ import fi.metropolia.practisecalorie.data.FoodViewModel;
 import fi.metropolia.practisecalorie.user.LoggedUser;
 import fi.metropolia.practisecalorie.user.UserDatabase;
 
+/**
+ * In this activity, the user can see the food entry of their day.
+ */
 public class Overview extends AppCompatActivity {
 
     TextView tvCalorieConsumedNum, tvTotalCalorieRequirement;
@@ -36,6 +39,7 @@ public class Overview extends AppCompatActivity {
     private FoodViewModel foodViewModel;
     FoodAdapter adapter;
     CircularProgressIndicator circularProgressIndicator;
+    BottomNavigationView bottomNavigationOverview;
 
     //After user successfully adds the food then user is directed back to overview activity and
     //the recycler view, corresponding text views and progress bar are updated
@@ -45,7 +49,7 @@ public class Overview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.home));
 
         Log.d("Overview", "On create");
 
@@ -128,6 +132,9 @@ public class Overview extends AppCompatActivity {
 
 
 
+        bottomNavigationOverview = findViewById(R.id.bottomNavigationOverview);
+        bottomNavigationOverview.setSelectedItemId(R.id.home);
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new FoodAdapter();
@@ -167,12 +174,40 @@ public class Overview extends AppCompatActivity {
 
         //setting on click listener on complete button so that the user can complete their day
         findViewById(R.id.completeBtn).setOnClickListener(v -> {
-            Intent completedDayIntent = new Intent(Overview.this, History.class);
+            Intent completedDayIntent = new Intent(Overview.this, CompletedDay.class);
             startActivity(completedDayIntent);
         });
+
+
+        bottomNavigationOverview.setOnItemSelectedListener(item -> {
+            //To click on Profile, the profile activity will open
+            if (item.getItemId() == R.id.profile) {
+
+                startActivity(new Intent(getApplicationContext(), EditProfile.class));
+                overridePendingTransition(0, 0);
+
+                // To Click on home, it will stay in overview activity.
+            } else if (item.getItemId() == R.id.home) {
+                startActivity(new Intent(getApplicationContext(), Overview.class));
+                overridePendingTransition(0, 0);
+
+                //To click on history it will go to history activity
+            } else {
+                startActivity(new Intent(getApplicationContext(), History.class));
+                overridePendingTransition(0, 0);
+            }
+            return true;
+        });
+
+
     }
 
     // creating a menu from which the user can logout from the application
+    /**
+     * Inflating the top bar with a menu
+     * @param menu that allows user to see option to logout
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -182,20 +217,26 @@ public class Overview extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Menu item which shows logout option to the user, on which user can click to logout from the
+     * application
+     * @param item logout item
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.logout){
+        if (item.getItemId() == R.id.logout) {
             //when logout is clicked a dialog box appears to ask confirmation from the user
             //https://www.youtube.com/watch?v=MXDlY0n6mkc&t=254s
             AlertDialog.Builder builder = new AlertDialog.Builder(Overview.this);
-            builder.setTitle("logging out")
+            builder.setTitle(getResources().getString(R.string.log_out))
                     .setCancelable(false)
-                    .setMessage("Are you sure you want to logout?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
+                    .setMessage(getResources().getString(R.string.sure_logout))
+                    .setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> {
                         Intent logoutIntent = new Intent(Overview.this, MainActivity.class);
                         startActivity(logoutIntent);
                     });
-            builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> dialog.dismiss());
             builder.show();
             return true;
         }
@@ -206,8 +247,7 @@ public class Overview extends AppCompatActivity {
      * updates the UI of the overview activity whenever the user starts the application
      * and whenever the user adds, edits or deletes a food entry.
      */
-    @SuppressLint("SetTextI18n")
-    public void updateUI(){
+    public void updateUI() {
         foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         foodViewModel.getAllFoods().observe(this, adapter::setFoods);
 
@@ -217,9 +257,9 @@ public class Overview extends AppCompatActivity {
         tvCalorieConsumedNum.setText(String.valueOf(sumConsumedCalorie));
 
         calorieRequirement = userDatabase.userDao().searchCalorieRequirement(LoggedUser.getUserID());
-        tvTotalCalorieRequirement.setText("of " + calorieRequirement + " Kcal");
+        tvTotalCalorieRequirement.setText(getResources().getString(R.string.of_total, String.valueOf(calorieRequirement)));
 
-        circularProgressIndicator.setProgress((int) ((sumConsumedCalorie/calorieRequirement)*100), true);
+        circularProgressIndicator.setProgress((int) ((sumConsumedCalorie / calorieRequirement) * 100), true);
     }
 
 }

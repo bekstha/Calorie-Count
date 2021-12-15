@@ -1,5 +1,4 @@
 package fi.metropolia.practisecalorie.data;
-
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
@@ -16,13 +15,16 @@ import fi.metropolia.practisecalorie.user.UserDatabase;
 // this playlist about android architecture components
 // https://www.youtube.com/playlist?list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118
 
+/**
+ * Repository acts as a data storage and maintenance which helps share data between database and
+ * view model
+ */
 public class FoodRepository {
     private final FoodDAO foodDAO;
     private final LiveData<List<Food>> allFoods;
 
     //try to sort food by user and date
     private LiveData<List<Food>> foodsByDate;
-
     private LocalDate day;
 
     public FoodRepository(Application application){

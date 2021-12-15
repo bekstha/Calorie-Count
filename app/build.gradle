@@ -32,6 +32,8 @@ android {
 
 dependencies {
 
+    compileOnly files("C:/Users/study/AppData/Local/Android/Sdk/platforms/android-31/android.jar")
+
     def room_version = "2.3.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"

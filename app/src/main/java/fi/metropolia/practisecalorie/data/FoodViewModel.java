@@ -9,7 +9,9 @@ import androidx.lifecycle.LiveData;
 import java.time.LocalDate;
 import java.util.List;
 
-
+/**
+ * displays the food entry made by user to the user overview activity
+ */
 public class FoodViewModel extends AndroidViewModel {
     private final FoodRepository foodRepository;
     private final LiveData<List<Food>> allFoods;

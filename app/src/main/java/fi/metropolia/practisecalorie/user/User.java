@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * creates a user in users table
+ */
 @Entity (tableName = "users")
 public class User {
 

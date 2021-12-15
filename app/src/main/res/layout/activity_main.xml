@@ -7,17 +7,14 @@
     tools:context=".MainActivity"
     android:background="#1d1e1e">
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/welcomeView"
-        android:layout_above="@+id/etUserName"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        app:cardBackgroundColor="#2C2C2C">
+    <androidx.cardview.widget.CardView
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="10dp"
+        android:padding="10dp"
+        app:cardBackgroundColor="#2C2C2C"
+        app:cardCornerRadius="10dp">
 
 
         <RelativeLayout

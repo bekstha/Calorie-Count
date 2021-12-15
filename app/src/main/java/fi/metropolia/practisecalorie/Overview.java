@@ -51,86 +51,9 @@ public class Overview extends AppCompatActivity {
         setContentView(R.layout.activity_overview);
         Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.home));
 
-        Log.d("Overview", "On create");
-
-        tvTotalCalorieRequirement = findViewById(R.id.tvCalorieRequirement);
-        tvCalorieConsumedNum = findViewById(R.id.tvTotalCalorieNum);
-
-
-        //To get the bottomNavigation view by Id
-        view = findViewById(R.id.bottomNavigation);
-
-
-
-        //Set home selected
-
-        view.setSelectedItemId(R.id.home);
-
-
-        view.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
-
-                //To click on Profile, the profile activity will open
-
-                switch (item.getItemId()) {
-                    case R.id.profile:
-                        Toast.makeText(getApplicationContext(), "My Profile", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(),
-                                Profile.class));
-                        overridePendingTransition(0, 0);
-
-                        break;
-
-
-
-                   // To Click on home, it will stay in overview activity.
-
-                    case R.id.home:
-                        Toast.makeText(Overview.this, "Home", Toast.LENGTH_SHORT).show();
-
-                        startActivity(new Intent(getApplicationContext(),
-                                Overview.class));
-                        overridePendingTransition(0, 0);
-                        break;
-
-
-                        //To click on history it will go to history activity
-
-                    case R.id.history:
-                        Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
-
-                        startActivity(new Intent(getApplicationContext(),
-                                History.class));
-                        overridePendingTransition(0, 0);
-
-                        break;
-
-
-                }
-
-                return true;
-            }
-            });
-
-
-
-
-
-
-
-
-//        FoodDB foodDB = FoodDB.get(getApplicationContext());
-//        final FoodDAO foodDAO = foodDB.foodDAO();
-//        sumConsumedCalorie = foodDAO.getTotal(LocalDate.now());
-//        Toast.makeText(getApplicationContext(), " sum: " + sumConsumedCalorie, Toast.LENGTH_SHORT).show();
-
-
-
-
-
+        tvTotalCalorieRequirement = findViewById(R.id.tvTotalCalorieRequirement);
+        tvCalorieConsumedNum = findViewById(R.id.tvConsumedCalorieNum);
+        circularProgressIndicator = findViewById(R.id.progressCircular);
 
         bottomNavigationOverview = findViewById(R.id.bottomNavigationOverview);
         bottomNavigationOverview.setSelectedItemId(R.id.home);

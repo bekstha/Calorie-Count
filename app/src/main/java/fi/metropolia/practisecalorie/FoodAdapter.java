@@ -17,6 +17,10 @@ import java.util.List;
 import fi.metropolia.practisecalorie.data.Food;
 
 
+/**
+ * Food adapter holds the entry made by the user and shows it to the user in recycler view in the
+ * overview activity
+ */
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     /**

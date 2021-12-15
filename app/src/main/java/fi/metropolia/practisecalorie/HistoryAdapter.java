@@ -15,6 +15,10 @@ import java.util.List;
 
 import fi.metropolia.practisecalorie.data.Food;
 
+/**
+ * History adapter holds the food entries made by the user and shows the view to the user in the
+ * History activity using a recycler view
+ */
 public class HistoryAdapter extends RecyclerView.Adapter <HistoryAdapter.HistoryHolder>{
 
     /**

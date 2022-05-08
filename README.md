@@ -1,8 +1,8 @@
 # Calorie Count
 
 Team Members:-
-Bibek Shrestha
-Muhhamad Khan
+Bibek Shrestha,
+Muhhamad Khan,
 Sumaya Firoj
 
 As a project for my 1st year studies at Metropolia UAS, we developed a simple calorie counting application using Android Studio.
